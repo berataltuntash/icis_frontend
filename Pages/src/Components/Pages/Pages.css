@@ -110,6 +110,11 @@
     font-weight: 700;
 }
 
+.wrapper .button:hover {
+    background-color: #000000; /* Changes background color to black */
+    color: #ffffff; /* Changes text color to white for better visibility */
+}
+
 .wrapper .register-link{
     text-align: center;
     font-size: 14.5px;
