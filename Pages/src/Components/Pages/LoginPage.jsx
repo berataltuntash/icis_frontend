@@ -2,23 +2,30 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import "./Pages.css";
 import iytelogo from "../Assets/iytelogo.png";
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';  
 
 const LoginPage = () => {
-    // State for storing input values
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const history = useHistory(); 
 
-    // Handle form submission
+   
     const handleLogin = async (event) => {
-        event.preventDefault();  // Prevent default form submission behavior
+        event.preventDefault();  
         try {
             const response = await axios.post('http://localhost:8080/login', {
                 username,  // Shorthand for username: username
                 password   // Shorthand for password: password
             });
-            console.log(response.data);  // Handle the response as needed
-            // Redirect or do other actions based on the response
+            console.log(response.data);  // Log the response data
+
+            // Check if login is successful and redirect
+            if (response.status === 200) {  // Assuming status 200 means success
+                history.push('/home');  // Redirect to the home page
+            } else {
+                // Handle cases where login is not successful
+                console.log('Login failed:', response.status);
+            }
         } catch (error) {
             console.error('Login error:', error.response || error.message);
             // Handle errors such as incorrect credentials, server errors, etc.
