@@ -2,33 +2,28 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import "./Pages.css";
 import iytelogo from "../Assets/iytelogo.png";
-import { Link, useNavigate } from 'react-router-dom';  // Import useNavigate
+import { Link, useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const navigate = useNavigate();  // Use useNavigate instead of useHistory
+    const navigate = useNavigate();  // Initialize useNavigate
 
-    // Handle form submission
     const handleLogin = async (event) => {
-        event.preventDefault();  // Prevent default form submission behavior
+        event.preventDefault();
         try {
-            const response = await axios.post('http://localhost:8080/login', {
-                username,  // Shorthand for username: username
-                password   // Shorthand for password: password
+            const response = await axios.post('http://localhost:8080/api/login', {
+                email: username,  // Assuming username is actually the email
+                password
+            }, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
             });
-            console.log(response.data);  // Log the response data
-
-            // Check if login is successful and redirect
-            if (response.status === 200) {  // Assuming status 200 means success
-                navigate('/homepage');  // Redirect to the home page using navigate
-            } else {
-                // Handle cases where login is not successful
-                console.log('Login failed:', response.status);
-            }
+            console.log('Login successful:', response.data);  // Optional: log the response data
+            navigate('/homepage');  // Redirect to homepage on successful login
         } catch (error) {
             console.error('Login error:', error.response || error.message);
-            // Handle errors such as incorrect credentials, server errors, etc.
         }
     };
 
