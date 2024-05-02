@@ -2,16 +2,16 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import "./Pages.css";
 import iytelogo from "../Assets/iytelogo.png";
-import { Link, useHistory } from 'react-router-dom';  
+import { Link, useNavigate } from 'react-router-dom';  // Import useNavigate
 
 const LoginPage = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const history = useHistory(); 
+    const navigate = useNavigate();  // Use useNavigate instead of useHistory
 
-   
+    // Handle form submission
     const handleLogin = async (event) => {
-        event.preventDefault();  
+        event.preventDefault();  // Prevent default form submission behavior
         try {
             const response = await axios.post('http://localhost:8080/login', {
                 username,  // Shorthand for username: username
@@ -21,7 +21,7 @@ const LoginPage = () => {
 
             // Check if login is successful and redirect
             if (response.status === 200) {  // Assuming status 200 means success
-                history.push('/home');  // Redirect to the home page
+                navigate('/homepage');  // Redirect to the home page using navigate
             } else {
                 // Handle cases where login is not successful
                 console.log('Login failed:', response.status);
