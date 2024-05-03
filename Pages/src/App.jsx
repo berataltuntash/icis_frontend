@@ -18,7 +18,9 @@ function App() {
           <Route path="/companyregister" element={<CompanyRegister />} />
           <Route path="/forgotpassword" element={<ForgotPassword />} />
           <Route path="/resetpassword" element={<ResetPassword />} />
-          <Route path="/homepage" element={<HomePage />} />
+          <Route path="/studenhomepage" element={<HomePage />} />
+          <Route path="/companyhomepage" element={<HomePage />} />
+          <Route path="/staffhomepage" element={<HomePage />} />
         </Routes>
       </div>
     </Router>
