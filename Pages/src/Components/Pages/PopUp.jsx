@@ -6,7 +6,6 @@ const PopUp = ({ message, onClose }) => {
         <div className="popup">
             <div className="popup-inner">
                 <h2>{message}</h2>
-                <button onClick={onClose}>Close</button>
             </div>
         </div>
     );

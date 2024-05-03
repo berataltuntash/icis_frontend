@@ -23,7 +23,7 @@ const ForgotPassword = () => {
 
             if (response.status === 202) {
                 setTimeout(() => {
-                    navigate('/home');
+                    navigate('/resetpassword');
                     setShowPopup(false);
                 }, 2000); 
             }
