@@ -5,23 +5,29 @@ import iytelogo from "../Assets/iytelogo.png";
 import { Link, useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
-    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const navigate = useNavigate();  // Initialize useNavigate
+    const navigate = useNavigate(); 
 
     const handleLogin = async (event) => {
         event.preventDefault();
         try {
             const response = await axios.post('http://localhost:8080/api/login', {
-                email: username,  // Assuming username is actually the email
+                email,  
                 password
             }, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
             });
-            console.log('Login successful:', response.data);  // Optional: log the response data
-            navigate('/homepage');  // Redirect to homepage on successful login
+            console.log('Login successful:', response.data); 
+            if(response.data.role === 'company') {
+                navigate('/companyhomepage');
+            } else if(response.data.role === 'iyte') {
+                navigate('/iytehomepage');
+            } else {
+                alert('Login failed');
+            }
         } catch (error) {
             console.error('Login error:', error.response || error.message);
         }
@@ -36,8 +42,8 @@ const LoginPage = () => {
             <form onSubmit={handleLogin}>
                 <h1>Login</h1>
                 <div className="input-box">
-                    <input type="text" placeholder="Username" required
-                        value={username} onChange={e => setUsername(e.target.value)} />
+                    <input type="text" placeholder="Email" required
+                        value={email} onChange={e => setEmail(e.target.value)} />
                 </div>
                 <div className="input-box">
                     <input type="password" placeholder="Password" required
@@ -49,7 +55,7 @@ const LoginPage = () => {
                 </div>
                 <button className="button" type="submit">Login</button>
                 <div className="register-link">
-                    <p>Don't have an account? <Link to="/register">Register here</Link></p>
+                    <p>Don't have an account? <Link to="/iyteregister">Register here</Link></p>
                 </div>
             </form>
         </div>

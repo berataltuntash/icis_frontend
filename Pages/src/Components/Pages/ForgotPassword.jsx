@@ -1,42 +1,56 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import Popup from './PopUp.jsx';
 import "./Pages.css";
 import iytelogo from "../Assets/iytelogo.png";
 
 const ForgotPassword = () => {
     const [email, setEmail] = useState('');
+    const [message, setMessage] = useState('');
+    const [showPopup, setShowPopup] = useState(false);
+    const navigate = useNavigate();
 
-    // Handle form submission
     const handleSubmit = async (event) => {
-        event.preventDefault(); // Prevent the form from submitting the traditional way
+        event.preventDefault();
 
         try {
-            const response = await axios.post('http://localhost:8080/forgot-password', {
-                email // Send the email to the backend
+            const response = await axios.post('http://localhost:8080/api/forgotpassword', { 
+                email
             });
-            console.log(response.data);
-            // You might want to display a confirmation message or handle the response further
+            setMessage(response.data);
+            setShowPopup(true);
+
+            if (response.status === 202) {
+                setTimeout(() => {
+                    navigate('/home');
+                    setShowPopup(false);
+                }, 2000); 
+            }
         } catch (error) {
-            console.error('Error sending email:', error.response || error.message);
-            // Handle errors, such as server not reachable, email not in database, etc.
+            setMessage(error.response?.data || 'Error sending email: The server may be down.');
+            setShowPopup(true);
         }
     };
 
     return (
         <>
-        <div className="red-bar">
-            <img src={iytelogo} alt="Logo" className="logo" />
-        </div>
-        <div className="wrapper">
-            <form onSubmit={handleSubmit}>
-                <h1>Forgot Password</h1>
-                <div className="input-box">
-                    <input type="email" placeholder="Email" required
-                        value={email} onChange={e => setEmail(e.target.value)} />
-                </div>
-                <button className="button" type="submit">Submit</button>
-            </form>
-        </div>
+            <div className="red-bar">
+                <img src={iytelogo} alt="Logo" className="logo" />
+            </div>
+            <div className="wrapper">
+                <form onSubmit={handleSubmit}>
+                    <h1>Forgot Password</h1>
+                    <div className="input-box">
+                        <input type="email" placeholder="Email" required
+                            value={email} onChange={e => setEmail(e.target.value)} />
+                    </div>
+                    <button className="button" type="submit">Submit</button>
+                </form>
+                {showPopup && (
+                    <Popup message={message} onClose={() => setShowPopup(false)} />
+                )}
+            </div>
         </>
     );
 }
