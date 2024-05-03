@@ -8,12 +8,17 @@ const ResetPassword = () => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [email, setEmail] = useState(''); 
     const [code, setCode] = useState('');
+    const [showPopup, setShowPopup] = useState(false);
+    const [message, setMessage] = useState('');
+    const navigate = useNavigate();
 
     const handleResetPassword = async (event) => {
         event.preventDefault(); 
 
         if (newPassword !== confirmPassword) {
-            alert("Passwords do not match");
+            setMessage("Passwords do not match.");
+            setShowPopup(true);
+            setTimeout(() => setShowPopup(false), 2000);
             return;
         }
 
@@ -24,10 +29,27 @@ const ResetPassword = () => {
                 confirmPassword,
                 emailcode : code
             });
-            console.log(response.data);
+            if (response.status === 202) {
+                setMessage(response.data || "Password reset successful.");
+                setShowPopup(true);
+                setTimeout(() => {
+                    setShowPopup(false);
+                }, 2000);
+                navigate('/login');
+            } else if (response.status === 400) {
+                setMessage(response.data || "Password reset error: The server may be down.");
+                setShowPopup(true);
+                setTimeout(() => setShowPopup(false), 2000);
+            } else {
+                setMessage(response.data || "Unexpected status received. Please try again.");
+                setShowPopup(true);
+                setTimeout(() => setShowPopup(false), 2000);
+            }
            
         } catch (error) {
-            console.error('Error resetting password:', error.response || error.message);
+            setMessage(error.response?.data || 'Error sending email: The server may be down.');
+            setShowPopup(true);
+            setTimeout(() => setShowPopup(false), 2000);
 
         }
     };
@@ -58,6 +80,9 @@ const ResetPassword = () => {
                 </div>
                 <button className="button" type="submit">Reset</button>
             </form>
+            {showPopup && (
+                    <Popup message={message} onClose={() => setShowPopup(false)} />
+                )}
         </div>
         </>
     );
