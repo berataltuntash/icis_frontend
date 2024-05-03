@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import "./Pages.css";
 import iytelogo from "../Assets/iytelogo.png";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import Popup from './PopUp.jsx';
+
 
 const CompanyRegister = () => {
 
@@ -10,13 +12,19 @@ const CompanyRegister = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [showPopup, setShowPopup] = useState(false);
+    const [message, setMessage] = useState('');
+    const navigate = useNavigate();
+
 
 
     const handleRegister = async (event) => {
         event.preventDefault(); 
 
         if (password !== confirmPassword) {
-            alert("Passwords do not match");
+            setMessage("Passwords do not match.");
+            setShowPopup(true);
+            setTimeout(() => setShowPopup(false), 2000);
             return;
         }
 
@@ -31,10 +39,27 @@ const CompanyRegister = () => {
                     'Content-Type': 'application/json'
                 }
             });
-            console.log(response.data);
 
+            if (response.status === 202) {
+                setMessage(response.data || "Registration successful.");
+                setShowPopup(true);
+                setTimeout(() => {
+                    setShowPopup(false);
+                }, 2000);
+                navigate('/login');
+            } else if (response.status === 400) {
+                setMessage(response.data || "Registration error: The server may be down.");
+                setShowPopup(true);
+                setTimeout(() => setShowPopup(false), 2000);
+            } else {
+                setMessage(response.data || "Unexpected status received. Please try again.");
+                setShowPopup(true);
+                setTimeout(() => setShowPopup(false), 2000);
+            }
         } catch (error) {
-            console.error('Registration error:', error.response || error.message);
+            setMessage((error.response && error.response.data && error.response.data.message) || 'Registration error: The server may be down.');
+            setShowPopup(true);
+            setTimeout(() => setShowPopup(false), 2000);
 
         }
     };
@@ -71,6 +96,9 @@ const CompanyRegister = () => {
                     <p>Are you a Iyte? <Link to="/IyteRegister">Register Here</Link></p>
                 </div>
             </form>
+            {showPopup && (
+                <Popup message={message} onClose={() => setShowPopup(false)} />
+            )}
         </div>
         </>
     );

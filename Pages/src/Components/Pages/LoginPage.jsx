@@ -23,8 +23,7 @@ const LoginPage = () => {
                     'Content-Type': 'application/json'
                 }
             });
-
-
+            
             setMessage(response.data);
             setShowPopup(true);
 
