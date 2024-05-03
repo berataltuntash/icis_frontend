@@ -59,6 +59,9 @@ const ForgotPassword = () => {
                             value={email} onChange={e => setEmail(e.target.value)} />
                     </div>
                     <button className="button" type="submit">Submit</button>
+                <div className="register-link">
+                    <p>Did you remember your password ?<Link to="/login">Login Here</Link></p>
+                </div>
                 </form>
                 {showPopup && (
                     <Popup message={message} onClose={() => setShowPopup(false)} />
