@@ -166,13 +166,14 @@
 
 .popup-inner {
     padding: 20px;
-    background: #ff3333; 
+    background: hsl(2, 81%, 34%); 
     border-radius: 5px;
     box-shadow: 0px 0px 15px rgba(0,0,0,0.5);
     color: white; 
     text-align: center; 
     width: auto; 
     max-width: 90%; 
+    font-size: 20px;
 }
 
 
