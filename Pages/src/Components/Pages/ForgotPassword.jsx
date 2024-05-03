@@ -26,6 +26,9 @@ const ForgotPassword = () => {
                     navigate('/resetpassword');
                     setShowPopup(false);
                 }, 2000); 
+            }else{
+                setShowPopup(true);
+                navigate('/forgotpassword');
             }
         } catch (error) {
             setMessage(error.response?.data || 'Error sending email: The server may be down.');
