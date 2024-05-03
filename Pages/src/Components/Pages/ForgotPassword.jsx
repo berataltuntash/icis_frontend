@@ -17,6 +17,10 @@ const ForgotPassword = () => {
         try {
             const response = await axios.post('http://localhost:8080/api/forgotpassword', { 
                 email
+            },{
+                headers: {
+                    'Content-Type': 'application/json'
+                }
             });
             setMessage(response.data);
             setShowPopup(true);
@@ -26,15 +30,19 @@ const ForgotPassword = () => {
                     navigate('/resetpassword');
                     setShowPopup(false);
                 }, 2000); 
-            }if else(response.status === 404) {
+            }else if (response.status === 400) {
                 setTimeout(() => {
-                    navigate('/iyteregister');
                     setShowPopup(false);
                 }, 2000);
             }
         } catch (error) {
             setMessage(error.response?.data || 'Error sending email: The server may be down.');
             setShowPopup(true);
+            if (error.response?.status === 400) {
+                setTimeout(() => {
+                    setShowPopup(false);
+                }, 2000);
+            }
         }
     };
 
