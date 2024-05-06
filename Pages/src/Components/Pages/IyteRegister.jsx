@@ -37,9 +37,7 @@ const IyteRegister = () => {
             if (response.status === 202) {
                 setMessage(response.data || "Registration successful.");
                 setShowPopup(true);
-                setTimeout(() => {
-                    setShowPopup(false);
-                }, 2000);
+                setTimeout(() => setShowPopup(false), 2000);
                 navigate('/login');
             } else if (response.status === 400) {
                 setMessage(response.data || "Registration error: The server may be down.");
