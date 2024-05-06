@@ -45,8 +45,8 @@ const CompanyRegister = () => {
                 setShowPopup(true);
                 setTimeout(() => {
                     setShowPopup(false);
+                    navigate('/login');
                 }, 2000);
-                navigate('/login');
             } else if (response.status === 400) {
                 setMessage(response.data || "Registration error: The server may be down.");
                 setShowPopup(true);
