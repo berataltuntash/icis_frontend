@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
+import Popup from './PopUp.jsx';
 import "./Pages.css";
 import iytelogo from "../Assets/iytelogo.png";
 
@@ -25,9 +27,8 @@ const ResetPassword = () => {
         try {
             const response = await axios.post('http://localhost:8080/api/resetpassword', {
                 email,
-                newPassword, 
-                confirmPassword,
-                emailcode : code
+                password : newPassword, 
+                emailCode : code
             });
             if (response.status === 202) {
                 setMessage(response.data || "Password reset successful.");

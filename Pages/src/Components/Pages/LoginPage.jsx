@@ -72,7 +72,7 @@ const LoginPage = () => {
                     </div>
                     <button className="button" type="submit">Login</button>
                     <div className="register-link">
-                        <p>Don't have an account? <Link to="/register">Register here</Link></p>
+                        <p>Don't have an account? <Link to="/iyteregister">Register here</Link></p>
                     </div>
                 </form>
                 {showPopup && (
