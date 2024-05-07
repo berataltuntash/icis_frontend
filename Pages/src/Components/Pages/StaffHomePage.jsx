@@ -1,22 +1,22 @@
 import React from 'react';
 import "./Pages.css";
 import iytelogo from "../Assets/iytelogo.png";
-import appleBuilding from "../Assets/apple-building.jpg"; // ensure you have this image in your assets folder
+import appleBuilding from "../Assets/apple-building.jpg"; 
 import { Link } from 'react-router-dom';
 
-const StudentHomePage = () => {
+const StaffHomePage = () => {
     return (
         <div>
             <div className="red-bar">
                 <div className="logo-container">
                     <img src={iytelogo} alt="Logo" className="logo" />
                 </div>
-                <div className="buttons-container">
+                <div className="buttons-container3">
                     <button className="redbarbutton">
-                        <Link to="/internshipopportunities" className="link-style">Internship Opportunities</Link>
+                        <Link to="/summerpracticereport" className="link-style">Summer Practice Report</Link>
                     </button>
                     <button className="redbarbutton">
-                        <Link to="/myinternship" className="link-style">My Internship</Link>
+                        <Link to="/manageinternshipopportunities" className="link-style">Manage Internship Opportunities</Link>
                     </button>
                 </div>
             </div>
@@ -37,4 +37,4 @@ const StudentHomePage = () => {
     );
 }
 
-export default StudentHomePage;
+export default StaffHomePage;
