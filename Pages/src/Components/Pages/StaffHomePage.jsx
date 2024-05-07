@@ -19,6 +19,9 @@ const StaffHomePage = () => {
                         <Link to="/manageinternshipopportunities" className="link-style">Manage Internship Opportunities</Link>
                     </button>
                 </div>
+                <div className="profile" >
+                        <h1>Profile</h1>
+                </div> 
             </div>
             <div className="main-content">
                 <div className="image-container">

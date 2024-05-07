@@ -1,10 +1,43 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import "./Pages.css";
 import iytelogo from "../Assets/iytelogo.png";
-import appleBuilding from "../Assets/apple-building.jpg"; // ensure you have this image in your assets folder
+import appleBuilding from "../Assets/apple-building.jpg";
 import { Link } from 'react-router-dom';
 
+
+const api = axios.create({
+    baseURL: 'http://localhost:8080/', // Change this to your actual backend server URL
+    withCredentials: true, // This is important for CORS and sessions/cookies handling
+});
+
 const StudentHomePage = () => {
+    const [studentInfo, setStudentInfo] = useState(null);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        api.post('/showstudenthomepage')
+            .then(response => {
+                // Response with user data means successful authentication
+                setStudentInfo(response.data);
+            })
+            .catch(error => {
+                console.error('Error fetching student home page:', error);
+                if (error.response && error.response.status === 401) {
+                    // If unauthorized, redirect to login page
+                    navigate('/login');
+                } else {
+                    // Handle other types of errors (network error, server error, etc.)
+                    alert('Error fetching data. Please try again later.');
+                }
+            });
+    }, [navigate]);
+
+    if (!studentInfo) {
+        return <div>Loading...</div>;
+    }
+
     return (
         <div>
             <div className="red-bar">
@@ -17,8 +50,11 @@ const StudentHomePage = () => {
                     </button>
                     <button className="redbarbutton">
                         <Link to="/myinternship" className="link-style">My Internship</Link>
-                    </button>
+                    </button>      
                 </div>
+                <div className="profile">
+                    <h1>Profile: {studentInfo}</h1>
+                </div> 
             </div>
             <div className="main-content">
                 <div className="image-container">

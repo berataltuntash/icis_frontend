@@ -119,19 +119,16 @@
 .buttons-container {
     display: flex;
     align-items: center;
-    margin-right: 35%;
 }
 
 .buttons-container2 {
     display: flex;
     align-items: center;
-    margin-right: 15%;
 }
 
 .buttons-container3 {
     display: flex;
     align-items: center;
-    margin-right: 28%;
 }
 
 .redbarbutton {
@@ -222,4 +219,15 @@
     font-size: 16px;
 }
 
+.profile {
+    display: flex;
+    justify-content: center;
+    background-color: hsl(0, 0%, 100%);
+    border-radius: 30px;
+    margin: 30px;
+}
 
+.profile h1 {
+    font-size: 20px;
+    margin: 10px 25px;
+}

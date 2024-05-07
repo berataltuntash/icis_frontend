@@ -22,6 +22,9 @@ const CompanyHomePage = () => {
                         <Link to="/reviewsummerpracticereport" className="link-style">Review Summer Practice Report</Link>
                     </button>
                 </div>
+                <div className="profile" >
+                        <h1>Profile</h1>
+                </div> 
             </div>
             <div className="main-content">
                 <div className="image-container">
