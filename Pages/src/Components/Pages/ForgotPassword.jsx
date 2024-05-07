@@ -49,7 +49,9 @@ const ForgotPassword = () => {
     return (
         <>
             <div className="red-bar">
-                <img src={iytelogo} alt="Logo" className="logo" />
+                <div className="logo-container">
+                    <img src={iytelogo} alt="Logo" className="logo" />
+                </div>
             </div>
             <div className="wrapper">
                 <form onSubmit={handleSubmit}>

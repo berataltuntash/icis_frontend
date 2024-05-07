@@ -8,42 +8,10 @@
     margin-top: 20vh; 
 }
 
-.dropdown-menu {
-    position: absolute;
-    top: 86px; /* Adjust based on your layout */
-    left: 94%;
-    transform: translateX(-50%);
-    background-color: transparent;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    z-index: 1000;
-    width: auto;
-    padding: 10px 0;
-
-}
-
-.dropdown-item {
-    color: #333;
-    padding: 10px 20px;
-    display: block;
-    cursor: pointer;
-    border: 1px solid black;
-    border-radius: 25px;
-    background-color: #fff;
-}
-
-.dropdown-item:hover {
-    background-color: #f1f1f1;
-}
-
 @media (max-width: 768px) {
     .wrapper {
-      width: 90vw; /* Adjust width for smaller screens */
+      width: 90vw;
     }
-}
-
-.red-bar, .company-box, .dropdown-menu {
-    width: auto; /* Adjust width to fit content */
 }
 
 .wrapper h1{
@@ -132,23 +100,56 @@
 }
 
 .red-bar {
-    background-color: hsl(2, 81%, 34%);
-    padding: 25px 0;
+    background-color: hsl(2, 81%, 34%); 
     width: 100%; 
     display: flex;
-    justify-content: center; 
-    align-items: center; 
-    position: fixed; 
-    top: 0; 
-    left: 0; 
-    z-index: 999; 
+    justify-content: space-between; 
+    align-items: flex-end;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.buttons-container {
+    display: flex;
+    align-items: center;
+    margin-right: 30%;
+}
+
+.redbarbutton {
+    background-color: hsl(0, 0%, 100%); 
+    color: hsl(0, 0%, 0%);
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    border-radius: 40px;  
+    margin: 35px 50px;
+}
+
+.redbarbutton:hover {
+    background-color: #000000;
+    color: #ffffff;
+    transform: scale(1.1); 
+}
+
+.link-style {
+    text-decoration: none;
+    color: inherit;
 }
 
 .logo {
     width: 80px;
     height: 80px;
-    margin-right: auto;
-    margin-left: 30px;
+    margin: 20px 30px;
 }
 
 .popup {

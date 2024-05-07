@@ -6,6 +6,7 @@ import ResetPassword from './Components/Pages/ResetPassword';
 import HomePage from './Components/Pages/HomePage';
 import IyteRegister from './Components/Pages/IyteRegister';
 import CompanyRegister from './Components/Pages/CompanyRegister';
+import StudentHomePage from './Components/Pages/StudentHomePage';
 
 function App() {
 
@@ -18,9 +19,9 @@ function App() {
           <Route path="/companyregister" element={<CompanyRegister />} />
           <Route path="/forgotpassword" element={<ForgotPassword />} />
           <Route path="/resetpassword" element={<ResetPassword />} />
-          <Route path="/studenthomepage" element={<HomePage />} />
           <Route path="/companyhomepage" element={<HomePage />} />
           <Route path="/staffhomepage" element={<HomePage />} />
+          <Route path="/studenthomepage" element={<StudentHomePage />} />
         </Routes>
       </div>
     </Router>
