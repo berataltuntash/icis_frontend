@@ -6,10 +6,9 @@ import iytelogo from "../Assets/iytelogo.png";
 import appleBuilding from "../Assets/apple-building.jpg";
 import { Link } from 'react-router-dom';
 
-
 const api = axios.create({
-    baseURL: 'http://localhost:8080/', // Change this to your actual backend server URL
-    withCredentials: true, // This is important for CORS and sessions/cookies handling
+    baseURL: 'http://localhost:8080/',
+    withCredentials: true,
 });
 
 const StudentHomePage = () => {
@@ -17,21 +16,21 @@ const StudentHomePage = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        api.post('/showstudenthomepage')
-            .then(response => {
-                // Response with user data means successful authentication
+        const fetchStudentHomePage = async () => {
+            try {
+                const response = await api.post('/showstudenthomepage');
                 setStudentInfo(response.data);
-            })
-            .catch(error => {
+            } catch (error) {
                 console.error('Error fetching student home page:', error);
                 if (error.response && error.response.status === 401) {
-                    // If unauthorized, redirect to login page
                     navigate('/login');
                 } else {
-                    // Handle other types of errors (network error, server error, etc.)
                     alert('Error fetching data. Please try again later.');
                 }
-            });
+            }
+        };
+
+        fetchStudentHomePage();
     }, [navigate]);
 
     if (!studentInfo) {
