@@ -1,42 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
 import "./Pages.css";
 import iytelogo from "../Assets/iytelogo.png";
-import appleBuilding from "../Assets/apple-building.jpg";
+import appleBuilding from "../Assets/apple-building.jpg"; // ensure you have this image in your assets folder
 import { Link } from 'react-router-dom';
 
-const api = axios.create({
-    baseURL: 'http://localhost:8080/',
-    withCredentials: true,
-});
-
 const StudentHomePage = () => {
-    const [studentInfo, setStudentInfo] = useState(null);
-    const navigate = useNavigate();
-
-    useEffect(() => {
-        const fetchStudentHomePage = async () => {
-            try {
-                const response = await api.post('/showstudenthomepage');
-                setStudentInfo(response.data);
-            } catch (error) {
-                console.error('Error fetching student home page:', error);
-                if (error.response && error.response.status === 401) {
-                    navigate('/login');
-                } else {
-                    alert('Error fetching data. Please try again later.');
-                }
-            }
-        };
-
-        fetchStudentHomePage();
-    }, [navigate]);
-
-    if (!studentInfo) {
-        return <div>Loading...</div>;
-    }
-
     return (
         <div>
             <div className="red-bar">
@@ -51,8 +19,8 @@ const StudentHomePage = () => {
                         <Link to="/myinternship" className="link-style">My Internship</Link>
                     </button>      
                 </div>
-                <div className="profile">
-                    <h1>Profile: {studentInfo}</h1>
+                <div className="profile" >
+                        <h1>Profile</h1>
                 </div> 
             </div>
             <div className="main-content">
