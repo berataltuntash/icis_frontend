@@ -1,88 +1,75 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom';
-import Popup from './PopUp.jsx';
+import { useNavigate } from 'react-router-dom';
 import "./Pages.css";
 import iytelogo from "../Assets/iytelogo.png";
+import appleBuilding from "../Assets/apple-building.jpg";
+import { Link } from 'react-router-dom';
 
-const LoginPage = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [showPopup, setShowPopup] = useState(false);
-    const [message, setMessage] = useState('');
+const api = axios.create({
+    baseURL: 'http://localhost:8080/',
+    withCredentials: true,
+});
+
+const StudentHomePage = () => {
+    const [studentInfo, setStudentInfo] = useState(null);
     const navigate = useNavigate();
 
-    const handleLogin = async (event) => {
-        event.preventDefault();
-        try {
-            const response = await axios.post('http://localhost:8080/api/login', {
-                email,
-                password
-            }, {
-                headers: {
-                    'Content-Type': 'application/json'
+    useEffect(() => {
+        const fetchStudentHomePage = async () => {
+            try {
+                const response = await api.post('/showstudenthomepage');
+                setStudentInfo(response.data);
+            } catch (error) {
+                console.error('Error fetching student home page:', error);
+                if (error.response && error.response.status === 401) {
+                    navigate('/login');
+                } else {
+                    alert('Error fetching data. Please try again later.');
                 }
-            });
-            
-            setMessage(response.data);
-            setShowPopup(true);
-
-            if (response.status === 202) {
-                setTimeout(() => {
-                    setShowPopup(false);
-                    if (email.endsWith('@std.iyte.edu.tr')) {
-                        navigate('/studenthomepage');
-                    } else if (email.endsWith('@iyte.edu.tr')) {
-                        navigate('/staffhomepage');
-                    }else{
-                        navigate('/companyhomepage');
-                    }
-                }, 2000);
-            } else {
-                setTimeout(() => {
-                    setShowPopup(false);
-                }, 2000);
             }
-        } catch (error) {
-            setMessage(error.response?.data || 'Error sending email: The server may be down.');
-            setShowPopup(true);
-            setTimeout(() => setShowPopup(false), 2000);
-        }
-    };
+        };
+
+        fetchStudentHomePage();
+    }, [navigate]);
+
+    if (!studentInfo) {
+        return <div>Loading...</div>;
+    }
 
     return (
-        <>
+        <div>
             <div className="red-bar">
                 <div className="logo-container">
                     <img src={iytelogo} alt="Logo" className="logo" />
                 </div>
+                <div className="buttons-container">
+                    <button className="redbarbutton">
+                        <Link to="/internshipopportunities" className="link-style">Internship Opportunities</Link>
+                    </button>
+                    <button className="redbarbutton">
+                        <Link to="/myinternship" className="link-style">My Internship</Link>
+                    </button>      
+                </div>
+                <div className="profile">
+                    <h1>Profile: {studentInfo}</h1>
+                </div> 
             </div>
-            <div className="wrapper">
-                <form onSubmit={handleLogin}>
-                    <h1>Login</h1>
-                    <div className="input-box">
-                        <input type="text" placeholder="Email" required
-                            value={email} onChange={e => setEmail(e.target.value)} />
-                    </div>
-                    <div className="input-box">
-                        <input type="password" placeholder="Password" required
-                            value={password} onChange={e => setPassword(e.target.value)} />
-                    </div>
-                    <div className="remember-forgot">
-                        <label><input type="checkbox" /> Remember me</label>
-                        <Link to="/forgotpassword">Forgot Password?</Link>
-                    </div>
-                    <button className="button" type="submit">Login</button>
-                    <div className="register-link">
-                        <p>Don't have an account? <Link to="/iyteregister">Register here</Link></p>
-                    </div>
-                </form>
-                {showPopup && (
-                    <Popup message={message} onClose={() => setShowPopup(false)} />
-                )}
+            <div className="main-content">
+                <div className="image-container">
+                    <img src={appleBuilding} alt="Apple Building" className="main-image" />
+                </div>
+                <div className="announcements-container">
+                    <h2 className="announcements-title">ANNOUNCEMENTS</h2>
+                    <ul className="announcements-list">
+                        <li className="announcement-item">First announcement goes here...</li>
+                        <li className="announcement-item">Second announcement goes here...</li>
+                        <li className="announcement-item">Third announcement goes here...</li>
+                    </ul>
+                </div>
             </div>
-        </>
+        </div>
     );
 }
 
-export default LoginPage;
+export default StudentHomePage;
