@@ -12,6 +12,37 @@ const LoginPage = () => {
     const [message, setMessage] = useState('');
     const navigate = useNavigate();
 
+    useEffect(() => {
+        const checkLoggedIn = async () => {
+            try {
+                const jwtToken = localStorage.getItem('jwtToken');
+                if (jwtToken) {
+                    const response = await axios.post('http://localhost:8080/api/checktoken', {
+                        token: jwtToken
+                    });
+                    
+                    if (response.status === 200) {
+                        // Kullanıcı zaten giriş yapmış, uygun bir yönlendirme yap
+                        const { userType } = response.data;
+                        if (userType === 'student') {
+                            navigate('/studenthomepage');
+                        } else if (userType === 'staff') {
+                            navigate('/staffhomepage');
+                        } else if (userType === 'company') {
+                            navigate('/companyhomepage');
+                        }
+                        return;
+                    }
+                }
+                // Kullanıcı giriş yapmamış veya token geçerli değil, login sayfasında kal
+            } catch (error) {
+                console.error('Error while checking login status:', error);
+            }
+        };
+
+        checkLoggedIn();
+    }, [navigate]);
+
     const handleLogin = async (event) => {
         event.preventDefault();
         try {
@@ -20,7 +51,7 @@ const LoginPage = () => {
                 password
             }, {
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
                 }
             });
             
