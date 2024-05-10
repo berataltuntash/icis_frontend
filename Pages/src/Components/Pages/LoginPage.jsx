@@ -24,27 +24,31 @@ const LoginPage = () => {
                 }
             });
             
-            setMessage(response.data);
-            setShowPopup(true);
-
             if (response.status === 202) {
+                const { jwtToken, message } = response.data;
+                localStorage.setItem('jwtToken', jwtToken); // Token'ı local storage'a kaydet
+                setMessage(message);
+                setShowPopup(true);
+
                 setTimeout(() => {
                     setShowPopup(false);
                     if (email.endsWith('@std.iyte.edu.tr')) {
                         navigate('/studenthomepage');
                     } else if (email.endsWith('@iyte.edu.tr')) {
                         navigate('/staffhomepage');
-                    }else{
+                    } else {
                         navigate('/companyhomepage');
                     }
                 }, 2000);
             } else {
+                setMessage(response.data.message);
+                setShowPopup(true);
                 setTimeout(() => {
                     setShowPopup(false);
                 }, 2000);
             }
         } catch (error) {
-            setMessage(error.response?.data || 'Error sending email: The server may be down.');
+            setMessage(error.response?.data || 'Server error: Could not log in.');
             setShowPopup(true);
             setTimeout(() => setShowPopup(false), 2000);
         }

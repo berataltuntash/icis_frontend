@@ -8,6 +8,7 @@ import CompanyRegister from './Components/Pages/CompanyRegister';
 import StudentHomePage from './Components/Pages/StudentHomePage';
 import CompanyHomePage from './Components/Pages/CompanyHomePage';
 import StaffHomePage from './Components/Pages/StaffHomePage';
+import PrivateRoute from './Components/Pages/PrivateRoute';
 
 function App() {
 
@@ -20,9 +21,9 @@ function App() {
           <Route path="/companyregister" element={<CompanyRegister />} />
           <Route path="/forgotpassword" element={<ForgotPassword />} />
           <Route path="/resetpassword" element={<ResetPassword />} />
-          <Route path="/studenthomepage" element={<StudentHomePage />} />
-          <Route path="/companyhomepage" element={<CompanyHomePage />} />
-          <Route path="/staffhomepage" element={<StaffHomePage />} />
+          <PrivateRoute  path="/studenthomepage" element={<StudentHomePage />} />
+          <PrivateRoute  path="/companyhomepage" element={<CompanyHomePage />} />
+          <PrivateRoute  path="/staffhomepage" element={<StaffHomePage />} />
         </Routes>
       </div>
     </Router>
