@@ -26,7 +26,7 @@ const LoginPage = () => {
             
             if (response.status === 202) {
                 const { jwtToken, message } = response.data;
-                localStorage.setItem('jwtToken', jwtToken); // Token'ı local storage'a kaydet
+                localStorage.setItem('jwtToken', jwtToken); 
                 setMessage(message);
                 setShowPopup(true);
 
@@ -41,7 +41,7 @@ const LoginPage = () => {
                     }
                 }, 2000);
             } else {
-                setMessage(response.data.message);
+                setMessage(message);    
                 setShowPopup(true);
                 setTimeout(() => {
                     setShowPopup(false);
