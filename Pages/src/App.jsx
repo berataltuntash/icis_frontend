@@ -8,7 +8,7 @@ import CompanyRegister from './Components/Pages/CompanyRegister';
 import StudentHomePage from './Components/Pages/StudentHomePage';
 import CompanyHomePage from './Components/Pages/CompanyHomePage';
 import StaffHomePage from './Components/Pages/StaffHomePage';
-import PrivateRoute from './Components/Pages/PrivateRoute';
+import PrivateRoute from './PrivateRoute';
 
 function App() {
 
@@ -21,9 +21,9 @@ function App() {
           <Route path="/companyregister" element={<CompanyRegister />} />
           <Route path="/forgotpassword" element={<ForgotPassword />} />
           <Route path="/resetpassword" element={<ResetPassword />} />
-          <PrivateRoute  path="/studenthomepage" element={<StudentHomePage />} />
-          <PrivateRoute  path="/companyhomepage" element={<CompanyHomePage />} />
-          <PrivateRoute  path="/staffhomepage" element={<StaffHomePage />} />
+          <Route  path="/studenthomepage" element={<PrivateRoute component={StudentHomePage} />} />
+          <Route  path="/companyhomepage" element={<PrivateRoute component={CompanyHomePage} />} />
+          <Route  path="/staffhomepage" element={<PrivateRoute component={StaffHomePage} />} />
         </Routes>
       </div>
     </Router>
