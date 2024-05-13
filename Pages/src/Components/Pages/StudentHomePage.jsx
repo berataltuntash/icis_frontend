@@ -1,10 +1,20 @@
-import React from 'react';
+// src/components/StudentHomePage.js
+import React, { useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import isLoggedIn from '../JWT/jwtToken'; 
 import "./Pages.css";
 import iytelogo from "../Assets/iytelogo.png";
-import appleBuilding from "../Assets/apple-building.jpg"; // ensure you have this image in your assets folder
-import { Link } from 'react-router-dom';
+import appleBuilding from "../Assets/apple-building.jpg";
 
 const StudentHomePage = () => {
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (!isLoggedIn()) {
+            navigate('/login'); 
+        }
+    }, [navigate]);
+
     return (
         <div>
             <div className="red-bar">
@@ -17,11 +27,11 @@ const StudentHomePage = () => {
                     </button>
                     <button className="redbarbutton">
                         <Link to="/myinternship" className="link-style">My Internship</Link>
-                    </button>      
+                    </button>
                 </div>
-                <div className="profile" >
-                        <h1>Profile</h1>
-                </div> 
+                <div className="profile">
+                    <h1>Profile</h1>
+                </div>
             </div>
             <div className="main-content">
                 <div className="image-container">

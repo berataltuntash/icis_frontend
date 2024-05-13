@@ -1,10 +1,52 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import isLoggedIn from '../JWT/jwtToken'; 
+import axios from 'axios';
+import Cookies from 'js-cookie';
 import "./Pages.css";
 import iytelogo from "../Assets/iytelogo.png";
-import appleBuilding from "../Assets/apple-building.jpg"; 
-import { Link } from 'react-router-dom';
+import appleBuilding from "../Assets/apple-building.jpg";
 
 const StaffHomePage = () => {
+    const navigate = useNavigate();
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+    useEffect(() => {
+        const checkAuthentication = async () => {
+            const token = Cookies.get('jwtToken');
+            if (!token) {
+                navigate('/login'); 
+                return;
+            }
+
+            try {
+                const response = await axios.get('http://localhost:8080/api/verifyToken', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (response.status === 200) {
+                    setIsAuthenticated(true);
+                } else {
+                    navigate('/login'); // Token geçersizse login sayfasına yönlendir
+                }
+            } catch (error) {
+                navigate('/login'); // Hata durumunda login sayfasına yönlendir
+            }
+        };
+
+        if (!isLoggedIn()) {
+            navigate('/login'); // Giriş yapmamışsa login sayfasına yönlendir
+        } else {
+            checkAuthentication();
+        }
+    }, [navigate]);
+
+    if (!isAuthenticated) {
+        return null; // Kullanıcı yetkilendirilmediği sürece hiçbir şey gösterme
+    }
+
     return (
         <div>
             <div className="red-bar">
@@ -19,9 +61,9 @@ const StaffHomePage = () => {
                         <Link to="/manageinternshipopportunities" className="link-style">Manage Internship Opportunities</Link>
                     </button>
                 </div>
-                <div className="profile" >
-                        <h1>Profile</h1>
-                </div> 
+                <div className="profile">
+                    <h1>Profile</h1>
+                </div>
             </div>
             <div className="main-content">
                 <div className="image-container">

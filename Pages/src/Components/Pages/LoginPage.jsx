@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
+// src/components/LoginPage.js
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
+import isLoggedIn from '../utils/auth'; // isLoggedIn fonksiyonunu import edin
 import Popup from './PopUp.jsx';
 import "./Pages.css";
 import iytelogo from "../Assets/iytelogo.png";
@@ -11,6 +14,12 @@ const LoginPage = () => {
     const [showPopup, setShowPopup] = useState(false);
     const [message, setMessage] = useState('');
     const navigate = useNavigate();
+
+    useEffect(() => {
+        if (isLoggedIn()) {
+            navigate('/'); 
+        }
+    }, [navigate]);
 
     const handleLogin = async (event) => {
         event.preventDefault();
@@ -26,7 +35,7 @@ const LoginPage = () => {
             
             if (response.status === 202) {
                 const { jwtToken, message } = response.data;
-                localStorage.setItem('jwtToken', jwtToken); 
+                Cookies.set('jwtToken', jwtToken, { expires: 1 });
                 setMessage(message);
                 setShowPopup(true);
 
