@@ -9,8 +9,14 @@ import appleBuilding from "../Assets/apple-building.jpg";
 const StaffHomePage = () => {
     const navigate = useNavigate();
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [showLogout, setShowLogout] = useState(false);
     const [name, setName] = useState('');
     
+    const handleLogout = () => {
+        Cookies.remove('jwtToken');
+        navigate('/login');
+    };
+
     const formatName = (name) => {
         return name
             .split('.') 
@@ -80,11 +86,11 @@ const StaffHomePage = () => {
                         <Link to="/manageinternshipopportunities" className="link-style">Manage Internship Opportunities</Link>
                     </button>
                 </div>
-                <div className="profile" onClick={() => setShowLogout(!showLogout)}>
-                    <h1 style={{ cursor: 'pointer' }}>{name}</h1>
+                <div className="profile">
+                    <h1 onClick={() => setShowLogout(!showLogout)}>{name}</h1>
                     {showLogout && (
-                    <div className="dropdown-content" onClick={(e) => e.stopPropagation()}>
-                        <button onClick={handleLogout} style={{ cursor: 'pointer' }}>Logout</button>
+                    <div className="dropdown-content">
+                        <button onClick={handleLogout}>Logout</button>
                     </div>
                     )}
                 </div>
