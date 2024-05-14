@@ -259,3 +259,34 @@
 .dropdown-item:hover {
     background-color: hsl(0, 0%, 73%);
 }
+
+.opportunities-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.offername-item {
+    background-color: #ff4d4d;
+    color: white;
+    margin: 10px;
+    padding: 20px;
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 10px;
+}
+
+.view-button {
+    background-color: white;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.view-button:hover {
+    background-color: #e6e6e6;
+}

@@ -101,11 +101,11 @@ const InternshipOpportunities = () => {
                         </div>
                     )}
             <div className="opportunities-container">
-                {opportunities.map((opportunity, index) => (
-                    <div key={index} className="opportunity-item">
-                        <span>{opportunity}</span>
+                {opportunities.map((offername, offerid) => (
+                    <div key={offerid} className="offername-item">
+                        <span>{offername}</span>
                         <button className="view-button">
-                            <Link to={`/opportunity/${opportunity.id}`} className="link-style">View</Link>
+                            <Link to={`/offername/${offername.id}`} className="link-style">View</Link>
                         </button>
                     </div>
                 ))}
