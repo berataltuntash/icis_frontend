@@ -5,11 +5,24 @@ import axios from 'axios';
 import "./Pages.css";
 import iytelogo from "../Assets/iytelogo.png";
 import appleBuilding from "../Assets/apple-building.jpg";
+import Cookies from 'js-cookie';
 
 const CompanyHomePage = () => {
     const navigate = useNavigate();
     const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [Name, setName] = useState('');
+    const [showLogout, setShowLogout] = useState(false);
+    const [name, setName] = useState('');
+
+    const handleLogout = () => {
+        Cookies.remove('jwtToken');
+        navigate('/login');
+    };
+    const formatName = (name) => {
+        return name
+            .split('.') 
+            .map(part => part.charAt(0).toUpperCase() + part.slice(1)) 
+            .join(' '); 
+    };
 
     useEffect(() => {
         const checkAuthentication = async () => {
@@ -30,7 +43,7 @@ const CompanyHomePage = () => {
                 const { UserType, Name } = response.data;
 
                 if (response.status === 202) {
-                    setName(Name);
+                    setName(formatName(Name));
                     if( UserType === 'Company') {
                         console.log(`Welcome, ${Name}`);
                     } else if( UserType === 'Staff') {
@@ -77,7 +90,10 @@ const CompanyHomePage = () => {
                     </button>
                 </div>
                 <div className="profile">
-                    <h1>{Name}</h1>
+                    <h1 onClick={() => setShowLogout(!showLogout)} style={{ cursor: 'pointer' }}>{name}</h1>
+                    {showLogout && (
+                        <button onClick={handleLogout} style={{ cursor: 'pointer' }}>Logout</button>
+                    )}
                 </div>
             </div>
             <div className="main-content">

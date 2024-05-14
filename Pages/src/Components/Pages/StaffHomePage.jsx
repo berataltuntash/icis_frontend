@@ -9,7 +9,14 @@ import appleBuilding from "../Assets/apple-building.jpg";
 const StaffHomePage = () => {
     const navigate = useNavigate();
     const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [Name, setName] = useState('');
+    const [name, setName] = useState('');
+    
+    const formatName = (name) => {
+        return name
+            .split('.') 
+            .map(part => part.charAt(0).toUpperCase() + part.slice(1)) 
+            .join(' '); 
+    };
 
     useEffect(() => {
         const checkAuthentication = async () => {
@@ -30,7 +37,7 @@ const StaffHomePage = () => {
                 const { UserType, Name } = response.data;
 
                 if (response.status === 202) {
-                    setName(Name);
+                    setName(formatName(Name));
                     if ( UserType === 'Staff')  {
                         console.log(`Welcome, ${Name}`);
                     } else if( UserType === 'Student') {
@@ -48,7 +55,6 @@ const StaffHomePage = () => {
             }
         };
 
-        // Önce token var mı diye kontrol et
         if (Cookies.get('jwtToken')) {
             checkAuthentication();
         } else {
@@ -57,7 +63,7 @@ const StaffHomePage = () => {
     }, [navigate]);
 
     if (!isAuthenticated) {
-        return null; // Kullanıcı yetkilendirilmediği sürece hiçbir şey gösterme
+        return null;
     }
 
     return (
@@ -75,7 +81,10 @@ const StaffHomePage = () => {
                     </button>
                 </div>
                 <div className="profile">
-                    <h1>{Name}</h1>
+                    <h1 onClick={() => setShowLogout(!showLogout)} style={{ cursor: 'pointer' }}>{name}</h1>
+                    {showLogout && (
+                        <button onClick={handleLogout} style={{ cursor: 'pointer' }}>Logout</button>
+                    )}
                 </div>
             </div>
             <div className="main-content">

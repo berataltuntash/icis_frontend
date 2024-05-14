@@ -10,7 +10,20 @@ import axios from 'axios';
 const StudentHomePage = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [name, setName] = useState('');
+    const [showLogout, setShowLogout] = useState(false);
     const navigate = useNavigate();
+
+    const handleLogout = () => {
+        Cookies.remove('jwtToken');
+        navigate('/login');
+    };
+    
+    const formatName = (name) => {
+        return name
+            .split('.') 
+            .map(part => part.charAt(0).toUpperCase() + part.slice(1)) 
+            .join(' '); 
+    };
 
     useEffect(() => {
         const checkAuthentication = async () => {
@@ -30,7 +43,7 @@ const StudentHomePage = () => {
                 const { UserType, Name } = response.data;
 
                 if (response.status === 202) {
-                    setName(Name);
+                    setName(formatName(Name));
                     if ( UserType === 'Student')  {
                         console.log(`Welcome, ${Name}`);
                     } else if( UserType === 'Staff') {
