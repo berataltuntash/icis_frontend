@@ -224,41 +224,42 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: hsl(0, 0%, 100%);
+    background-color: #ffffff; /* Using hex code equivalent of hsl(0, 0%, 100%) */
     border-radius: 30px;
     margin: 30px;
+    padding: 20px; /* Added padding for better spacing inside the profile */
     cursor: pointer;
-    position: relative; /* Bu tanım .dropdown-content'ın doğru konumlandırılması için gereklidir */
-    padding: 20px; /* Profil kartına iç boşluk ekleyerek daha iyi görünmesini sağlar */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15); /* Adding a subtle shadow for depth */
 }
 
 .profile h1 {
-    font-size: 15px; /* Eğer başlık çok küçük görünüyorsa, boyutunu ayarlayabilirsiniz */
+    font-size: 15px; /* Ensuring size is consistent with your setting */
     margin: 10px 25px;
+    color: #333333; /* Ensuring text color is easily readable */
+    font-weight: bold; /* Making the name stand out more */
 }
 
-.dropdown-content {
-    display: none; /* Başlangıçta gizli */
-    position: absolute; /* Profil bölümüne göre konumlandırılır */
-    background-color: #f9f9f9; /* Arka plan rengi */
-    min-width: 150px; /* Minimum genişlik */
-    box-shadow: 0 8px 16px rgba(0,0,0,0.2); /* Gölge efekti */
-    z-index: 100; /* Z-index değerini artırarak üst katmanda yer almasını sağladım */
-    right: 0; /* Sağa yasla */
-    top: 100%; /* Üst kenardan itibaren %100 uzaklıkta */
-    border-radius: 5px; /* Kenarları yuvarlat */
+.dropdown-menu {
+    position: absolute;
+    right: 0;
+    top: 100%; /* Aligning dropdown to appear right below the profile */
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    z-index: 1000;
+    width: 120px; /* Adjust width as per your content */
 }
 
-.dropdown-content button {
-    width: 100%; /* Buton genişliği */
-    padding: 10px; /* İç boşluk */
-    text-align: center; /* Metin hizalaması */
-    border: none; /* Kenarlık kaldırıldı */
-    background-color: hsl(0, 0%, 58%); /* Buton arka plan rengi */
-    color: white; /* Yazı rengi */
-    cursor: pointer; /* Göstergeyi pointer yapar */
+.dropdown-item {
+    color: #333;
+    padding: 8px 12px;
+    display: block;
+    text-align: left;
+    text-decoration: none;
+    white-space: nowrap;
 }
 
-.dropdown-content button:hover {
-    background-color: #d32f2f; /* Buton üzerine gelindiğinde rengi değişir */
+.dropdown-item:hover {
+    background-color: #f5f5f5;
 }
