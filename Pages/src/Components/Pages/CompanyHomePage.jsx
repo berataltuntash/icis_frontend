@@ -20,12 +20,16 @@ const CompanyHomePage = () => {
             }
 
             try {
-                const response = await axios.get('http://localhost:8080/api/checktoken', {
+                const response = await axios.post('http://localhost:8080/api/checktoken', {
                     jwttoken: token
                     
+                },{
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
                 });
 
-                if (response.status === 200) {
+                if (response.status === 202) {
                     setIsAuthenticated(true);
                 } else {
                     navigate('/login'); 

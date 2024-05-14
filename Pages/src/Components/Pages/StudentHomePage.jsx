@@ -1,14 +1,15 @@
 // src/components/StudentHomePage.js
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import isLoggedIn from '../JWT/jwtToken'; 
 import "./Pages.css";
 import iytelogo from "../Assets/iytelogo.png";
 import appleBuilding from "../Assets/apple-building.jpg";
+import Cookies from 'js-cookie';
 
 const StudentHomePage = () => {
-    const navigate = useNavigate();
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const checkAuthentication = async () => {
@@ -19,26 +20,26 @@ const StudentHomePage = () => {
             }
 
             try {
-                const response = await axios.get('http://localhost:8080/api/checktoken', {
+                const response = await axios.post('http://localhost:8080/api/checktoken', {
                     jwttoken: token
-                    
+                }, {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
                 });
 
-                if (response.status === 200) {
+                if (response.status === 202) {
                     setIsAuthenticated(true);
                 } else {
                     navigate('/login'); 
                 }
             } catch (error) {
+                console.error('Authentication check failed:', error);
                 navigate('/login'); 
             }
         };
 
-        if (!isLoggedIn()) {
-            navigate('/login'); 
-        } else {
-            checkAuthentication();
-        }
+        checkAuthentication();
     }, [navigate]);
 
     if (!isAuthenticated) {
