@@ -16,14 +16,14 @@ function App() {
     <Router>
       <div>
         <Routes>
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/iyteregister" element={<IyteRegister />} />
-          <Route path="/companyregister" element={<CompanyRegister />} />
-          <Route path="/forgotpassword" element={<ForgotPassword />} />
-          <Route path="/resetpassword" element={<ResetPassword />} />
-          <Route  path="/studenthomepage" element={<PrivateRoute component={StudentHomePage} />} />
-          <Route  path="/companyhomepage" element={<PrivateRoute component={CompanyHomePage} />} />
-          <Route  path="/staffhomepage" element={<PrivateRoute component={StaffHomePage} />} />
+          <Route path="/login" element={<LoginPage/>} />
+          <Route path="/iyteregister" element={<IyteRegister/>} />
+          <Route path="/companyregister" element={<CompanyRegister/>} />
+          <Route path="/forgotpassword" element={<ForgotPassword/>} />
+          <Route path="/resetpassword" element={<ResetPassword/>} />
+          <Route  path="/studenthomepage" element={<StudentHomePage/>} />
+          <Route  path="/companyhomepage" element={<CompanyHomePage/>} />
+          <Route  path="/staffhomepage" element={<StaffHomePage/>} />
         </Routes>
       </div>
     </Router>

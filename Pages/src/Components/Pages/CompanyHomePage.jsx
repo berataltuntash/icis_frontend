@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import isLoggedIn from '../JWT/jwtToken';
 import "./Pages.css";
 import iytelogo from "../Assets/iytelogo.png";
 import appleBuilding from "../Assets/apple-building.jpg";
@@ -22,7 +21,6 @@ const CompanyHomePage = () => {
             try {
                 const response = await axios.post('http://localhost:8080/api/checktoken', {
                     jwttoken: token
-                    
                 },{
                     headers: {
                         'Content-Type': 'application/json'
@@ -32,17 +30,19 @@ const CompanyHomePage = () => {
                 if (response.status === 202) {
                     setIsAuthenticated(true);
                 } else {
-                    navigate('/login'); 
+                    navigate('/login');
                 }
             } catch (error) {
-                navigate('/login'); 
+                console.error('Authentication check failed:', error);
+                navigate('/login');
             }
         };
 
-        if (!isLoggedIn()) {
-            navigate('/login'); 
-        } else {
+        // Token varlığını doğrulayıp, doğrulama işlemini başlat
+        if (Cookies.get('jwtToken')) {
             checkAuthentication();
+        } else {
+            navigate('/login');
         }
     }, [navigate]);
 

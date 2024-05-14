@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import isLoggedIn from '../JWT/jwtToken'; 
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import "./Pages.css";
@@ -15,13 +14,13 @@ const StaffHomePage = () => {
         const checkAuthentication = async () => {
             const token = Cookies.get('jwtToken');
             if (!token) {
-                navigate('/login'); 
+                navigate('/login');
                 return;
             }
 
             try {
                 const response = await axios.post('http://localhost:8080/api/checktoken', {
-                    jwttoken: token  
+                    jwttoken: token
                 }, {
                     headers: {
                         'Content-Type': 'application/json'
@@ -34,14 +33,16 @@ const StaffHomePage = () => {
                     navigate('/login');
                 }
             } catch (error) {
+                console.error('Authentication check failed:', error);
                 navigate('/login'); 
             }
         };
 
-        if (!isLoggedIn()) {
-            navigate('/login'); 
-        } else {
+        // Önce token var mı diye kontrol et
+        if (Cookies.get('jwtToken')) {
             checkAuthentication();
+        } else {
+            navigate('/login');
         }
     }, [navigate]);
 

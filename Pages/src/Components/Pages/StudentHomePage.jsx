@@ -1,11 +1,11 @@
 // src/components/StudentHomePage.js
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import isLoggedIn from '../JWT/jwtToken'; 
+import { Link, useNavigate } from 'react-router-dom'; 
 import "./Pages.css";
 import iytelogo from "../Assets/iytelogo.png";
 import appleBuilding from "../Assets/apple-building.jpg";
 import Cookies from 'js-cookie';
+import axios from 'axios';
 
 const StudentHomePage = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
