@@ -40,15 +40,15 @@ const CompanyHomePage = () => {
                     }
                 });
 
-                const { UserType, Name } = response.data;
+                const { usertype, name } = response.data;
 
                 if (response.status === 202) {
-                    setName(formatName(Name));
-                    if( UserType === 'Company') {
-                        console.log(`Welcome, ${Name}`);
-                    } else if( UserType === 'Staff') {
+                    setName(formatName(name));
+                    if( usertype === 'Company') {
+                        console.log(`Welcome, ${name}`);
+                    } else if( usertype === 'Staff') {
                         navigate('/staffhomepage');
-                    } else if( UserType === 'Student') {
+                    } else if( usertype === 'Student') {
                         navigate('/studenthomepage');
                     }
                     setIsAuthenticated(true);

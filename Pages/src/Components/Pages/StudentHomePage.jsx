@@ -17,7 +17,7 @@ const StudentHomePage = () => {
         Cookies.remove('jwtToken');
         navigate('/login');
     };
-    
+
     const formatName = (name) => {
         return name
             .split('.') 
@@ -40,15 +40,15 @@ const StudentHomePage = () => {
                         'Content-Type': 'application/json'
                     }
                 });
-                const { UserType, Name } = response.data;
+                const { usertype, name } = response.data;
 
                 if (response.status === 202) {
-                    setName(formatName(Name));
-                    if ( UserType === 'Student')  {
-                        console.log(`Welcome, ${Name}`);
-                    } else if( UserType === 'Staff') {
+                    setName(formatName(name));
+                    if ( usertype === 'Student')  {
+                        console.log(`Welcome, ${name}`);
+                    } else if( usertype === 'Staff') {
                         navigate('/staffhomepage');
-                    }else if( UserType === 'Company') {
+                    }else if( usertype === 'Company') {
                         navigate('/companyhomepage');
                     }    
                     setIsAuthenticated(true);
