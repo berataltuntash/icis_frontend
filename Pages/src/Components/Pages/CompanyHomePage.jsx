@@ -19,15 +19,23 @@ const CompanyHomePage = () => {
             }
 
             try {
-                const response = await axios.post('http://localhost:8080/api/checktoken', {
-                    jwttoken: token
-                },{
+                const response = await axios.post('http://localhost:8080/api/checktoken', {}, {
                     headers: {
+                        'Authorization': `${token}`,
                         'Content-Type': 'application/json'
                     }
                 });
 
+                const { UserType, Name } = response.data;
+
                 if (response.status === 202) {
+                    if( UserType === 'Company') {
+                        console.log(`Welcome, ${Name}`);
+                    } else if( UserType === 'Staff') {
+                        navigate('/staffhomepage');
+                    } else if( UserType === 'Student') {
+                        navigate('/studenthomepage');
+                    }
                     setIsAuthenticated(true);
                 } else {
                     navigate('/login');
@@ -38,7 +46,6 @@ const CompanyHomePage = () => {
             }
         };
 
-        // Token varlığını doğrulayıp, doğrulama işlemini başlat
         if (Cookies.get('jwtToken')) {
             checkAuthentication();
         } else {
@@ -47,7 +54,7 @@ const CompanyHomePage = () => {
     }, [navigate]);
 
     if (!isAuthenticated) {
-        return null; // Kullanıcı yetkilendirilmediği sürece hiçbir şey gösterme
+        return null;
     }
 
     return (
@@ -68,7 +75,7 @@ const CompanyHomePage = () => {
                     </button>
                 </div>
                 <div className="profile">
-                    <h1>Profile</h1>
+                    <h1>{Name}</h1>
                 </div>
             </div>
             <div className="main-content">

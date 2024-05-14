@@ -19,16 +19,24 @@ const StaffHomePage = () => {
             }
 
             try {
-                const response = await axios.post('http://localhost:8080/api/checktoken', {
-                    jwttoken: token
-                }, {
+                const response = await axios.post('http://localhost:8080/api/checktoken', {}, {
                     headers: {
+                        'Authorization': `${token}`,
                         'Content-Type': 'application/json'
                     }
                 });
 
+                const { UserType, Name } = response.data;
+
                 if (response.status === 202) {
-                    setIsAuthenticated(true);
+                    if ( UserType === 'Staff')  {
+                        console.log(`Welcome, ${Name}`);
+                    } else if( UserType === 'Student') {
+                        navigate('/studenthomepage');
+                    } else if( UserType === 'Company') {
+                        navigate('/companyhomepage');
+                    }
+                    setIsAuthenticated(true);    
                 } else {
                     navigate('/login');
                 }
@@ -65,7 +73,7 @@ const StaffHomePage = () => {
                     </button>
                 </div>
                 <div className="profile">
-                    <h1>Profile</h1>
+                    <h1>{Name}</h1>
                 </div>
             </div>
             <div className="main-content">

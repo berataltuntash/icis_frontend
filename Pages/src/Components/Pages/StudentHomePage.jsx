@@ -26,11 +26,17 @@ const StudentHomePage = () => {
                         'Content-Type': 'application/json'
                     }
                 });
+                const { UserType, Name } = response.data;
 
                 if (response.status === 202) {
+                    if ( UserType === 'Student')  {
+                        console.log(`Welcome, ${Name}`);
+                    } else if( UserType === 'Staff') {
+                        navigate('/staffhomepage');
+                    }else if( UserType === 'Company') {
+                        navigate('/companyhomepage');
+                    }    
                     setIsAuthenticated(true);
-                } else {
-                    navigate('/login'); 
                 }
             } catch (error) {
                 console.error('Authentication check failed:', error);
@@ -60,7 +66,7 @@ const StudentHomePage = () => {
                     </button>
                 </div>
                 <div className="profile">
-                    <h1>Profile</h1>
+                    <h1>{Name}</h1>
                 </div>
             </div>
             <div className="main-content">
