@@ -100,17 +100,19 @@ const InternshipOpportunities = () => {
                             <button onClick={handleLogout} className="dropdown-item">Logout</button>
                         </div>
                     )}
-            <div className="opportunities-container">
-                {opportunities.map((offername, offerid) => (
-                    <div key={offerid} className="offername-item">
-                        <span>{offername}</span>
+                </div>
+                </div>
+                <div className="opportunities-container">
+                {opportunities.map((opportunity) => (
+                    <div key={opportunity.offerid} className="offername-item">
+                        <span className='companyname'>{opportunity.offername}</span>
                         <button className="view-button">
-                            <Link to={`/offername/${offername.id}`} className="link-style">View</Link>
+                            <Link to={`/offername/${opportunity.offerid}`} className="link-style">View</Link>
                         </button>
                     </div>
                 ))}
-            </div>
-                </div>
+            
+            
             </div>
         </div>
     );

@@ -104,11 +104,12 @@
     width: 100%; 
     display: flex;
     justify-content: space-between; 
-    align-items: flex-end;
+    align-items: center;
     position: fixed;
     top: 0;
     left: 0;
     z-index: 999;
+    padding: 10px;
 }
 
 .logo-container {
@@ -224,18 +225,18 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: #ffffff; /* Using hex code equivalent of hsl(0, 0%, 100%) */
+    background-color: #ffffff;
     border-radius: 30px;
-    margin: 30px; /* Added padding for better spacing inside the profile */
+    margin: 30px; 
     cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15); /* Adding a subtle shadow for depth */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15); 
 }
 
 .profile h1 {
-    font-size: 15px; /* Ensuring size is consistent with your setting */
+    font-size: 15px;
     margin: 10px 25px;
-    color: #333333; /* Ensuring text color is easily readable */
-    font-weight: bold; /* Making the name stand out more */
+    color: #333333; 
+    font-weight: bold; 
 }
 
 .dropdown-menu {
@@ -264,29 +265,43 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 180px;
+    box-sizing: border-box;
     padding: 20px;
+    background-color: hsl(2, 81%, 34%);
 }
 
 .offername-item {
-    background-color: #ff4d4d;
-    color: white;
-    margin: 10px;
-    padding: 20px;
-    width: 80%;
+    background-color: hsl(0, 0%, 67%);
+    color: rgb(0, 0, 0);
+    margin: 20px 30px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     border-radius: 10px;
+    padding:  40px 40px 40px 40px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 }
 
 .view-button {
-    background-color: white;
+    background-color: rgb(255, 255, 255);
     color: black;
     border: none;
     padding: 10px 20px;
     cursor: pointer;
-    border-radius: 5px;
+    font-size: 20px;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+
 }
 
 .view-button:hover {
-    background-color: #e6e6e6;
+    background-color: #000000;
+    color: hsl(0, 0%, 100%);
+}
+
+.companyname {
+    font-size: 25px;
+    font-weight: bold;
+    margin-right: 800px;
 }
