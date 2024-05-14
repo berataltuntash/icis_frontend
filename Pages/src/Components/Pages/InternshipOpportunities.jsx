@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import "./Pages.css";
 import iytelogo from "../Assets/iytelogo.png";
-import appleBuilding from "../Assets/apple-building.jpg";
 import Cookies from 'js-cookie';
 import axios from 'axios';
 
-const StudentHomePage = () => {
+const InternshipOpportunities = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [name, setName] = useState('');
     const [showDropdown, setShowDropdown] = useState(false);
+    const [opportunities, setOpportunities] = useState([]);
     const navigate = useNavigate();
 
     const handleLogout = () => {
@@ -61,9 +61,23 @@ const StudentHomePage = () => {
         checkAuthentication();
     }, [navigate]);
 
-    if (!isAuthenticated) {
-        return null; 
-    }
+    useEffect(() => {
+        const fetchOpportunities = async () => {
+            if (!isAuthenticated) return;
+
+            const token = Cookies.get('jwtToken');
+            try {
+                const response = await axios.get('http://localhost:8080/api/showalloffers', {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                setOpportunities(response.data);
+            } catch (error) {
+                console.error('Error fetching opportunities:', error);
+            }
+        };
+
+        fetchOpportunities();
+    }, [isAuthenticated]);
 
     return (
         <div>
@@ -86,23 +100,20 @@ const StudentHomePage = () => {
                             <button onClick={handleLogout} className="dropdown-item">Logout</button>
                         </div>
                     )}
-                </div>
+            <div className="opportunities-container">
+                {opportunities.map((opportunity, index) => (
+                    <div key={index} className="opportunity-item">
+                        <span>{opportunity}</span>
+                        <button className="view-button">
+                            <Link to={`/opportunity/${opportunity.id}`} className="link-style">View</Link>
+                        </button>
+                    </div>
+                ))}
             </div>
-            <div className="main-content">
-                <div className="image-container">
-                    <img src={appleBuilding} alt="Apple Building" className="main-image" />
-                </div>
-                <div className="announcements-container">
-                    <h2 className="announcements-title">ANNOUNCEMENTS</h2>
-                    <ul className="announcements-list">
-                        <li className="announcement-item">First announcement goes here...</li>
-                        <li className="announcement-item">Second announcement goes here...</li>
-                        <li className="announcement-item">Third announcement goes here...</li>
-                    </ul>
                 </div>
             </div>
         </div>
     );
 }
 
-export default StudentHomePage;
+export default InternshipOpportunities;
