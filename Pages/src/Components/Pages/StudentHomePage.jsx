@@ -1,11 +1,10 @@
-// src/components/StudentHomePage.js
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom'; 
+import { Link, useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
+import axios from 'axios';
 import "./Pages.css";
 import iytelogo from "../Assets/iytelogo.png";
 import appleBuilding from "../Assets/apple-building.jpg";
-import Cookies from 'js-cookie';
-import axios from 'axios';
 
 const StudentHomePage = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -18,11 +17,15 @@ const StudentHomePage = () => {
         navigate('/login');
     };
 
+    const toggleDropdown = () => {
+        setShowLogout(!showLogout);
+    };
+
     const formatName = (name) => {
         return name
-            .split('.') 
-            .map(part => part.charAt(0).toUpperCase() + part.slice(1)) 
-            .join(' '); 
+            .split('.')
+            .map(part => part.charAt(0).toUpperCase() + part.slice(1))
+            .join(' ');
     };
 
     useEffect(() => {
@@ -44,18 +47,18 @@ const StudentHomePage = () => {
 
                 if (response.status === 202) {
                     setName(formatName(name));
-                    if ( usertype === 'Student')  {
+                    if (usertype === 'Student') {
                         console.log(`Welcome, ${name}`);
-                    } else if( usertype === 'Staff') {
+                    } else if(usertype === 'Staff') {
                         navigate('/staffhomepage');
-                    }else if( usertype === 'Company') {
+                    } else if(usertype === 'Company') {
                         navigate('/companyhomepage');
-                    }    
+                    }
                     setIsAuthenticated(true);
                 }
             } catch (error) {
                 console.error('Authentication check failed:', error);
-                navigate('/login'); 
+                navigate('/login');
             }
         };
 
@@ -63,7 +66,7 @@ const StudentHomePage = () => {
     }, [navigate]);
 
     if (!isAuthenticated) {
-        return null; 
+        return null;
     }
 
     return (
@@ -81,11 +84,11 @@ const StudentHomePage = () => {
                     </button>
                 </div>
                 <div className="profile">
-                    <h1 onClick={() => setShowLogout(!showLogout)}>{name}</h1>
+                    <h1 onClick={toggleDropdown} style={{ cursor: 'pointer' }}>{name}</h1>
                     {showLogout && (
-                    <div className="dropdown-content">
-                        <button onClick={handleLogout}>Logout</button>
-                    </div>
+                        <div className="dropdown-content" onClick={(e) => e.stopPropagation()}>
+                            <button onClick={handleLogout} style={{ cursor: 'pointer' }}>Logout</button>
+                        </div>
                     )}
                 </div>
             </div>

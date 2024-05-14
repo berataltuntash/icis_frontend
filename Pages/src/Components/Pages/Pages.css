@@ -228,10 +228,12 @@
     border-radius: 30px;
     margin: 30px;
     cursor: pointer;
+    position: relative; /* Bu tanım .dropdown-content'ın doğru konumlandırılması için gereklidir */
+    padding: 20px; /* Profil kartına iç boşluk ekleyerek daha iyi görünmesini sağlar */
 }
 
 .profile h1 {
-    font-size: 15px;
+    font-size: 15px; /* Eğer başlık çok küçük görünüyorsa, boyutunu ayarlayabilirsiniz */
     margin: 10px 25px;
 }
 
@@ -241,9 +243,10 @@
     background-color: #f9f9f9; /* Arka plan rengi */
     min-width: 150px; /* Minimum genişlik */
     box-shadow: 0 8px 16px rgba(0,0,0,0.2); /* Gölge efekti */
-    z-index: 1; /* Üst üste gelme sırası */
+    z-index: 100; /* Z-index değerini artırarak üst katmanda yer almasını sağladım */
     right: 0; /* Sağa yasla */
     top: 100%; /* Üst kenardan itibaren %100 uzaklıkta */
+    border-radius: 5px; /* Kenarları yuvarlat */
 }
 
 .dropdown-content button {
@@ -251,7 +254,7 @@
     padding: 10px; /* İç boşluk */
     text-align: center; /* Metin hizalaması */
     border: none; /* Kenarlık kaldırıldı */
-    background-color: #f44336; /* Buton arka plan rengi */
+    background-color: hsl(0, 0%, 58%); /* Buton arka plan rengi */
     color: white; /* Yazı rengi */
     cursor: pointer; /* Göstergeyi pointer yapar */
 }
