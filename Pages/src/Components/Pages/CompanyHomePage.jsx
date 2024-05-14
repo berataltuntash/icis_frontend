@@ -89,10 +89,12 @@ const CompanyHomePage = () => {
                         <Link to="/reviewsummerpracticereport" className="link-style">Review Summer Practice Report</Link>
                     </button>
                 </div>
-                <div className="profile">
-                    <h1 onClick={() => setShowLogout(!showLogout)} style={{ cursor: 'pointer' }}>{name}</h1>
+                <div className="profile" onClick={() => setShowLogout(!showLogout)}>
+                    <h1 style={{ cursor: 'pointer' }}>{name}</h1>
                     {showLogout && (
+                    <div className="dropdown-content" onClick={(e) => e.stopPropagation()}>
                         <button onClick={handleLogout} style={{ cursor: 'pointer' }}>Logout</button>
+                    </div>
                     )}
                 </div>
             </div>
