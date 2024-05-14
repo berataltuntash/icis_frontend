@@ -20,10 +20,9 @@ const StudentHomePage = () => {
             }
 
             try {
-                const response = await axios.post('http://localhost:8080/api/checktoken', {
-                    jwttoken: token
-                }, {
+                const response = await axios.post('http://localhost:8080/api/checktoken', {}, {
                     headers: {
+                        'Authorization': `${token}`,
                         'Content-Type': 'application/json'
                     }
                 });

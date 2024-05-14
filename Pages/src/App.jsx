@@ -8,7 +8,6 @@ import CompanyRegister from './Components/Pages/CompanyRegister';
 import StudentHomePage from './Components/Pages/StudentHomePage';
 import CompanyHomePage from './Components/Pages/CompanyHomePage';
 import StaffHomePage from './Components/Pages/StaffHomePage';
-import PrivateRoute from './PrivateRoute';
 
 function App() {
 
