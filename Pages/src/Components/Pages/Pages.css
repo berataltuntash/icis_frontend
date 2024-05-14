@@ -236,5 +236,17 @@
 }
 
 .profile button {
-    margin-bottom: 10px; 
+    width: 80%; /* Buton genişliği */
+    padding: 10px 20px; /* İç boşluk */
+    background-color: #f44336; /* Buton arka plan rengi */
+    color: white; /* Buton yazı rengi */
+    border: none; /* Çerçeve kaldırılır */
+    border-radius: 5px; /* Kenarları yuvarlak */
+    cursor: pointer; /* İmleç pointer tipinde olur */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Gölgelendirme efekti */
+    transition: background-color 0.3s ease; /* Renk değişim animasyonu */
+}
+
+.profile button:hover {
+    background-color: #d32f2f; /* Buton üzerine gelindiğinde renk değişimi */
 }
