@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import "./Pages.css";
 import iytelogo from "../Assets/iytelogo.png";
@@ -16,6 +16,11 @@ const CompanyHomePage = () => {
         Cookies.remove('jwtToken');
         navigate('/login');
     };
+
+    const handleClick = (path) => {
+        navigate(path);
+    };
+
     const formatName = (name) => {
         return name
             .split('.') 
@@ -78,15 +83,9 @@ const CompanyHomePage = () => {
                     <img src={iytelogo} alt="Logo" className="logo" />
                 </div>
                 <div className="buttons-container2">
-                    <button className="redbarbutton">
-                        <Link to="/createinternshipannouncement" className="link-style">Create Internship Announcement</Link>
-                    </button>
-                    <button className="redbarbutton">
-                        <Link to="/fiiloutcompanyform" className="link-style">Fill Out Company Form</Link>
-                    </button>
-                    <button className="redbarbutton">
-                        <Link to="/reviewsummerpracticereport" className="link-style">Review Summer Practice Report</Link>
-                    </button>
+                    <button className="redbarbutton" onClick={() => handleClick("/createinternshipannouncement")}>Create Internship Announcement</button>
+                    <button className="redbarbutton" onClick={() => handleClick("/fiiloutcompanyform")}>Fill Out Company Form</button>
+                    <button className="redbarbutton" onClick={() => handleClick("/reviewsummerpracticereport")}>Review Summer Practice Report</button>
                 </div>
                 <div className="profile" onClick={() => setShowDropdown(!showDropdown)}>
                     <h1>{name}</h1>

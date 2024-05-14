@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState} from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import "./Pages.css";
 import iytelogo from "../Assets/iytelogo.png";
 import Cookies from 'js-cookie';
 import axios from 'axios';
+import Popup from './PopUp';
 
 const OpportunityDetail = () => {
     const { offerid } = useParams()
@@ -15,24 +16,35 @@ const OpportunityDetail = () => {
     const [showPopup, setShowPopup] = useState(false);
     const navigate = useNavigate();
 
+    const handleClick = (path) => {
+        navigate(path);
+    };
+
+    const handleLogout = () => {
+        Cookies.remove('jwtToken');
+        navigate('/login');
+    };
+
+
     const handleApply = async () => {
         const token = Cookies.get('jwtToken');
  
         try {
             const response = await axios.post(`http://localhost:8080/api/applyinternship/${offerid}`, {}, {
                 headers: {
-                    'Authorization': `Bearer ${token}`
+                    'Authorization': `${token}`
                 }
             });
+            
             if (response.status === 202) {
-                setMessage(response.data.message); 
+                setMessage("Applied successfully!"); 
                 setShowPopup(true);
                 setTimeout(() => {
                     setShowPopup(false);
                 }, 2000);
                 
             } else {
-                setMessage("Failed to apply: " + response.data.message);
+                setMessage("Failed to apply to opportunity.");
                 setShowPopup(true);
                 setTimeout(() => {
                     setShowPopup(false);
@@ -46,11 +58,6 @@ const OpportunityDetail = () => {
                 setShowPopup(false);
             }, 2000);
         }  
-    };
-
-    const handleLogout = () => {
-        Cookies.remove('jwtToken');
-        navigate('/login');
     };
 
     const formatName = (name) => {
@@ -122,12 +129,8 @@ const OpportunityDetail = () => {
                     <img src={iytelogo} alt="Logo" className="logo" />
                 </div>
                 <div className="buttons-container">
-                    <button className="redbarbutton">
-                        <Link to="/internshipopportunities" className="link-style">Internship Opportunities</Link>
-                    </button>
-                    <button className="redbarbutton">
-                        <Link to="/myinternship" className="link-style">My Internship</Link>
-                    </button>
+                    <button className="redbarbutton" onClick={() => handleClick("/internshipopportunities")}>Internship Opportunities</button>
+                    <button className="redbarbutton" onClick={() => handleClick("/myinternship")}>My Internship</button>
                 </div>
                 <div className="profile" onClick={() => setShowDropdown(!showDropdown)}>
                     <h1>{name}</h1>
@@ -139,7 +142,6 @@ const OpportunityDetail = () => {
                 </div>
             </div>
             <div className="opportunities">
-                <h1>Internship Opportunities</h1>
                 <div className="opportunities-details">
                     {details && (
                         <div className="opportunity">

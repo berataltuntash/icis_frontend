@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import "./Pages.css";
@@ -15,6 +15,10 @@ const StaffHomePage = () => {
     const handleLogout = () => {
         Cookies.remove('jwtToken');
         navigate('/login');
+    };
+
+    const handleClick = (path) => {
+        navigate(path);
     };
 
     const formatName = (name) => {
@@ -79,12 +83,8 @@ const StaffHomePage = () => {
                     <img src={iytelogo} alt="Logo" className="logo" />
                 </div>
                 <div className="buttons-container3">
-                    <button className="redbarbutton">
-                        <Link to="/summerpracticereport" className="link-style">Summer Practice Report</Link>
-                    </button>
-                    <button className="redbarbutton">
-                        <Link to="/manageinternshipopportunities" className="link-style">Manage Internship Opportunities</Link>
-                    </button>
+                    <button className="redbarbutton" onClick={() => handleClick("/summerpracticereport")}>Summer Practice Report</button>
+                    <button className="redbarbutton" onClick={() => handleClick("/manageinternshipopportunities")}>Manage Internship Opportunities</button>
                 </div>
                 <div className="profile" onClick={() => setShowDropdown(!showDropdown)}>
                     <h1>{name}</h1>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import "./Pages.css";
 import iytelogo from "../Assets/iytelogo.png";
 import Cookies from 'js-cookie';
@@ -15,6 +15,10 @@ const InternshipOpportunities = () => {
     const handleLogout = () => {
         Cookies.remove('jwtToken');
         navigate('/login');
+    };
+
+    const handleClick = (path) => {
+        navigate(path);
     };
 
     const formatName = (name) => {
@@ -87,12 +91,8 @@ const InternshipOpportunities = () => {
                     <img src={iytelogo} alt="Logo" className="logo" />
                 </div>
                 <div className="buttons-container">
-                    <button className="redbarbutton">
-                        <Link to="/internshipopportunities" className="link-style">Internship Opportunities</Link>
-                    </button>
-                    <button className="redbarbutton">
-                        <Link to="/myinternship" className="link-style">My Internship</Link>
-                    </button>
+                    <button className="redbarbutton" onClick={() => handleClick("/internshipopportunities")}>Internship Opportunities</button>
+                    <button className="redbarbutton" onClick={() => handleClick("/myinternship")}>My Internship</button>
                 </div>
                 <div className="profile" onClick={() => setShowDropdown(!showDropdown)}>
                     <h1>{name}</h1>
@@ -107,9 +107,7 @@ const InternshipOpportunities = () => {
                 {opportunities.map((opportunity) => (
                     <div key={opportunity.offerid} className="offername-item">
                         <span className='companyname'>{opportunity.offername}</span>
-                        <button className="view-button">
-                            <Link to={`/offername/${opportunity.offerid}`} className="link-style">View</Link>
-                        </button>
+                        <button className="view-button" onClick={() => handleClick(`/opportunitydetail/${opportunity.offerid}`)}>View</button>
                     </div>
                 ))}
             </div>

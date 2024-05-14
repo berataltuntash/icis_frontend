@@ -151,11 +151,6 @@
     transform: scale(1.1); 
 }
 
-.link-style {
-    text-decoration: none;
-    color: inherit;
-}
-
 .logo {
     width: 80px;
     height: 80px;
@@ -308,41 +303,40 @@
 
 
 .opportunities {
-    background-color: #f8f8f8; 
+    background-color: hsl(2, 81%, 34%); 
     padding: 20px;
     border-radius: 8px;
-    margin: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
-}
-
-
-.opportunities h1 {
-    color: #333;
-    text-align: center;
-    margin-bottom: 20px;
+    margin-top: 150px;
 }
 
 .opportunity {
     background-color: #ffffff;
     padding: 15px;
     border-radius: 5px;
-    margin-bottom: 10px;
+    margin: 20px;
+    height: 450px;
+    width: 1200px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    position: relative;
 }
 
 .opportunity-header h2 {
     color: #1a1a1a; 
-    margin-bottom: 5px;
+    margin-bottom: 15px;
+    margin-top: 20px;
 }
 
 .opportunity-name h3 {
     color: #666; 
-    margin-bottom: 5px;
+    margin-bottom: 30px;
 }
 
 .opportunity-description p {
     font-size: 14px; 
     color: #333;
-    margin-bottom: 10px;
 }
 
 .apply-button {
@@ -353,6 +347,10 @@
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
+    position: absolute; 
+    bottom: 40px; 
+    right: 70px;
+
 }
 
 .apply-button:hover {
