@@ -8,12 +8,42 @@ import appleBuilding from "../Assets/apple-building.jpg";
 
 const StudentHomePage = () => {
     const navigate = useNavigate();
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
 
     useEffect(() => {
+        const checkAuthentication = async () => {
+            const token = Cookies.get('jwtToken');
+            if (!token) {
+                navigate('/login');
+                return;
+            }
+
+            try {
+                const response = await axios.get('http://localhost:8080/api/checktoken', {
+                    jwttoken: token
+                    
+                });
+
+                if (response.status === 200) {
+                    setIsAuthenticated(true);
+                } else {
+                    navigate('/login'); 
+                }
+            } catch (error) {
+                navigate('/login'); 
+            }
+        };
+
         if (!isLoggedIn()) {
             navigate('/login'); 
+        } else {
+            checkAuthentication();
         }
     }, [navigate]);
+
+    if (!isAuthenticated) {
+        return null; 
+    }
 
     return (
         <div>

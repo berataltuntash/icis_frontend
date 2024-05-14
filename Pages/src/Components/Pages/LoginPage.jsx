@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
-import isLoggedIn from '../utils/auth'; // isLoggedIn fonksiyonunu import edin
 import Popup from './PopUp.jsx';
 import "./Pages.css";
 import iytelogo from "../Assets/iytelogo.png";
@@ -15,11 +14,6 @@ const LoginPage = () => {
     const [message, setMessage] = useState('');
     const navigate = useNavigate();
 
-    useEffect(() => {
-        if (isLoggedIn()) {
-            navigate('/'); 
-        }
-    }, [navigate]);
 
     const handleLogin = async (event) => {
         event.preventDefault();

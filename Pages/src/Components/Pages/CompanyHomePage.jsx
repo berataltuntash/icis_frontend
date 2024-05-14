@@ -15,29 +15,28 @@ const CompanyHomePage = () => {
         const checkAuthentication = async () => {
             const token = Cookies.get('jwtToken');
             if (!token) {
-                navigate('/login'); // Giriş yapmamışsa login sayfasına yönlendir
+                navigate('/login');
                 return;
             }
 
             try {
-                const response = await axios.get('http://localhost:8080/api/verifyToken', {
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    }
+                const response = await axios.get('http://localhost:8080/api/checktoken', {
+                    jwttoken: token
+                    
                 });
 
                 if (response.status === 200) {
                     setIsAuthenticated(true);
                 } else {
-                    navigate('/login'); // Token geçersizse login sayfasına yönlendir
+                    navigate('/login'); 
                 }
             } catch (error) {
-                navigate('/login'); // Hata durumunda login sayfasına yönlendir
+                navigate('/login'); 
             }
         };
 
         if (!isLoggedIn()) {
-            navigate('/login'); // Giriş yapmamışsa login sayfasına yönlendir
+            navigate('/login'); 
         } else {
             checkAuthentication();
         }
