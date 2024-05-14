@@ -9,6 +9,7 @@ import StudentHomePage from './Components/Pages/StudentHomePage';
 import CompanyHomePage from './Components/Pages/CompanyHomePage';
 import StaffHomePage from './Components/Pages/StaffHomePage';
 import InternshipOpportunities from './Components/Pages/InternshipOpportunities';
+import OpportunityDetail from './Components/Pages/OpportunityDetail';
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
           <Route  path="/companyhomepage" element={<CompanyHomePage/>} />
           <Route  path="/staffhomepage" element={<StaffHomePage/>} />
           <Route  path="/internshipopportunities" element={<InternshipOpportunities/>} />
+          <Route  path="/opportunitydetail/:offerid" element={<OpportunityDetail/>} />
         </Routes>
       </div>
     </Router>

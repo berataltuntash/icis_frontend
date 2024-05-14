@@ -5,12 +5,48 @@ import iytelogo from "../Assets/iytelogo.png";
 import Cookies from 'js-cookie';
 import axios from 'axios';
 
-const InternshipOpportunities = () => {
+const OpportunityDetail = () => {
+    const { offerid } = useParams()
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [name, setName] = useState('');
     const [showDropdown, setShowDropdown] = useState(false);
-    const [opportunities, setOpportunities] = useState([]);
+    const [details, setDetails] = useState({});
+    const [message, setMessage] = useState('');  
+    const [showPopup, setShowPopup] = useState(false);
     const navigate = useNavigate();
+
+    const handleApply = async () => {
+        const token = Cookies.get('jwtToken');
+ 
+        try {
+            const response = await axios.post(`http://localhost:8080/api/applyinternship/${offerid}`, {}, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            if (response.status === 202) {
+                setMessage(response.data.message); 
+                setShowPopup(true);
+                setTimeout(() => {
+                    setShowPopup(false);
+                }, 2000);
+                
+            } else {
+                setMessage("Failed to apply: " + response.data.message);
+                setShowPopup(true);
+                setTimeout(() => {
+                    setShowPopup(false);
+                }, 2000);
+            }
+        } catch (error) {
+            console.error('Error applying to opportunity:', error);
+            setMessage("Error applying to opportunity: " + error.message);
+            setShowPopup(true);
+            setTimeout(() => {
+                setShowPopup(false);
+            }, 2000);
+        }  
+    };
 
     const handleLogout = () => {
         Cookies.remove('jwtToken');
@@ -62,23 +98,22 @@ const InternshipOpportunities = () => {
     }, [navigate]);
 
     useEffect(() => {
-        const fetchOpportunities = async () => {
-            if (!isAuthenticated) {
-                return;
-            }
+        if (isAuthenticated) {
             const token = Cookies.get('jwtToken');
-            try {
-                const response = await axios.get('http://localhost:8080/api/showalloffers', {
-                    headers: { 'Authorization': `Bearer ${token}` }
-                });
-                setOpportunities(response.data);
-            } catch (error) {
-                console.error('Error fetching opportunities:', error);
-            }
-        };
+            const fetchOpportunity = async () => {
+                try {
+                    const response = await axios.get(`http://localhost:8080/api/showoffers/${offerid}`, {
+                        headers: { 'Authorization': `Bearer ${token}` }
+                    });
+                    setDetails(response.data);
+                } catch (error) {
+                    console.error('Error fetching opportunity details:', error);
+                }
+            };
 
-        fetchOpportunities();
-    }, [isAuthenticated]);
+            fetchOpportunity();
+        }
+    }, [offerid, isAuthenticated]);
 
     return (
         <div>
@@ -102,19 +137,33 @@ const InternshipOpportunities = () => {
                         </div>
                     )}
                 </div>
-                </div>
-                <div className="opportunities-container">
-                {opportunities.map((opportunity) => (
-                    <div key={opportunity.offerid} className="offername-item">
-                        <span className='companyname'>{opportunity.offername}</span>
-                        <button className="view-button">
-                            <Link to={`/offername/${opportunity.offerid}`} className="link-style">View</Link>
-                        </button>
-                    </div>
-                ))}
             </div>
+            <div className="opportunities">
+                <h1>Internship Opportunities</h1>
+                <div className="opportunities-details">
+                    {details && (
+                        <div className="opportunity">
+                            <div className="opportunity-header">
+                                <h2>{details.companyname}</h2>
+                            </div>
+                            <div className="opportunity-name">
+                                <h3>{details.offername}</h3>
+                            </div>
+                            <div className="opportunity-description">
+                                <p>{details.description}</p>
+                            </div>
+                            <div className="opportunity-apply">
+                                <button className="apply-button" onClick={handleApply}>Apply</button>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            </div>
+            {showPopup && (
+                    <Popup message={message} onClose={() => setShowPopup(false)} />
+            )}
         </div>
     );
 }
 
-export default InternshipOpportunities;
+export default OpportunityDetail;

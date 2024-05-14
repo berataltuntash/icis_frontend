@@ -305,3 +305,56 @@
     font-weight: bold;
     margin-right: 800px;
 }
+
+
+.opportunities {
+    background-color: #f8f8f8; 
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+}
+
+
+.opportunities h1 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.opportunity {
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.opportunity-header h2 {
+    color: #1a1a1a; 
+    margin-bottom: 5px;
+}
+
+.opportunity-name h3 {
+    color: #666; 
+    margin-bottom: 5px;
+}
+
+.opportunity-description p {
+    font-size: 14px; 
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.apply-button {
+    background-color: #4CAF50; 
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.apply-button:hover {
+    background-color: #45a049;
+}
