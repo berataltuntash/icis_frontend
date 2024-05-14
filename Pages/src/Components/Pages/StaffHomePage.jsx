@@ -9,6 +9,7 @@ import appleBuilding from "../Assets/apple-building.jpg";
 const StaffHomePage = () => {
     const navigate = useNavigate();
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [Name, setName] = useState('');
 
     useEffect(() => {
         const checkAuthentication = async () => {
@@ -29,6 +30,7 @@ const StaffHomePage = () => {
                 const { UserType, Name } = response.data;
 
                 if (response.status === 202) {
+                    setName(Name);
                     if ( UserType === 'Staff')  {
                         console.log(`Welcome, ${Name}`);
                     } else if( UserType === 'Student') {

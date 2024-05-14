@@ -9,6 +9,7 @@ import axios from 'axios';
 
 const StudentHomePage = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [name, setName] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -29,6 +30,7 @@ const StudentHomePage = () => {
                 const { UserType, Name } = response.data;
 
                 if (response.status === 202) {
+                    setName(Name);
                     if ( UserType === 'Student')  {
                         console.log(`Welcome, ${Name}`);
                     } else if( UserType === 'Staff') {
@@ -66,7 +68,10 @@ const StudentHomePage = () => {
                     </button>
                 </div>
                 <div className="profile">
-                    <h1>{Name}</h1>
+                    <h1 onClick={() => setShowLogout(!showLogout)} style={{ cursor: 'pointer' }}>{name}</h1>
+                    {showLogout && (
+                        <button onClick={handleLogout} style={{ cursor: 'pointer' }}>Logout</button>
+                    )}
                 </div>
             </div>
             <div className="main-content">
