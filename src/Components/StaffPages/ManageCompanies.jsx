@@ -32,7 +32,7 @@ const ManageCompanies = () => {
 
     const handleApproveReject = async (companyId, isApprove) => {
         const token = Cookies.get("jwtToken");
-
+    
         try {
             const response = await axios.post(`http://localhost:8080/api/managecompanyapplication/${companyId}`, {
                 approve: isApprove
@@ -42,11 +42,14 @@ const ManageCompanies = () => {
                     "Content-Type": "application/json"
                 }
             });
-
+    
             if (response.status === 202) {
                 setMessage(isApprove ? "Company approved successfully!" : "Company rejected successfully!");
                 setShowPopup(true);
-                setTimeout(() => setShowPopup(false), 2000);
+                setTimeout(() => {
+                    setShowPopup(false);
+                    fetchCompanies(); // Refetch the companies after an action is successfully completed
+                }, 2000);
             } else {
                 setMessage(`Failed to ${isApprove ? 'approve' : 'reject'} company.`);
                 setShowPopup(true);
@@ -59,6 +62,7 @@ const ManageCompanies = () => {
             setTimeout(() => setShowPopup(false), 2000);
         }
     };
+    
 
     const fetchCompanies = async () => {
         const token = Cookies.get("jwtToken");
@@ -142,8 +146,8 @@ const ManageCompanies = () => {
                     <div key={company.companyId} className="offername-item">
                         <span className='companyname'>{company.companyName}</span>
                         <div className='approve-reject-buttons'>
-                            <button className="approve-button-company" onClick={() => handleApproveReject(company.id, true)}>Approve</button>
-                            <button className="reject-button-company" onClick={() => handleApproveReject(company.id, false)}>Reject</button>
+                            <button className="approve-button-company" onClick={() => handleApproveReject(company.companyId, true)}>Approve</button>
+                            <button className="reject-button-company" onClick={() => handleApproveReject(company.companyId, false)}>Reject</button>
                         </div>
                     </div>
                 ))}
