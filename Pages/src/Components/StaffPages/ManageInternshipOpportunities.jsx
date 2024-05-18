@@ -45,13 +45,13 @@ const ManageInternshipOpportunities = () => {
 
             if (response.status === 202) {
                 setName(formatName(name));
-                if (usertype === 'Student')  {
+                if ( usertype === 'Staff')  {
                     console.log(`Welcome, ${name}`);
-                } else if (usertype === 'Staff') {
-                    navigate('/staffhomepage');
-                } else if (usertype === 'Company') {
+                } else if ( usertype === 'Student') {
+                    navigate('/studenthomepage');
+                } else if ( usertype === 'Company') {
                     navigate('/companyhomepage');
-                }    
+                }
                 return true;
             }
         } catch (error) {
@@ -109,7 +109,7 @@ const ManageInternshipOpportunities = () => {
                 {opportunities.map((opportunity) => (
                     <div key={opportunity.offerid} className="offername-item">
                         <span className='companyname'>{opportunity.offername}</span>
-                        <button className="view-button" onClick={() => handleClick(`/manageopportunitydetail/${opportunity.offerid}`)}>View</button>
+                        <button className="view-button" onClick={() => handleClick(`/manageopportunitydetails/${opportunity.offerid}`)}>View</button>
                     </div>
                 ))}
             </div>

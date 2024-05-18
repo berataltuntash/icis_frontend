@@ -12,6 +12,7 @@ const ManageOpportunityDetails = () => {
     const [details, setDetails] = useState({});
     const [message, setMessage] = useState("");
     const [showPopup, setShowPopup] = useState(false);
+    const [showDropdown, setShowDropdown] = useState(false);
     const navigate = useNavigate();
 
     const handleClick = (path) => {
@@ -31,7 +32,7 @@ const ManageOpportunityDetails = () => {
         try {
             const response = await axios.post(url, data, {
                 headers: {
-                    "Authorization": `Bearer ${token}`
+                    "Authorization": `${token}`
                 }
             });
 
@@ -94,11 +95,10 @@ const ManageOpportunityDetails = () => {
     };
 
     const fetchOpportunityDetails = async () => {
-        const token = Cookies.get("jwtToken");
-
         try {
+            const token = Cookies.get("jwtToken");
             const response = await axios.get(`http://localhost:8080/api/manageoffers/${offerid}`, {
-                headers: { "Authorization": `Bearer ${token}` }
+                headers: { "Authorization": `${token}` }
             });
             setDetails(response.data);
         } catch (error) {
@@ -128,8 +128,13 @@ const ManageOpportunityDetails = () => {
                     <button className="redbarbutton" onClick={() => handleClick("/manageinternshipopportunities")}>Manage Internship Opportunities</button>
                     <button className="redbarbutton" onClick={() => handleClick("/managecompanies")}>Manage Companies</button>
                 </div>
-                <div className="profile" onClick={() => handleLogout()}>
+                <div className="profile" onClick={() => setShowDropdown(!showDropdown)}>
                     <h1>{name}</h1>
+                    {showDropdown && (
+                        <div className="dropdown-menu">
+                            <button onClick={handleLogout} className="dropdown-item">Logout</button>
+                        </div>
+                    )}
                 </div>
             </div>
             <div className="opportunities">

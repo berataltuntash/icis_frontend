@@ -105,7 +105,7 @@ const OpportunityDetail = () => {
         try {
             const token = Cookies.get('jwtToken');
             const response = await axios.get(`http://localhost:8080/api/showoffers/${offerid}`, {
-                headers: { 'Authorization': `Bearer ${token}` }
+                headers: { 'Authorization': ` ${token}` }
             });
             setDetails(response.data);
         } catch (error) {
