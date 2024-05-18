@@ -113,13 +113,14 @@ const OpportunityDetail = () => {
         }
     };
 
+    const authenticateAndFetch = async () => {
+        const isAuthenticated = await checkAuthentication();
+        if (isAuthenticated) {
+            fetchOpportunity();
+        }
+    };
+
     useEffect(() => {
-        const authenticateAndFetch = async () => {
-            const isAuthenticated = await checkAuthentication();
-            if (isAuthenticated) {
-                fetchOpportunity();
-            }
-        };
         authenticateAndFetch();
     }, [navigate, offerid]);
 

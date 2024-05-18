@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "../Pages.css";
 import iytelogo from "../Assets/iytelogo.png";
 import Cookies from "js-cookie";
 import axios from "axios";
 import Popup from "../PopUp";
 
-const ManageOpportunityDetails = () => {
-    const { offerid } = useParams();
+const ManageCompanies = () => {
     const [name, setName] = useState("");
-    const [details, setDetails] = useState({});
+    const [companies, setCompanies] = useState([]);
+    const [showDropdown, setShowDropdown] = useState(false);
     const [message, setMessage] = useState("");
     const [showPopup, setShowPopup] = useState(false);
-    const [showDropdown, setShowDropdown] = useState(false);
     const navigate = useNavigate();
 
     const handleClick = (path) => {
@@ -24,41 +23,53 @@ const ManageOpportunityDetails = () => {
         navigate("/login");
     };
 
-    const handleApproveReject = async (isApprove) => {
+    const formatName = (name) => {
+        return name
+            .split('.') 
+            .map(part => part.charAt(0).toUpperCase() + part.slice(1)) 
+            .join(' '); 
+    };
+
+    const handleApproveReject = async (companyId, isApprove) => {
         const token = Cookies.get("jwtToken");
 
         try {
-            const response = await axios.post(`http://localhost:8080/api/approverejectoffer/${offerid}`,{ 
-                offerApprove: isApprove
-                },{
+            const response = await axios.post(`http://localhost:8080/api/managecompanyapplication/${companyId}`, {
+                approve: isApprove
+            }, {
                 headers: {
                     "Authorization": `${token}`,
-                    'Content-Type': 'application/json',
+                    "Content-Type": "application/json"
                 }
             });
 
             if (response.status === 202) {
-                setMessage(isApprove ? "Approved successfully!" : "Rejected successfully!");
+                setMessage(isApprove ? "Company approved successfully!" : "Company rejected successfully!");
                 setShowPopup(true);
                 setTimeout(() => setShowPopup(false), 2000);
             } else {
-                setMessage(`Failed to ${isApprove ? 'approve' : 'reject'} opportunity.`);
+                setMessage(`Failed to ${isApprove ? 'approve' : 'reject'} company.`);
                 setShowPopup(true);
                 setTimeout(() => setShowPopup(false), 2000);
             }
         } catch (error) {
-            console.error(`Error ${isApprove ? 'approving' : 'rejecting'} opportunity:`, error);
-            setMessage(`Error ${isApprove ? 'approving' : 'rejecting'} opportunity: ` + error.message);
+            console.error(`Error ${isApprove ? 'approving' : 'rejecting'} company:`, error);
+            setMessage(`Error ${isApprove ? 'approving' : 'rejecting'} company: ` + error.message);
             setShowPopup(true);
             setTimeout(() => setShowPopup(false), 2000);
         }
     };
 
-    const formatName = (name) => {
-        return name
-            .split('.')
-            .map(part => part.charAt(0).toUpperCase() + part.slice(1))
-            .join(' ');
+    const fetchCompanies = async () => {
+        const token = Cookies.get("jwtToken");
+        try {
+            const response = await axios.get("http://localhost:8080/api/managecompanyapplication", {
+                headers: { "Authorization": `${token}` }
+            });
+            setCompanies(response.data);
+        } catch (error) {
+            console.error("Error fetching companies:", error);
+        }
     };
 
     const checkAuthentication = async () => {
@@ -79,12 +90,12 @@ const ManageOpportunityDetails = () => {
 
             if (response.status === 202) {
                 setName(formatName(name));
-                if (usertype === "Staff") {
+                if ( usertype === 'Staff')  {
                     console.log(`Welcome, ${name}`);
-                } else if (usertype === "Student") { 
-                    navigate("/studenthomepage");
-                } else if (usertype === "Company") {
-                    navigate("/companyhomepage");
+                } else if ( usertype === 'Student') {
+                    navigate('/studenthomepage');
+                } else if ( usertype === 'Company') {
+                    navigate('/companyhomepage');
                 }
                 return true;
             }
@@ -95,28 +106,16 @@ const ManageOpportunityDetails = () => {
         return false;
     };
 
-    const fetchOpportunityDetails = async () => {
-        try {
-            const token = Cookies.get("jwtToken");
-            const response = await axios.get(`http://localhost:8080/api/manageoffers/${offerid}`, {
-                headers: { "Authorization": `${token}` }
-            });
-            setDetails(response.data);
-        } catch (error) {
-            console.error("Error fetching opportunity details:", error);
-        }
-    };
-
     const authenticateAndFetch = async () => {
         const isAuthenticated = await checkAuthentication();
         if (isAuthenticated) {
-            fetchOpportunityDetails();
+            fetchCompanies();
         }
     };
 
     useEffect(() => {
         authenticateAndFetch();
-    }, [navigate, offerid]);
+    }, [navigate]);
 
     return (
         <div>
@@ -138,26 +137,14 @@ const ManageOpportunityDetails = () => {
                     )}
                 </div>
             </div>
-            <div className="opportunities">
-                <div className="opportunities-details">
-                    {details && (
-                        <div className="opportunity">
-                            <div className="opportunity-header">
-                                <h2>{details.companyname}</h2>
-                            </div>
-                            <div className="opportunity-name">
-                                <h3>{details.offername}</h3>
-                            </div>
-                            <div className="opportunity-description">
-                                <p>{details.description}</p>
-                            </div>
-                            <div className="opportunity-buttons">
-                                <button className="approve-button" onClick={() => handleApproveReject(true)}>Approve</button>
-                                <button className="reject-button" onClick={() => handleApproveReject(false)}>Reject</button>
-                            </div>
-                        </div>
-                    )}
-                </div>
+            <div className="opportunities-container">
+                {companies.map((company) => (
+                    <div key={company.id} className="company-item">
+                        <span className='company-name'>{company.name}</span>
+                        <button className="approve-button" onClick={() => handleApproveReject(company.id, true)}>Approve</button>
+                        <button className="reject-button" onClick={() => handleApproveReject(company.id, false)}>Reject</button>
+                    </div>
+                ))}
             </div>
             {showPopup && (
                 <Popup message={message} onClose={() => setShowPopup(false)} />
@@ -166,4 +153,4 @@ const ManageOpportunityDetails = () => {
     );
 };
 
-export default ManageOpportunityDetails;
+export default ManageCompanies;

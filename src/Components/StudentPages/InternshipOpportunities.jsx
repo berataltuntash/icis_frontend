@@ -73,15 +73,15 @@ const InternshipOpportunities = () => {
         }
     };
 
-    useEffect(() => {
-        const authenticateAndFetch = async () => {
-            const isAuthenticated = await checkAuthentication();
-            if (isAuthenticated) {
-                const token = Cookies.get('jwtToken');
-                fetchOpportunities(token);
-            }
-        };
+    const authenticateAndFetch = async () => {
+        const isAuthenticated = await checkAuthentication();
+        if (isAuthenticated) {
+            const token = Cookies.get('jwtToken');
+            fetchOpportunities(token);
+        }
+    };
 
+    useEffect(() => {
         authenticateAndFetch();
     }, [navigate]);
 

@@ -13,7 +13,7 @@ import OpportunityDetail from './Components/StudentPages/OpportunityDetail';
 import CreateInternshipAnnouncement from './Components/CompanyPages/CreateInternshipAnnouncement';
 import ManageInternshipOpportunities from './Components/StaffPages/ManageInternshipOpportunities';
 import ManageOpportunityDetails from './Components/StaffPages/ManageOpportunityDetails';
-
+import ManageCompanies from './Components/StaffPages/ManageCompanies';
 
 function App() {
 
@@ -34,6 +34,7 @@ function App() {
           <Route  path="/createinternshipannouncement" element={<CreateInternshipAnnouncement/>} />
           <Route  path="/manageinternshipopportunities" element={<ManageInternshipOpportunities/>} />
           <Route  path="/manageopportunitydetails/:offerid" element={<ManageOpportunityDetails/>} />
+          <Route  path="/managecompanies" element={<ManageCompanies/>} />
         </Routes>
       </div>
     </Router>
