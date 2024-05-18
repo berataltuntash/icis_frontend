@@ -4,11 +4,33 @@ import iytelogo from "../Assets/iytelogo.png";
 import appleBuilding from "../Assets/apple-building.jpg";
 import Cookies from 'js-cookie';
 import axios from 'axios';
+import { saveAs } from 'file-saver';
 
 const StudentHomePage = () => {
     const [name, setName] = useState('');
     const [showDropdown, setShowDropdown] = useState(false);
     const navigate = useNavigate();
+
+    const handleDownloadInternshipFile = async () => {
+        try {
+            const response = await axios.get('http://localhost:8080/api/download-internship-file', {
+                responseType: 'blob', // Important: This tells axios to download the data as a binary blob
+            });
+    
+            const contentDisposition = response.headers['content-disposition'];
+            let filename = 'downloaded_file.txt'; // Default filename if none is specified by the server
+            if (contentDisposition) {
+                const match = contentDisposition.match(/filename="?(.+)"?/);
+                if (match) filename = match[1];
+            }
+    
+            const blob = new Blob([response.data], { type: 'application/octet-stream' });
+            saveAs(blob, filename); // Initiates download on the client's browser
+        } catch (error) {
+            console.error('Error downloading file:', error);
+            alert('Failed to download the file.');
+        }
+    };
 
     const handleLogout = () => {
         Cookies.remove('jwtToken');
@@ -70,7 +92,7 @@ const StudentHomePage = () => {
                 </div>
                 <div className="buttons-container">
                     <button className="redbarbutton" onClick={() => handleClick("/internshipopportunities")}>Internship Opportunities</button>
-                    <button className="redbarbutton" onClick={() => handleClick("/myinternship")}>My Internship</button>
+                    <button className="redbarbutton" onClick={() => handleClick(handleDownloadInternshipFile)}>My Internship</button>
                 </div>
                 <div className="profile" onClick={() => setShowDropdown(!showDropdown)}>
                     <h1>{name}</h1>
