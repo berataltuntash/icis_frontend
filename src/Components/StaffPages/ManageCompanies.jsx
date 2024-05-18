@@ -139,10 +139,12 @@ const ManageCompanies = () => {
             </div>
             <div className="opportunities-container">
                 {companies.map((company) => (
-                    <div key={company.id} className="company-item">
-                        <span className='company-name'>{company.name}</span>
-                        <button className="approve-button" onClick={() => handleApproveReject(company.id, true)}>Approve</button>
-                        <button className="reject-button" onClick={() => handleApproveReject(company.id, false)}>Reject</button>
+                    <div key={company.companyId} className="offername-item">
+                        <span className='companyname'>{company.companyName}</span>
+                        <div className='approve-reject-buttons'>
+                            <button className="approve-button-company" onClick={() => handleApproveReject(company.id, true)}>Approve</button>
+                            <button className="reject-button-company" onClick={() => handleApproveReject(company.id, false)}>Reject</button>
+                        </div>
                     </div>
                 ))}
             </div>

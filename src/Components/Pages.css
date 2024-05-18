@@ -247,7 +247,6 @@
 }
 
 .opportunities-container {
-    display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: 180px;
@@ -264,7 +263,8 @@
     justify-content: space-between;
     align-items: center;
     border-radius: 10px;
-    padding:  40px 40px 40px 40px;
+    width: 1200px;
+    height: 110px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 }
 
@@ -277,7 +277,7 @@
     font-size: 20px;
     border-radius: 20px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-
+    margin-right: 20px;
 }
 
 .view-button:hover {
@@ -285,10 +285,43 @@
     color: hsl(0, 0%, 100%);
 }
 
+.approve-button-company {
+    background-color: #4CAF50; 
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 40px;
+    transition: background-color 0.3s;
+    margin-right: 20px;
+}
+
+.approve-button-company:hover {
+    background-color: #45a049;
+}
+
+.reject-button-company {
+    background-color: #d32f2f; 
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 40px;
+    transition: background-color 0.3s;
+    margin-right: 20px;
+}
+
+.reject-button-company:hover {
+    background-color: #b71c1c;
+}
+
+.approve-reject-buttons {
+    display: flex;
+    justify-content: center;
+}
+
 .companyname {
-    font-size: 25px;
+    font-size: 20px;
     font-weight: bold;
-    margin-right: 800px;
+    margin-left: 20px;
 }
 
 
