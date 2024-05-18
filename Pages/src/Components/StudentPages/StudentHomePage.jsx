@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import "./Pages.css";
 import iytelogo from "../Assets/iytelogo.png";
 import appleBuilding from "../Assets/apple-building.jpg";
 import Cookies from 'js-cookie';
 import axios from 'axios';
 
 const StudentHomePage = () => {
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [name, setName] = useState('');
     const [showDropdown, setShowDropdown] = useState(false);
     const navigate = useNavigate();
@@ -28,51 +26,46 @@ const StudentHomePage = () => {
             .join(' '); 
     };
 
-    useEffect(() => {
-        const checkAuthentication = async () => {
-            const token = Cookies.get('jwtToken');
-            if (!token) {
-                navigate('/login');
-                return;
-            }
+    const checkAuthentication = async () => {
+        const token = Cookies.get('jwtToken');
+        if (!token) {
+            navigate('/login');
+            return;
+        }
 
-            try {
-                const response = await axios.post('http://localhost:8080/api/checktoken', {}, {
-                    headers: {
-                        'Authorization': `${token}`,
-                        'Content-Type': 'application/json'
-                    }
-                });
-                const { usertype, name } = response.data;
-
-                if (response.status === 202) {
-                    setName(formatName(name));
-                    if ( usertype === 'Student')  {
-                        console.log(`Welcome, ${name}`);
-                    } else if( usertype === 'Staff') {
-                        navigate('/staffhomepage');
-                    } else if( usertype === 'Company') {
-                        navigate('/companyhomepage');
-                    }    
-                    setIsAuthenticated(true);
+        try {
+            const response = await axios.post('http://localhost:8080/api/checktoken', {}, {
+                headers: {
+                    'Authorization': `${token}`,
+                    'Content-Type': 'application/json'
                 }
-            } catch (error) {
-                console.error('Authentication check failed:', error);
-                navigate('/login'); 
-            }
-        };
+            });
+            const { usertype, name } = response.data;
 
+            if (response.status === 202) {
+                setName(formatName(name));
+                if ( usertype === 'Student')  {
+                    console.log(`Welcome, ${name}`);
+                } else if( usertype === 'Staff') {
+                    navigate('/staffhomepage');
+                } else if( usertype === 'Company') {
+                    navigate('/companyhomepage');
+                }    
+            }
+        } catch (error) {
+            console.error('Authentication check failed:', error);
+            navigate('/login'); 
+        }
+    };
+
+    useEffect(() => {
         checkAuthentication();
     }, [navigate]);
-
-    if (!isAuthenticated) {
-        return null; 
-    }
 
     return (
         <div>
             <div className="red-bar">
-                <div className="logo-container">
+                <div className="logo-container" onClick={() => handleClick("/studenthomepage")}>
                     <img src={iytelogo} alt="Logo" className="logo" />
                 </div>
                 <div className="buttons-container">

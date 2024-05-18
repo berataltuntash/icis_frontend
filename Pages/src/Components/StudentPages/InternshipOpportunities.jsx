@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import "./Pages.css";
+import "../Pages.css";
 import iytelogo from "../Assets/iytelogo.png";
 import Cookies from 'js-cookie';
 import axios from 'axios';
 
 const InternshipOpportunities = () => {
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [name, setName] = useState('');
     const [showDropdown, setShowDropdown] = useState(false);
     const [opportunities, setOpportunities] = useState([]);
@@ -28,66 +27,68 @@ const InternshipOpportunities = () => {
             .join(' '); 
     };
 
-    useEffect(() => {
-        const checkAuthentication = async () => {
-            const token = Cookies.get('jwtToken');
-            if (!token) {
-                navigate('/login');
-                return;
-            }
+    const checkAuthentication = async () => {
+        const token = Cookies.get('jwtToken');
+        if (!token) {
+            navigate('/login');
+            return false;
+        }
 
-            try {
-                const response = await axios.post('http://localhost:8080/api/checktoken', {}, {
-                    headers: {
-                        'Authorization': `${token}`,
-                        'Content-Type': 'application/json'
-                    }
-                });
-                const { usertype, name } = response.data;
-
-                if (response.status === 202) {
-                    setName(formatName(name));
-                    if ( usertype === 'Student')  {
-                        console.log(`Welcome, ${name}`);
-                    } else if( usertype === 'Staff') {
-                        navigate('/staffhomepage');
-                    } else if( usertype === 'Company') {
-                        navigate('/companyhomepage');
-                    }    
-                    setIsAuthenticated(true);
+        try {
+            const response = await axios.post('http://localhost:8080/api/checktoken', {}, {
+                headers: {
+                    'Authorization': `${token}`,
+                    'Content-Type': 'application/json'
                 }
-            } catch (error) {
-                console.error('Authentication check failed:', error);
-                navigate('/login'); 
-            }
-        };
+            });
+            const { usertype, name } = response.data;
 
-        checkAuthentication();
-    }, [navigate]);
+            if (response.status === 202) {
+                setName(formatName(name));
+                if ( usertype === 'Student')  {
+                    console.log(`Welcome, ${name}`);
+                } else if( usertype === 'Staff') {
+                    navigate('/staffhomepage');
+                } else if( usertype === 'Company') {
+                    navigate('/companyhomepage');
+                }    
+                return true;
+            }
+        } catch (error) {
+            console.error('Authentication check failed:', error);
+            navigate('/login'); 
+        }
+        return false;
+    };
+
+    const fetchOpportunities = async () => {
+        const token = Cookies.get('jwtToken');
+        try {
+            const response = await axios.get('http://localhost:8080/api/showalloffers', {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            setOpportunities(response.data);
+        } catch (error) {
+            console.error('Error fetching opportunities:', error);
+        }
+    };
 
     useEffect(() => {
-        const fetchOpportunities = async () => {
-            if (!isAuthenticated) {
-                return;
-            }
-            const token = Cookies.get('jwtToken');
-            try {
-                const response = await axios.get('http://localhost:8080/api/showalloffers', {
-                    headers: { 'Authorization': `Bearer ${token}` }
-                });
-                setOpportunities(response.data);
-            } catch (error) {
-                console.error('Error fetching opportunities:', error);
+        const authenticateAndFetch = async () => {
+            const isAuthenticated = await checkAuthentication();
+            if (isAuthenticated) {
+                const token = Cookies.get('jwtToken');
+                fetchOpportunities(token);
             }
         };
 
-        fetchOpportunities();
-    }, [isAuthenticated]);
+        authenticateAndFetch();
+    }, [navigate]);
 
     return (
         <div>
             <div className="red-bar">
-                <div className="logo-container">
+                <div className="logo-container" onClick={() => handleClick("/studenthomepage")}>
                     <img src={iytelogo} alt="Logo" className="logo" />
                 </div>
                 <div className="buttons-container">

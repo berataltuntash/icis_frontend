@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import Cookies from 'js-cookie';
-import "./Pages.css";
+import "../Pages.css";
 import iytelogo from "../Assets/iytelogo.png";
 import appleBuilding from "../Assets/apple-building.jpg";
+import Cookies from 'js-cookie';
 
-const StaffHomePage = () => {
+const CompanyHomePage = () => {
     const navigate = useNavigate();
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [showDropdown, setShowDropdown] = useState(false);
     const [name, setName] = useState('');
-    
+
     const handleLogout = () => {
         Cookies.remove('jwtToken');
         navigate('/login');
@@ -28,53 +27,44 @@ const StaffHomePage = () => {
             .join(' '); 
     };
 
-    useEffect(() => {
-        const checkAuthentication = async () => {
-            const token = Cookies.get('jwtToken');
-            if (!token) {
-                navigate('/login');
-                return;
-            }
+    const checkAuthentication = async () => {
+        const token = Cookies.get('jwtToken');
+        if (!token) {
+            navigate('/login');
+            return;
+        }
 
-            try {
-                const response = await axios.post('http://localhost:8080/api/checktoken', {}, {
-                    headers: {
-                        'Authorization': `${token}`,
-                        'Content-Type': 'application/json'
-                    }
-                });
-
-                const { usertype, name } = response.data;
-
-                if (response.status === 202) {
-                    setName(formatName(name));
-                    if ( usertype === 'Staff')  {
-                        console.log(`Welcome, ${name}`);
-                    } else if( usertype === 'Student') {
-                        navigate('/studenthomepage');
-                    } else if( usertype === 'Company') {
-                        navigate('/companyhomepage');
-                    }
-                    setIsAuthenticated(true);    
-                } else {
-                    navigate('/login');
+        try {
+            const response = await axios.post('http://localhost:8080/api/checktoken', {}, {
+                headers: {
+                    'Authorization': `${token}`,
+                    'Content-Type': 'application/json'
                 }
-            } catch (error) {
-                console.error('Authentication check failed:', error);
-                navigate('/login'); 
-            }
-        };
+            });
 
-        if (Cookies.get('jwtToken')) {
-            checkAuthentication();
-        } else {
+            const { usertype, name } = response.data;
+
+            if (response.status === 202) {
+                setName(formatName(name));
+                if( usertype === 'Company') {
+                    console.log(`Welcome, ${name}`);
+                } else if( usertype === 'Staff') {
+                    navigate('/staffhomepage');
+                } else if( usertype === 'Student') {
+                    navigate('/studenthomepage');
+                }
+            } else {
+                navigate('/login');
+            }
+        } catch (error) {
+            console.error('Authentication check failed:', error);
             navigate('/login');
         }
-    }, [navigate]);
+    };
 
-    if (!isAuthenticated) {
-        return null;
-    }
+    useEffect(() => {
+        checkAuthentication();
+    }, [navigate]);
 
     return (
         <div>
@@ -82,9 +72,10 @@ const StaffHomePage = () => {
                 <div className="logo-container">
                     <img src={iytelogo} alt="Logo" className="logo" />
                 </div>
-                <div className="buttons-container3">
-                    <button className="redbarbutton" onClick={() => handleClick("/summerpracticereport")}>Summer Practice Report</button>
-                    <button className="redbarbutton" onClick={() => handleClick("/manageinternshipopportunities")}>Manage Internship Opportunities</button>
+                <div className="buttons-container2">
+                    <button className="redbarbutton" onClick={() => handleClick("/createinternshipannouncement")}>Create Internship Announcement</button>
+                    <button className="redbarbutton" onClick={() => handleClick("/fiiloutcompanyform")}>Fill Out Company Form</button>
+                    <button className="redbarbutton" onClick={() => handleClick("/reviewsummerpracticereport")}>Review Summer Practice Report</button>
                 </div>
                 <div className="profile" onClick={() => setShowDropdown(!showDropdown)}>
                     <h1>{name}</h1>
@@ -112,4 +103,4 @@ const StaffHomePage = () => {
     );
 }
 
-export default StaffHomePage;
+export default CompanyHomePage;

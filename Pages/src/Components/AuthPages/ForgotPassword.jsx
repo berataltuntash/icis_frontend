@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
-import Popup from './PopUp.jsx';
-import "./Pages.css";
+import Popup from '../PopUp.jsx';
+import "../Pages.css";
 import iytelogo from "../Assets/iytelogo.png";
 
 const ForgotPassword = () => {

@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
-import Popup from './PopUp.jsx';
-import "./Pages.css";
+import Popup from '../PopUp.jsx';
+import "../Pages.css";
 import iytelogo from "../Assets/iytelogo.png";
 
 const LoginPage = () => {
