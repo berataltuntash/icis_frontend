@@ -26,13 +26,14 @@ const ManageOpportunityDetails = () => {
 
     const handleApproveReject = async (isApprove) => {
         const token = Cookies.get("jwtToken");
-        const url = `http://localhost:8080/api/approverejectoffer/${offerid}`;
-        const data = { approve: isApprove }; // Payload containing the boolean
+        const data = { approve: isApprove };
 
         try {
-            const response = await axios.post(url, data, {
+            const response = await axios.post(`http://localhost:8080/api/approverejectoffer/${offerid}`, {
                 headers: {
-                    "Authorization": `${token}`
+                    "Authorization": `${token}`,
+                    'Content-Type': 'application/json',
+                    'offerApprove': isApprove === 'true' ? 'true' : 'false'
                 }
             });
 
