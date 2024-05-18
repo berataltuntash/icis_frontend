@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import Cookies from 'js-cookie';
 import "../Pages.css";
 import iytelogo from "../Assets/iytelogo.png";
-import appleBuilding from "../Assets/apple-building.jpg";
+import Cookies from 'js-cookie';
+import axios from 'axios';
 
-const StaffHomePage = () => {
-    const navigate = useNavigate();
-    const [showDropdown, setShowDropdown] = useState(false);
+const ManageInternshipOpportunities = () => {
     const [name, setName] = useState('');
-    
+    const [showDropdown, setShowDropdown] = useState(false);
+    const [opportunities, setOpportunities] = useState([]);
+    const navigate = useNavigate();
+
     const handleLogout = () => {
         Cookies.remove('jwtToken');
         navigate('/login');
@@ -31,7 +31,7 @@ const StaffHomePage = () => {
         const token = Cookies.get('jwtToken');
         if (!token) {
             navigate('/login');
-            return;
+            return false;
         }
 
         try {
@@ -41,37 +41,54 @@ const StaffHomePage = () => {
                     'Content-Type': 'application/json'
                 }
             });
-
             const { usertype, name } = response.data;
 
             if (response.status === 202) {
                 setName(formatName(name));
-                if ( usertype === 'Staff')  {
+                if (usertype === 'Student')  {
                     console.log(`Welcome, ${name}`);
-                } else if( usertype === 'Student') {
-                    navigate('/studenthomepage');
-                } else if( usertype === 'Company') {
+                } else if (usertype === 'Staff') {
+                    navigate('/staffhomepage');
+                } else if (usertype === 'Company') {
                     navigate('/companyhomepage');
-                }  
-            } else {
-                navigate('/login');
+                }    
+                return true;
             }
         } catch (error) {
             console.error('Authentication check failed:', error);
             navigate('/login'); 
         }
+        return false;
+    };
+
+    const fetchOpportunities = async () => {
+        const token = Cookies.get('jwtToken');
+        try {
+            const response = await axios.get('http://localhost:8080/api/manageoffers', {
+                headers: { 'Authorization': `${token}` }
+            });
+            setOpportunities(response.data);
+        } catch (error) {
+            console.error('Error fetching opportunities:', error);
+        }
     };
 
     useEffect(() => {
-        checkAuthentication();
+        const authenticateAndFetch = async () => {
+            const isAuthenticated = await checkAuthentication();
+            if (isAuthenticated) {
+                const token = Cookies.get('jwtToken');
+                fetchOpportunities(token);
+            }
+        };
+
+        authenticateAndFetch();
     }, [navigate]);
-
-
 
     return (
         <div>
             <div className="red-bar">
-                <div className="logo-container">
+                <div className="logo-container" onClick={() => handleClick("/studenthomepage")}>
                     <img src={iytelogo} alt="Logo" className="logo" />
                 </div>
                 <div className="buttons-container">
@@ -88,21 +105,16 @@ const StaffHomePage = () => {
                     )}
                 </div>
             </div>
-            <div className="main-content">
-                <div className="image-container">
-                    <img src={appleBuilding} alt="Apple Building" className="main-image" />
-                </div>
-                <div className="announcements-container">
-                    <h2 className="announcements-title">ANNOUNCEMENTS</h2>
-                    <ul className="announcements-list">
-                        <li className="announcement-item">First announcement goes here...</li>
-                        <li className="announcement-item">Second announcement goes here...</li>
-                        <li className="announcement-item">Third announcement goes here...</li>
-                    </ul>
-                </div>
+            <div className="opportunities-container">
+                {opportunities.map((opportunity) => (
+                    <div key={opportunity.offerid} className="offername-item">
+                        <span className='companyname'>{opportunity.offername}</span>
+                        <button className="view-button" onClick={() => handleClick(`/manageopportunitydetail/${opportunity.offerid}`)}>View</button>
+                    </div>
+                ))}
             </div>
         </div>
     );
 }
 
-export default StaffHomePage;
+export default ManageInternshipOpportunities;

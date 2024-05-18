@@ -155,7 +155,7 @@ const OpportunityDetail = () => {
                             <div className="opportunity-description">
                                 <p>{details.description}</p>
                             </div>
-                            <div className="opportunity-apply">
+                            <div className="opportunity-buttons">
                                 <button className="apply-button" onClick={handleApply}>Apply</button>
                             </div>
                         </div>

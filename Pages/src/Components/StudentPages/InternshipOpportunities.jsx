@@ -64,8 +64,8 @@ const InternshipOpportunities = () => {
     const fetchOpportunities = async () => {
         const token = Cookies.get('jwtToken');
         try {
-            const response = await axios.get('http://localhost:8080/api/showalloffers', {
-                headers: { 'Authorization': `Bearer ${token}` }
+            const response = await axios.get('http://localhost:8080/api/showoffers', {
+                headers: { 'Authorization': `${token}` }
             });
             setOpportunities(response.data);
         } catch (error) {

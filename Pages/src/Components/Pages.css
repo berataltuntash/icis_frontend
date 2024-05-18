@@ -122,16 +122,6 @@
     align-items: center;
 }
 
-.buttons-container2 {
-    display: flex;
-    align-items: center;
-}
-
-.buttons-container3 {
-    display: flex;
-    align-items: center;
-}
-
 .redbarbutton {
     background-color: hsl(0, 0%, 100%); 
     color: hsl(0, 0%, 0%);
@@ -313,7 +303,7 @@
 .opportunity {
     background-color: #ffffff;
     padding: 15px;
-    border-radius: 5px;
+    border-radius: 10px;
     margin: 20px;
     height: 450px;
     width: 1200px;
@@ -344,7 +334,7 @@
     color: white;
     border: none;
     padding: 10px 20px;
-    border-radius: 5px;
+    border-radius: 40px;
     cursor: pointer;
     transition: background-color 0.3s;
     position: absolute; 
@@ -424,3 +414,38 @@
     background-color: #b71c1c;
 }
 
+.approve-button {
+    background-color: #4CAF50; 
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 40px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    position: absolute; 
+    bottom: 40px; 
+    right: 70px;
+
+}
+
+.approve-button:hover {
+    background-color: #45a049;
+}
+
+.reject-button {
+    background-color: #d32f2f; 
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 40px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    position: absolute; 
+    bottom: 40px; 
+    right: 70px;
+
+}
+
+.reject-button:hover {
+    background-color: #b71c1c;
+}

@@ -11,6 +11,9 @@ import StaffHomePage from './Components/StaffPages/StaffHomePage';
 import InternshipOpportunities from './Components/StudentPages/InternshipOpportunities';
 import OpportunityDetail from './Components/StudentPages/OpportunityDetail';
 import CreateInternshipAnnouncement from './Components/CompanyPages/CreateInternshipAnnouncement';
+import ManageInternshipOpportunities from './Components/StaffPages/ManageInternshipOpportunities';
+import ManageOpportunityDetails from './Components/StaffPages/ManageOpportunityDetails';
+
 
 function App() {
 
@@ -29,6 +32,8 @@ function App() {
           <Route  path="/internshipopportunities" element={<InternshipOpportunities/>} />
           <Route  path="/opportunitydetail/:offerid" element={<OpportunityDetail/>} />
           <Route  path="/createinternshipannouncement" element={<CreateInternshipAnnouncement/>} />
+          <Route  path="/manageinternshipopportunities" element={<ManageInternshipOpportunities/>} />
+          <Route  path="/manageopportunitydetails/:offerid" element={<ManageOpportunityDetails/>} />
         </Routes>
       </div>
     </Router>

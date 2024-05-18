@@ -72,7 +72,7 @@ const CompanyHomePage = () => {
                 <div className="logo-container">
                     <img src={iytelogo} alt="Logo" className="logo" />
                 </div>
-                <div className="buttons-container2">
+                <div className="buttons-container">
                     <button className="redbarbutton" onClick={() => handleClick("/createinternshipannouncement")}>Create Internship Announcement</button>
                     <button className="redbarbutton" onClick={() => handleClick("/fiiloutcompanyform")}>Fill Out Company Form</button>
                     <button className="redbarbutton" onClick={() => handleClick("/reviewsummerpracticereport")}>Review Summer Practice Report</button>
