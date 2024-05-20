@@ -240,3 +240,64 @@
     background-color: #45a049;
 }
 
+.applications-container-student {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 180px;
+    box-sizing: border-box;
+    padding: 20px;
+    background-color: hsl(2, 81%, 34%);
+}
+
+.company-student {
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 20px;
+}
+
+.approve-reject-buttons-student {
+    display: flex;
+    justify-content: center;
+}
+
+.approve-button-student {
+    background-color: #4CAF50; 
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 40px;
+    transition: background-color 0.3s;
+    margin-right: 20px;
+}
+
+.approve-button-student:hover {
+    background-color: #45a049;
+}
+
+.reject-button-student {
+    background-color: #d32f2f; 
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 40px;
+    transition: background-color 0.3s;
+    margin-right: 20px;
+}
+
+.reject-button-student:hover {
+    background-color: #b71c1c;
+}
+
+.applications-item-student {
+    background-color: hsl(0, 0%, 67%);
+    color: rgb(0, 0, 0);
+    margin: 20px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 10px;
+    width: 1200px;
+    height: 110px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+

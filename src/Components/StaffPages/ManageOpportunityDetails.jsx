@@ -156,8 +156,8 @@ const ManageOpportunityDetails = () => {
                                 <p>{details.description}</p>
                             </div>
                             <div className="opportunity-buttons-staff">
-                                <button className="approve-button-staff" onClick={() => handleApproveReject(true)} disabled={isSubmitting}>Approve</button>
-                                <button className="reject-button-staff" onClick={() => handleApproveReject(false)} disabled={isSubmitting}>Reject</button>
+                                <button className="approve-button-internship-staff" onClick={() => handleApproveReject(true)} disabled={isSubmitting}>Approve</button>
+                                <button className="reject-button-internship-staff" onClick={() => handleApproveReject(false)} disabled={isSubmitting}>Reject</button>
                             </div>
                         </div>
                     )}

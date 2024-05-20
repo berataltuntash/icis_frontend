@@ -9,7 +9,7 @@ import '../PopUp.css';
 
 const ApprovedInternship = () => {
     const [name, setName] = useState("");
-    const [students, setStudents] = useState([]);
+    const [companies, setCompanies] = useState([]);
     const [showDropdown, setShowDropdown] = useState(false);
     const [message, setMessage] = useState("");
     const [showPopup, setShowPopup] = useState(false);
@@ -32,12 +32,12 @@ const ApprovedInternship = () => {
             .join(' '); 
     };
 
-    const handleApproveReject = async (studentId, isApprove) => {
+    const handleApproveReject = async (companyId, isApprove) => {
         const token = Cookies.get("jwtToken");
         setIsSubmitting(true);
     
         try {
-            const response = await axios.post(`http://localhost:8080/api/applicationstocompany/${studentId}`, {
+            const response = await axios.post(`http://localhost:8080/api/applicationstostudent/${companyId}`, {
                 approve: isApprove
             }, {
                 headers: {
@@ -71,10 +71,10 @@ const ApprovedInternship = () => {
     const fetchstudents = async () => {
         const token = Cookies.get("jwtToken");
         try {
-            const response = await axios.get("http://localhost:8080/api/applicationstocompany", {
+            const response = await axios.get("http://localhost:8080/api/applicationstostudent", {
                 headers: { "Authorization": `${token}` }
             });
-            setStudents(response.data);
+            setCompanies(response.data);
         } catch (error) {
             console.error("Error fetching students:", error);
         }
@@ -127,32 +127,32 @@ const ApprovedInternship = () => {
 
     return (
         <div>
-            <div className="red-bar-company">
-                <div className="logo-container-company" onClick={() => handleClick("/staffhomepage")}>
-                    <img src={iytelogo} alt="Logo" className="logo-company" />
+            <div className="red-bar-student">
+                <div className="logo-container-student" onClick={() => handleClick("/staffhomepage")}>
+                    <img src={iytelogo} alt="Logo" className="logo-student" />
                 </div>
-                <div className="buttons-container-company">
-                <button className="redbarbutton-company" onClick={() => handleClick("/createinternshipannouncement")}>Create Internship Announcement</button>
-                    <button className="redbarbutton-company" onClick={() => handleClick("/fiiloutcompanyform")}>Fill Out Company Form</button>
-                    <button className="redbarbutton-company" onClick={() => handleClick("/reviewsummerpracticereport")}>Review Summer Practice Report</button>
-                    <button className='redbarbutton-company' onClick={() => handleClick('/approvedinternship')}>Approved Internship</button>
+                <div className="buttons-container-student">
+                <button className="redbarbutton-student" onClick={() => handleClick("/createinternshipannouncement")}>Create Internship Announcement</button>
+                    <button className="redbarbutton-student" onClick={() => handleClick("/fiiloutcompanyform")}>Fill Out Company Form</button>
+                    <button className="redbarbutton-student" onClick={() => handleClick("/reviewsummerpracticereport")}>Review Summer Practice Report</button>
+                    <button className='redbarbutton-student' onClick={() => handleClick('/approvedinternship')}>Approved Internship</button>
                 </div>
-                <div className="profile-company" onClick={() => setShowDropdown(!showDropdown)}>
+                <div className="profile-student" onClick={() => setShowDropdown(!showDropdown)}>
                     <h1>{name}</h1>
                     {showDropdown && (
-                        <div className="dropdown-menu-company">
-                            <button onClick={handleLogout} className="dropdown-item-company">Logout</button>
+                        <div className="dropdown-menu-student">
+                            <button onClick={handleLogout} className="dropdown-item-student">Logout</button>
                         </div>
                     )}
                 </div>
             </div>
-            <div className="applications-container-company">
-                {students.map((student) => (
-                    <div key={student.studentId} className="applications-item-company">
-                        <span className='studentname-company'>{student.studentName}</span>
-                        <div className='approve-reject-buttons-company'>
-                            <button className="approve-button-company" onClick={() => handleApproveReject(student.studentId, true)} disabled={isSubmitting}>Approve</button>
-                            <button className="reject-button-company" onClick={() => handleApproveReject(student.studentId, false)} disabled={isSubmitting}>Reject</button>
+            <div className="applications-container-student">
+                {companies.map((company) => (
+                    <div key={company.companyId} className="applications-item-student">
+                        <span className='company-student'>{company.companyName}</span>
+                        <div className='approve-reject-buttons-student'>
+                            <button className="approve-button-student" onClick={() => handleApproveReject(company.companyId, true)} disabled={isSubmitting}>Approve</button>
+                            <button className="reject-button-student" onClick={() => handleApproveReject(company.companyId, false)} disabled={isSubmitting}>Reject</button>
                         </div>
                     </div>
                 ))}
