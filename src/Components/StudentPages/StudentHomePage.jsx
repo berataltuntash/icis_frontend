@@ -96,6 +96,7 @@ const StudentHomePage = () => {
                 <div className="buttons-container-student">
                     <button className="redbarbutton-student" onClick={() => handleClick("/internshipopportunities")}>Internship Opportunities</button>
                     <button className="redbarbutton-student" onClick={() => handleClick("/myinternship")}>My Internship</button>
+                    <button className="redbarbutton-student" onClick={() => handleClick("/approvedapplication")}>Approved Application</button>
                 </div>
                 <div className="profile-student" onClick={() => setShowDropdown(!showDropdown)}>
                     <h1>{name}</h1>

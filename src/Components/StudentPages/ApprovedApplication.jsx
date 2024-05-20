@@ -132,10 +132,9 @@ const ApprovedInternship = () => {
                     <img src={iytelogo} alt="Logo" className="logo-student" />
                 </div>
                 <div className="buttons-container-student">
-                <button className="redbarbutton-student" onClick={() => handleClick("/createinternshipannouncement")}>Create Internship Announcement</button>
-                    <button className="redbarbutton-student" onClick={() => handleClick("/fiiloutcompanyform")}>Fill Out Company Form</button>
-                    <button className="redbarbutton-student" onClick={() => handleClick("/reviewsummerpracticereport")}>Review Summer Practice Report</button>
-                    <button className='redbarbutton-student' onClick={() => handleClick('/approvedinternship')}>Approved Internship</button>
+                    <button className="redbarbutton-student" onClick={() => handleClick("/internshipopportunities")}>Internship Opportunities</button>
+                    <button className="redbarbutton-student" onClick={() => handleClick("/myinternship")}>My Internship</button>
+                    <button className="redbarbutton-student" onClick={() => handleClick("/approvedapplication")}>Approved Application</button>
                 </div>
                 <div className="profile-student" onClick={() => setShowDropdown(!showDropdown)}>
                     <h1>{name}</h1>

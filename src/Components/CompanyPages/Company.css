@@ -181,54 +181,6 @@
     background-color: #b71c1c;
 }
 
-.applications-container-company {
-    flex-direction: column;
-    align-items: center;
-    margin-top: 180px;
-    box-sizing: border-box;
-    padding: 20px;
-    background-color: hsl(2, 81%, 34%);
-}
-
-.studentname-company {
-    font-size: 20px;
-    font-weight: bold;
-    margin-left: 20px;
-}
-
-.approve-reject-buttons-company {
-    display: flex;
-    justify-content: center;
-}
-
-.approve-button-company {
-    background-color: #4CAF50; 
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 40px;
-    transition: background-color 0.3s;
-    margin-right: 20px;
-}
-
-.approve-button-company:hover {
-    background-color: #45a049;
-}
-
-.reject-button-company {
-    background-color: #d32f2f; 
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 40px;
-    transition: background-color 0.3s;
-    margin-right: 20px;
-}
-
-.reject-button-company:hover {
-    background-color: #b71c1c;
-}
-
 .applications-item-company {
     background-color: hsl(0, 0%, 67%);
     color: rgb(0, 0, 0);
@@ -241,3 +193,59 @@
     height: 110px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 }
+
+.opportunities-container-company {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 180px;
+    box-sizing: border-box;
+    padding: 20px;
+    background-color: hsl(2, 81%, 34%);
+}
+
+.opportunities-container-company {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 180px;
+    box-sizing: border-box;
+    padding: 20px;
+    background-color: hsl(2, 81%, 34%);
+}
+
+.offername-item-company {
+    background-color: hsl(0, 0%, 67%);
+    color: rgb(0, 0, 0);
+    margin: 20px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 10px;
+    width: 1200px;
+    height: 110px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.studentname-company {
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 20px;
+}
+
+.view-button-company {
+    background-color: rgb(255, 255, 255);
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 20px;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    margin-right: 20px;
+}
+
+.view-button-company:hover {
+    background-color: #000000;
+    color: hsl(0, 0%, 100%);
+}
+
+
