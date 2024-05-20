@@ -51,7 +51,7 @@ const ApprovedInternship = () => {
                 setShowPopup(true);
                 setTimeout(() => {
                     setShowPopup(false);
-                    fetchstudents(); // Refetch the students after an action is successfully completed
+                    fetchstudents();
                 }, 2000);
             } else {
                 setMessage(`Failed to ${isApprove ? 'approve' : 'reject'} company.`);

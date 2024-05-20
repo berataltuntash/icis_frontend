@@ -148,11 +148,12 @@ const ApprovedInternship = () => {
             </div>
             <div className="applications-container-student">
                 {companies.map((company) => (
-                    <div key={company.companyId} className="applications-item-student">
+                    <div key={company.applicationId} className="applications-item-student">
                         <span className='company-student'>{company.companyName}</span>
+                        <span className='company-student'>{company.offerName}</span>
                         <div className='approve-reject-buttons-student'>
-                            <button className="approve-button-student" onClick={() => handleApproveReject(company.companyId, true)} disabled={isSubmitting}>Approve</button>
-                            <button className="reject-button-student" onClick={() => handleApproveReject(company.companyId, false)} disabled={isSubmitting}>Reject</button>
+                            <button className="approve-button-student" onClick={() => handleApproveReject(company.applicationId, true)} disabled={isSubmitting}>Approve</button>
+                            <button className="reject-button-student" onClick={() => handleApproveReject(company.applicationId, false)} disabled={isSubmitting}>Reject</button>
                         </div>
                     </div>
                 ))}
