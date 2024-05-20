@@ -1,5 +1,4 @@
 import React from 'react';
-import "./Pages.css"; 
 
 const PopUp = ({ message, onClose }) => {
     const errorMessage = typeof message === 'object' ? message.message : message;
