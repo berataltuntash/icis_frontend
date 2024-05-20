@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import iytelogo from "../Assets/iytelogo.png";
-import appleBuilding from "../Assets/apple-building.jpg";
 import Cookies from 'js-cookie';
 import axios from 'axios';
+import iytelogo from "../Assets/iytelogo.png";
 import './Student.css';
 import '../PopUp.css';
 
 const StudentHomePage = () => {
     const [name, setName] = useState('');
     const [showDropdown, setShowDropdown] = useState(false);
+    const [announcements, setAnnouncements] = useState([]);
+    const [currentIndex, setCurrentIndex] = useState(0);
     const navigate = useNavigate();
 
     const handleLogout = () => {
@@ -46,11 +47,11 @@ const StudentHomePage = () => {
 
             if (response.status === 202) {
                 setName(formatName(name));
-                if ( usertype === 'Student')  {
+                if (usertype === 'Student')  {
                     console.log(`Welcome, ${name}`);
-                } else if( usertype === 'Staff') {
+                } else if (usertype === 'Staff') {
                     navigate('/staffhomepage');
-                } else if( usertype === 'Company') {
+                } else if (usertype === 'Company') {
                     navigate('/companyhomepage');
                 }    
             }
@@ -60,8 +61,30 @@ const StudentHomePage = () => {
         }
     };
 
+    const goNext = () => {
+        if (currentIndex < announcements.length - 1) {
+            setCurrentIndex(currentIndex + 1);
+        }
+    };
+
+    const goPrevious = () => {
+        if (currentIndex > 0) {
+            setCurrentIndex(currentIndex - 1);
+        }
+    };
+
+    const fetchAnnouncements = async () => {
+        try {
+            const response = await axios.get('http://localhost:8080/api/announcements');
+            setAnnouncements(response.data);
+        } catch (error) {
+            console.error('Failed to fetch announcements:', error);
+        }
+    };
+
     useEffect(() => {
         checkAuthentication();
+        fetchAnnouncements();
     }, [navigate]);
 
     return (
@@ -84,16 +107,18 @@ const StudentHomePage = () => {
                 </div>
             </div>
             <div className="main-content">
-                <div className="image-container">
-                    <img src={appleBuilding} alt="Apple Building" className="main-image" />
-                </div>
                 <div className="announcements-container">
                     <h2 className="announcements-title">ANNOUNCEMENTS</h2>
-                    <ul className="announcements-list">
-                        <li className="announcement-item">First announcement goes here...</li>
-                        <li className="announcement-item">Second announcement goes here...</li>
-                        <li className="announcement-item">Third announcement goes here...</li>
-                    </ul>
+                    {announcements.length > 0 && (
+                        <div className="announcement-viewer">
+                            <button onClick={goPrevious} className='previous-button'>Previous</button>
+                            <div className="announcement-item">
+                                <h3>{announcements[currentIndex].title}</h3>
+                                <p>{announcements[currentIndex].description}</p>
+                            </div>
+                            <button onClick={goNext} className='next-button'>Next</button>
+                        </div>
+                    )}
                 </div>
             </div>
         </div>

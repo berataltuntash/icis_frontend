@@ -10,10 +10,12 @@ const ForgotPassword = () => {
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
     const [showPopup, setShowPopup] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        setIsSubmitting(true);
 
         try {
             const response = await axios.post('http://localhost:8080/api/forgotpassword', { 
@@ -45,6 +47,7 @@ const ForgotPassword = () => {
                 }, 2000);
             }
         }
+        setIsSubmitting(false);
     };
 
     return (
@@ -61,7 +64,7 @@ const ForgotPassword = () => {
                         <input type="email" placeholder="Email" required
                             value={email} onChange={e => setEmail(e.target.value)} />
                     </div>
-                    <button className="button" type="submit">Submit</button>
+                    <button className="button" type="submit" disabled={isSubmitting} >Submit</button>
                 <div className="register-link">
                     <p>Did you remember your password ?<Link to="/login">Login Here</Link></p>
                 </div>

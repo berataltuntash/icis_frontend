@@ -14,6 +14,7 @@ const ManageOpportunityDetails = () => {
     const [message, setMessage] = useState("");
     const [showPopup, setShowPopup] = useState(false);
     const [showDropdown, setShowDropdown] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const navigate = useNavigate();
 
     const handleClick = (path) => {
@@ -27,6 +28,7 @@ const ManageOpportunityDetails = () => {
 
     const handleApproveReject = async (isApprove) => {
         const token = Cookies.get("jwtToken");
+        setIsSubmitting(true);
 
         try {
             const response = await axios.post(`http://localhost:8080/api/approverejectoffer/${offerid}`,{ 
@@ -53,6 +55,7 @@ const ManageOpportunityDetails = () => {
             setShowPopup(true);
             setTimeout(() => setShowPopup(false), 2000);
         }
+        setIsSubmitting(false);
     };
 
     const formatName = (name) => {
@@ -153,8 +156,8 @@ const ManageOpportunityDetails = () => {
                                 <p>{details.description}</p>
                             </div>
                             <div className="opportunity-buttons">
-                                <button className="approve-button" onClick={() => handleApproveReject(true)}>Approve</button>
-                                <button className="reject-button" onClick={() => handleApproveReject(false)}>Reject</button>
+                                <button className="approve-button" onClick={() => handleApproveReject(true)} disabled={isSubmitting}>Approve</button>
+                                <button className="reject-button" onClick={() => handleApproveReject(false)} disabled={isSubmitting}>Reject</button>
                             </div>
                         </div>
                     )}

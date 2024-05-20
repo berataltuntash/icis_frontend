@@ -12,11 +12,14 @@ const LoginPage = () => {
     const [password, setPassword] = useState('');
     const [showPopup, setShowPopup] = useState(false);
     const [message, setMessage] = useState('');
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const navigate = useNavigate();
 
 
     const handleLogin = async (event) => {
         event.preventDefault();
+        setIsSubmitting(true);
+
         try {
             const response = await axios.post('http://localhost:8080/api/login', {
                 email,
@@ -55,6 +58,7 @@ const LoginPage = () => {
             setShowPopup(true);
             setTimeout(() => setShowPopup(false), 2000);
         }
+        setIsSubmitting(false);
     };
 
     return (
@@ -79,7 +83,7 @@ const LoginPage = () => {
                         <label><input type="checkbox" /> Remember me</label>
                         <Link to="/forgotpassword">Forgot Password?</Link>
                     </div>
-                    <button className="button" type="submit">Login</button>
+                    <button className="button" type="submit" disabled={isSubmitting}>Login</button>
                     <div className="register-link">
                         <p>Don't have an account? <Link to="/iyteregister">Register here</Link></p>
                     </div>

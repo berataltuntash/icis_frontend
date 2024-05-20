@@ -13,10 +13,12 @@ const ResetPassword = () => {
     const [code, setCode] = useState('');
     const [showPopup, setShowPopup] = useState(false);
     const [message, setMessage] = useState('');
+    const [isSubmitting, setIsSubmitting] = useState(false); // [1
     const navigate = useNavigate();
 
     const handleResetPassword = async (event) => {
         event.preventDefault(); 
+        setIsSubmitting(true);
 
         if (newPassword !== confirmPassword) {
             setMessage("Passwords do not match.");
@@ -54,6 +56,7 @@ const ResetPassword = () => {
             setTimeout(() => setShowPopup(false), 2000);
 
         }
+        setIsSubmitting(false);
     };
 
     return (
@@ -82,7 +85,7 @@ const ResetPassword = () => {
                     <input type="code" placeholder="Email Code" required
                         value={code} onChange={e => setCode(e.target.value)} />
                 </div>
-                <button className="button" type="submit">Reset</button>
+                <button className="button" type="submit" disabled={isSubmitting}>Reset</button>
             </form>
             {showPopup && (
                     <Popup message={message} onClose={() => setShowPopup(false)} />

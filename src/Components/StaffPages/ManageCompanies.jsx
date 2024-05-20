@@ -13,6 +13,7 @@ const ManageCompanies = () => {
     const [showDropdown, setShowDropdown] = useState(false);
     const [message, setMessage] = useState("");
     const [showPopup, setShowPopup] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const navigate = useNavigate();
 
     const handleClick = (path) => {
@@ -33,6 +34,7 @@ const ManageCompanies = () => {
 
     const handleApproveReject = async (companyId, isApprove) => {
         const token = Cookies.get("jwtToken");
+        setIsSubmitting(true);
     
         try {
             const response = await axios.post(`http://localhost:8080/api/managecompanyapplication/${companyId}`, {
@@ -62,6 +64,7 @@ const ManageCompanies = () => {
             setShowPopup(true);
             setTimeout(() => setShowPopup(false), 2000);
         }
+        setIsSubmitting(false);
     };
     
 
@@ -147,8 +150,8 @@ const ManageCompanies = () => {
                     <div key={company.companyId} className="offername-item">
                         <span className='companyname'>{company.companyName}</span>
                         <div className='approve-reject-buttons'>
-                            <button className="approve-button-company" onClick={() => handleApproveReject(company.companyId, true)}>Approve</button>
-                            <button className="reject-button-company" onClick={() => handleApproveReject(company.companyId, false)}>Reject</button>
+                            <button className="approve-button-company" onClick={() => handleApproveReject(company.companyId, true)} disabled={isSubmitting}>Approve</button>
+                            <button className="reject-button-company" onClick={() => handleApproveReject(company.companyId, false)} disabled={isSubmitting}>Reject</button>
                         </div>
                     </div>
                 ))}

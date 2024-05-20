@@ -17,6 +17,7 @@ const CreateInternshipAnnouncement = () => {
         description: ''
     });
     const [message, setMessage] = useState('');
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const navigate = useNavigate();
 
     const handleLogout = () => {
@@ -38,6 +39,8 @@ const CreateInternshipAnnouncement = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setIsSubmitting(true);
+
         const token = Cookies.get('jwtToken');
         try {
             const response = await axios.post('http://localhost:8080/api/createoffer', {
@@ -67,6 +70,7 @@ const CreateInternshipAnnouncement = () => {
                 setShowPopup(false);
             }, 2000);
         }
+        setIsSubmitting(false);
     };
 
     const formatName = (name) => {
@@ -167,7 +171,7 @@ const CreateInternshipAnnouncement = () => {
                             required
                         ></textarea>
                     </div>
-                    <button type="submit" className="submit-button">Create Announcement</button>
+                    <button type="submit" className="submit-button" disabled={isSubmitting}>Create Announcement</button>
                 </form>
             </div>
             {showPopup && (

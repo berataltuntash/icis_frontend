@@ -14,6 +14,7 @@ const OpportunityDetail = () => {
     const [details, setDetails] = useState({});
     const [message, setMessage] = useState('');  
     const [showPopup, setShowPopup] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const navigate = useNavigate();
 
     const handleClick = (path) => {
@@ -28,6 +29,7 @@ const OpportunityDetail = () => {
 
     const handleApply = async () => {
         const token = Cookies.get('jwtToken');
+        setIsSubmitting(true);
  
         try {
             const response = await axios.post(`http://localhost:8080/api/applyinternship/${offerid}`, {}, {
@@ -57,7 +59,8 @@ const OpportunityDetail = () => {
             setTimeout(() => {
                 setShowPopup(false);
             }, 2000);
-        }  
+        }
+        setIsSubmitting(false);  
     };
 
     const formatName = (name) => {
@@ -158,7 +161,7 @@ const OpportunityDetail = () => {
                                 <p>{details.description}</p>
                             </div>
                             <div className="opportunity-buttons">
-                                <button className="apply-button" onClick={handleApply}>Apply</button>
+                                <button className="apply-button" onClick={handleApply} disabled={isSubmitting}>Apply</button>
                             </div>
                         </div>
                     )}

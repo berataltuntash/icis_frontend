@@ -7,16 +7,17 @@ import './Auth.css';
 import '../PopUp.css';
 
 const IyteRegister = () => {
-    
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [showPopup, setShowPopup] = useState(false);
     const [message, setMessage] = useState('');
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const navigate = useNavigate();
 
     const handleRegister = async (event) => {
         event.preventDefault();
+        setIsSubmitting(true);
 
         if (password !== confirmPassword) {
             setMessage("Passwords do not match.");
@@ -56,6 +57,7 @@ const IyteRegister = () => {
             setShowPopup(true);
             setTimeout(() => setShowPopup(false), 2000);
         }
+        setIsSubmitting(false);
     };
 
     return (
@@ -80,7 +82,7 @@ const IyteRegister = () => {
                     <input type="password" placeholder="Confirm Password" required
                         value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} />
                 </div>
-                <button className="button" type="submit">Register</button>
+                <button className="button" type="submit" disabled={isSubmitting}>Register</button>
                 <div className="register-link">
                     <p>Already have an account? <Link to="/login">Login here</Link></p>
                 </div>
