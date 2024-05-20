@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Popup from '../PopUp.jsx';
-import "../Pages.css";
 import iytelogo from "../Assets/iytelogo.png";
+import './Auth.css';
+import '../PopUp.css';
 
 const ResetPassword = () => {
     const [newPassword, setNewPassword] = useState('');

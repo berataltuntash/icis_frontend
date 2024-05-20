@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import "../Pages.css";
 import iytelogo from "../Assets/iytelogo.png";
 import Cookies from 'js-cookie';
 import axios from 'axios';
+import './Staff.css';
+import '../PopUp.css';
 
 const ManageInternshipOpportunities = () => {
     const [name, setName] = useState('');
@@ -88,7 +89,7 @@ const ManageInternshipOpportunities = () => {
     return (
         <div>
             <div className="red-bar">
-                <div className="logo-container" onClick={() => handleClick("/studenthomepage")}>
+                <div className="logo-container" onClick={() => handleClick("/staffhomepage")}>
                     <img src={iytelogo} alt="Logo" className="logo" />
                 </div>
                 <div className="buttons-container">

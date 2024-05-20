@@ -4,6 +4,8 @@ import iytelogo from "../Assets/iytelogo.png";
 import appleBuilding from "../Assets/apple-building.jpg";
 import Cookies from 'js-cookie';
 import axios from 'axios';
+import './Student.css';
+import '../PopUp.css';
 
 const StudentHomePage = () => {
     const [name, setName] = useState('');

@@ -1,10 +1,11 @@
 import React, { useEffect, useState} from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import "../Pages.css";
 import iytelogo from "../Assets/iytelogo.png";
 import Cookies from 'js-cookie';
 import axios from 'axios';
 import Popup from '../PopUp';
+import './Student.css';
+import '../PopUp.css';
 
 const OpportunityDetail = () => {
     const { offerid } = useParams();

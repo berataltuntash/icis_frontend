@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import "../Pages.css";
 import iytelogo from "../Assets/iytelogo.png";
 import appleBuilding from "../Assets/apple-building.jpg";
+import './Staff.css';
+import '../PopUp.css';
 
 const StaffHomePage = () => {
     const navigate = useNavigate();

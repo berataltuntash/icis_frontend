@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import "../Pages.css";
 import iytelogo from "../Assets/iytelogo.png";
 import Cookies from "js-cookie";
 import axios from "axios";
 import Popup from "../PopUp";
+import './Staff.css';
+import '../PopUp.css';
 
 const ManageOpportunityDetails = () => {
     const { offerid } = useParams();
@@ -121,7 +122,7 @@ const ManageOpportunityDetails = () => {
     return (
         <div>
             <div className="red-bar">
-                <div className="logo-container" onClick={() => handleClick("/studenthomepage")}>
+                <div className="logo-container" onClick={() => handleClick("/staffhomepage")}>
                     <img src={iytelogo} alt="Logo" className="logo" />
                 </div>
                 <div className="buttons-container">

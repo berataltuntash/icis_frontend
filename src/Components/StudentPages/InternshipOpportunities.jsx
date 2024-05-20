@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import "../Pages.css";
 import iytelogo from "../Assets/iytelogo.png";
 import Cookies from 'js-cookie';
 import axios from 'axios';
+import './Student.css';
+import '../PopUp.css';
 
 const InternshipOpportunities = () => {
     const [name, setName] = useState('');

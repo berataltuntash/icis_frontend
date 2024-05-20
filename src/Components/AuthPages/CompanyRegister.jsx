@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import "../Pages.css";
 import iytelogo from "../Assets/iytelogo.png";
 import { Link, useNavigate } from 'react-router-dom';
 import Popup from '../PopUp.jsx';
-
+import './Auth.css';
+import '../PopUp.css';
 
 const CompanyRegister = () => {
 

@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import "../Pages.css";
 import iytelogo from "../Assets/iytelogo.png";
 import appleBuilding from "../Assets/apple-building.jpg";
 import Cookies from 'js-cookie';
+import './Company.css';
+import '../PopUp.css';
 
 const CompanyHomePage = () => {
     const navigate = useNavigate();
@@ -69,7 +70,7 @@ const CompanyHomePage = () => {
     return (
         <div>
             <div className="red-bar">
-                <div className="logo-container">
+                <div className="logo-container" onClick={() => handleClick("/companyhomepage")}>
                     <img src={iytelogo} alt="Logo" className="logo" />
                 </div>
                 <div className="buttons-container">
