@@ -4,12 +4,12 @@ import iytelogo from "../Assets/iytelogo.png";
 import Cookies from "js-cookie";
 import axios from "axios";
 import Popup from "../PopUp";
-import './Staff.css';
+import './Company.css';
 import '../PopUp.css';
 
-const ManageCompanies = () => {
+const ApprovedInternship = () => {
     const [name, setName] = useState("");
-    const [companies, setCompanies] = useState([]);
+    const [students, setStudents] = useState([]);
     const [showDropdown, setShowDropdown] = useState(false);
     const [message, setMessage] = useState("");
     const [showPopup, setShowPopup] = useState(false);
@@ -37,7 +37,7 @@ const ManageCompanies = () => {
         setIsSubmitting(true);
     
         try {
-            const response = await axios.post(`http://localhost:8080/api/managecompanyapplication/${companyId}`, {
+            const response = await axios.post(`http://localhost:8080/api/applicationstocompany/${companyId}`, {
                 approve: isApprove
             }, {
                 headers: {
@@ -51,7 +51,7 @@ const ManageCompanies = () => {
                 setShowPopup(true);
                 setTimeout(() => {
                     setShowPopup(false);
-                    fetchCompanies(); // Refetch the companies after an action is successfully completed
+                    fetchstudents(); // Refetch the students after an action is successfully completed
                 }, 2000);
             } else {
                 setMessage(`Failed to ${isApprove ? 'approve' : 'reject'} company.`);
@@ -68,15 +68,15 @@ const ManageCompanies = () => {
     };
     
 
-    const fetchCompanies = async () => {
+    const fetchstudents = async () => {
         const token = Cookies.get("jwtToken");
         try {
-            const response = await axios.get("http://localhost:8080/api/managecompanyapplication", {
+            const response = await axios.get("http://localhost:8080/api/applicationstocompany", {
                 headers: { "Authorization": `${token}` }
             });
-            setCompanies(response.data);
+            setStudents(response.data);
         } catch (error) {
-            console.error("Error fetching companies:", error);
+            console.error("Error fetching students:", error);
         }
     };
 
@@ -117,7 +117,7 @@ const ManageCompanies = () => {
     const authenticateAndFetch = async () => {
         const isAuthenticated = await checkAuthentication();
         if (isAuthenticated) {
-            fetchCompanies();
+            fetchstudents();
         }
     };
 
@@ -127,31 +127,32 @@ const ManageCompanies = () => {
 
     return (
         <div>
-            <div className="red-bar-staff">
-                <div className="logo-container-staff" onClick={() => handleClick("/staffhomepage")}>
-                    <img src={iytelogo} alt="Logo" className="logo-staff" />
+            <div className="red-bar-company">
+                <div className="logo-container-company" onClick={() => handleClick("/staffhomepage")}>
+                    <img src={iytelogo} alt="Logo" className="logo-company" />
                 </div>
-                <div className="buttons-container-staff">
-                    <button className="redbarbutton-staff" onClick={() => handleClick("/summerpracticereport")}>Summer Practice Report</button>
-                    <button className="redbarbutton-staff" onClick={() => handleClick("/manageinternshipopportunities")}>Manage Internship Opportunities</button>
-                    <button className="redbarbutton-staff" onClick={() => handleClick("/managecompanies")}>Manage Companies</button>
+                <div className="buttons-container-company">
+                <button className="redbarbutton-company" onClick={() => handleClick("/createinternshipannouncement")}>Create Internship Announcement</button>
+                    <button className="redbarbutton-company" onClick={() => handleClick("/fiiloutcompanyform")}>Fill Out Company Form</button>
+                    <button className="redbarbutton-company" onClick={() => handleClick("/reviewsummerpracticereport")}>Review Summer Practice Report</button>
+                    <button className='redbarbutton-company' onClick={() => handleClick('/approvedinternship')}>Approved Internship</button>
                 </div>
-                <div className="profile-staff" onClick={() => setShowDropdown(!showDropdown)}>
+                <div className="profile-company" onClick={() => setShowDropdown(!showDropdown)}>
                     <h1>{name}</h1>
                     {showDropdown && (
-                        <div className="dropdown-menu-staff">
-                            <button onClick={handleLogout} className="dropdown-item-staff">Logout</button>
+                        <div className="dropdown-menu-company">
+                            <button onClick={handleLogout} className="dropdown-item-company">Logout</button>
                         </div>
                     )}
                 </div>
             </div>
-            <div className="opportunities-container-staff">
-                {companies.map((company) => (
-                    <div key={company.companyId} className="offername-item-staff">
-                        <span className='companyname-staff'>{company.companyName}</span>
-                        <div className='approve-reject-buttons-staff'>
-                            <button className="approve-button-staff" onClick={() => handleApproveReject(company.companyId, true)} disabled={isSubmitting}>Approve</button>
-                            <button className="reject-button-staff" onClick={() => handleApproveReject(company.companyId, false)} disabled={isSubmitting}>Reject</button>
+            <div className="applications-container-company">
+                {students.map((student) => (
+                    <div key={student.studentId} className=".applications-item-company">
+                        <span className='studentname-company'>{student.studentName}</span>
+                        <div className='approve-reject-buttons-company'>
+                            <button className="approve-button-company" onClick={() => handleApproveReject(student.studentId, true)} disabled={isSubmitting}>Approve</button>
+                            <button className="reject-button-company" onClick={() => handleApproveReject(student.studentId, false)} disabled={isSubmitting}>Reject</button>
                         </div>
                     </div>
                 ))}
@@ -163,4 +164,4 @@ const ManageCompanies = () => {
     );
 };
 
-export default ManageCompanies;
+export default ApprovedInternship;

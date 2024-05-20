@@ -1,4 +1,4 @@
-.red-bar {
+.red-bar-student {
     background-color: hsl(2, 81%, 34%); 
     width: 100%; 
     display: flex;
@@ -11,23 +11,23 @@
     padding: 10px;
 }
 
-.logo-container {
+.logo-container-student {
     display: flex;
     align-items: center;
 }
 
-.logo {
+.logo-student {
     width: 80px;
     height: 80px;
     margin: 20px 30px;
 }
 
-.buttons-container {
+.buttons-container-student {
     display: flex;
     align-items: center;
 }
 
-.redbarbutton {
+.redbarbutton-student {
     background-color: hsl(0, 0%, 100%); 
     color: hsl(0, 0%, 0%);
     border: none;
@@ -40,13 +40,13 @@
     margin: 35px 50px;
 }
 
-.redbarbutton:hover {
+.redbarbutton-student:hover {
     background-color: #000000;
     color: #ffffff;
     transform: scale(1.1); 
 }
 
-.profile {
+.profile-student {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -58,14 +58,14 @@
     box-shadow: 0 4px 8px rgba(0,0,0,0.15); 
 }
 
-.profile h1 {
+.profile-student h1 {
     font-size: 15px;
     margin: 10px 25px;
     color: #333333; 
     font-weight: bold; 
 }
 
-.dropdown-menu {
+.dropdown-menu-student {
     position: absolute;
     right: 0;
     top: 66%; 
@@ -76,51 +76,50 @@
 
 }
 
-.dropdown-item { 
+.dropdown-item-student { 
     padding: 8px 12px;
     font-size: 15px; 
     border-radius: 15px;
     border: 2px solid #000000;   
 }
 
-.dropdown-item:hover {
+.dropdown-item-student:hover {
     background-color: hsl(0, 0%, 73%);
 }
 
-.main-content {
+.main-content-student {
     display: flex;
+    align-items: center; /* Align items vertically */
+    justify-content: space-between; /* Space out the child elements */
+    width: 800px;
+    height: 350px;
     margin-top: 100px;
+    padding: 20px;
     background-color: hsl(0, 0%, 64%);
 }
 
-.image-container .main-image {
-    width: 70%;
-    height: auto;
-    margin: 30px 0 30px 30px;
-}
-
-.announcements-container {
-    width: 30%;
+.announcements-container-student {
     padding: 20px;
     background-color: #f1f1f1;
-    margin: 30px 30px 30px 0;
+    width: 60%; /* Adjust width to take the remaining space */
+    overflow: auto; /* Add scrolling to the container if content overflows */
 }
 
-.announcements-title {
+.announcements-title-student {
     font-size: 24px;
     margin-bottom: 15px;
 }
 
-.announcement-viewer {
+.announcement-viewer-student {
     list-style-type: none;
 }
 
-.announcement-item {
+.announcement-item-student {
     margin-bottom: 10px;
     font-size: 16px;
 }
 
-.opportunities-container {
+.opportunities-container-student {
     flex-direction: column;
     align-items: center;
     margin-top: 180px;
@@ -129,7 +128,28 @@
     background-color: hsl(2, 81%, 34%);
 }
 
-.offername-item {
+.next-button-student, .previous-button-student {
+    background-color: hsl(0, 0%, 100%);
+    color: hsl(0, 0%, 0%);
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    border-radius: 40px;  
+    margin: 35px 0; /* Adjusted margin for better placement */
+    height: 10%;
+    width: 10%;
+}
+
+.next-button-student:hover, .previous-button-student:hover {
+    background-color: #000000;
+    color: #ffffff;
+    transform: scale(1.1);
+}
+
+.offername-item-student {
     background-color: hsl(0, 0%, 67%);
     color: rgb(0, 0, 0);
     margin: 20px 30px;
@@ -142,13 +162,13 @@
     box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 }
 
-.companyname {
+.companyname-student {
     font-size: 20px;
     font-weight: bold;
     margin-left: 20px;
 }
 
-.view-button {
+.view-button-student {
     background-color: rgb(255, 255, 255);
     color: black;
     border: none;
@@ -160,12 +180,12 @@
     margin-right: 20px;
 }
 
-.view-button:hover {
+.view-button-student:hover {
     background-color: #000000;
     color: hsl(0, 0%, 100%);
 }
 
-.opportunities {
+.opportunities-student {
     background-color: hsl(2, 81%, 34%); 
     padding: 20px;
     border-radius: 8px;
@@ -173,7 +193,7 @@
     margin-top: 150px;
 }
 
-.opportunity {
+.opportunity-student {
     background-color: #ffffff;
     padding: 15px;
     border-radius: 10px;
@@ -186,23 +206,23 @@
     position: relative;
 }
 
-.opportunity-header h2 {
+.opportunity-header-student h2 {
     color: #1a1a1a; 
     margin-bottom: 15px;
     margin-top: 20px;
 }
 
-.opportunity-name h3 {
+.opportunity-name-student h3 {
     color: #666; 
     margin-bottom: 30px;
 }
 
-.opportunity-description p {
+.opportunity-description-student p {
     font-size: 14px; 
     color: #333;
 }
 
-.apply-button {
+.apply-button-student {
     background-color: #4CAF50; 
     color: white;
     border: none;
@@ -216,7 +236,7 @@
 
 }
 
-.apply-button:hover {
+.apply-button-student:hover {
     background-color: #45a049;
 }
 

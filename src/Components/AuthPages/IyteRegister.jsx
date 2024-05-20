@@ -37,18 +37,18 @@ const IyteRegister = () => {
             });
 
             if (response.status === 202) {
-                setMessage(response.data || "Registration successful.");
+                setMessage(response.data );
                 setShowPopup(true);
                 setTimeout(() => {
                     setShowPopup(false);
                     navigate('/login');
                 }, 2000);
             } else if (response.status === 400) {
-                setMessage(response.data || "Registration error: The server may be down.");
+                setMessage(response.data);
                 setShowPopup(true);
                 setTimeout(() => setShowPopup(false), 2000);
             } else {
-                setMessage(response.data || "Unexpected status received. Please try again.");
+                setMessage(response.data);
                 setShowPopup(true);
                 setTimeout(() => setShowPopup(false), 2000);
             }

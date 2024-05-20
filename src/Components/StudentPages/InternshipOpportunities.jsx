@@ -88,28 +88,28 @@ const InternshipOpportunities = () => {
 
     return (
         <div>
-            <div className="red-bar">
-                <div className="logo-container" onClick={() => handleClick("/studenthomepage")}>
-                    <img src={iytelogo} alt="Logo" className="logo" />
+            <div className="red-bar-student">
+                <div className="logo-container-student" onClick={() => handleClick("/studenthomepage")}>
+                    <img src={iytelogo} alt="Logo" className="logo-student" />
                 </div>
-                <div className="buttons-container">
-                    <button className="redbarbutton" onClick={() => handleClick("/internshipopportunities")}>Internship Opportunities</button>
-                    <button className="redbarbutton" onClick={() => handleClick("/myinternship")}>My Internship</button>
+                <div className="buttons-container-student">
+                    <button className="redbarbutton-student" onClick={() => handleClick("/internshipopportunities")}>Internship Opportunities</button>
+                    <button className="redbarbutton-student" onClick={() => handleClick("/myinternship")}>My Internship</button>
                 </div>
-                <div className="profile" onClick={() => setShowDropdown(!showDropdown)}>
+                <div className="profile-student" onClick={() => setShowDropdown(!showDropdown)}>
                     <h1>{name}</h1>
                     {showDropdown && (
-                        <div className="dropdown-menu">
-                            <button onClick={handleLogout} className="dropdown-item">Logout</button>
+                        <div className="dropdown-menu-student">
+                            <button onClick={handleLogout} className="dropdown-item-student">Logout</button>
                         </div>
                     )}
                 </div>
                 </div>
-                <div className="opportunities-container">
+                <div className="opportunities-container-student">
                 {opportunities.map((opportunity) => (
-                    <div key={opportunity.offerid} className="offername-item">
-                        <span className='companyname'>{opportunity.offername}</span>
-                        <button className="view-button" onClick={() => handleClick(`/opportunitydetail/${opportunity.offerid}`)}>View</button>
+                    <div key={opportunity.offerid} className="offername-item-student">
+                        <span className='companyname-student'>{opportunity.offername}</span>
+                        <button className="view-button-student" onClick={() => handleClick(`/opportunitydetail/${opportunity.offerid}`)}>View</button>
                     </div>
                 ))}
             </div>

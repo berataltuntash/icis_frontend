@@ -9,6 +9,8 @@ import '../PopUp.css';
 const CompanyHomePage = () => {
     const navigate = useNavigate();
     const [showDropdown, setShowDropdown] = useState(false);
+    const [announcements, setAnnouncements] = useState([]);
+    const [currentIndex, setCurrentIndex] = useState(0);
     const [name, setName] = useState('');
 
     const handleLogout = () => {
@@ -90,35 +92,36 @@ const CompanyHomePage = () => {
 
     return (
         <div>
-            <div className="red-bar">
-                <div className="logo-container" onClick={() => handleClick("/companyhomepage")}>
-                    <img src={iytelogo} alt="Logo" className="logo" />
+            <div className="red-bar-company">
+                <div className="logo-container-company" onClick={() => handleClick("/companyhomepage")}>
+                    <img src={iytelogo} alt="Logo" className="logo-company" />
                 </div>
-                <div className="buttons-container">
-                    <button className="redbarbutton" onClick={() => handleClick("/createinternshipannouncement")}>Create Internship Announcement</button>
-                    <button className="redbarbutton" onClick={() => handleClick("/fiiloutcompanyform")}>Fill Out Company Form</button>
-                    <button className="redbarbutton" onClick={() => handleClick("/reviewsummerpracticereport")}>Review Summer Practice Report</button>
+                <div className="buttons-container-company">
+                    <button className="redbarbutton-company" onClick={() => handleClick("/createinternshipannouncement")}>Create Internship Announcement</button>
+                    <button className="redbarbutton-company" onClick={() => handleClick("/fiiloutcompanyform")}>Fill Out Company Form</button>
+                    <button className="redbarbutton-company" onClick={() => handleClick("/reviewsummerpracticereport")}>Review Summer Practice Report</button>
+                    <button className='redbarbutton-company' onClick={() => handleClick('/approvedinternship')}>Approved Internship</button>
                 </div>
-                <div className="profile" onClick={() => setShowDropdown(!showDropdown)}>
+                <div className="profile-company" onClick={() => setShowDropdown(!showDropdown)}>
                     <h1>{name}</h1>
                     {showDropdown && (
-                        <div className="dropdown-menu">
-                            <button onClick={handleLogout} className="dropdown-item">Logout</button>
+                        <div className="dropdown-menu-company">
+                            <button onClick={handleLogout} className="dropdown-item-company">Logout</button>
                         </div>
                     )}
                 </div>
             </div>
-            <div className="main-content">
-                <div className="announcements-container">
-                    <h2 className="announcements-title">ANNOUNCEMENTS</h2>
+            <div className="main-content-company">
+                <div className="announcements-container-company">
+                    <h2 className="announcements-title-company">ANNOUNCEMENTS</h2>
                     {announcements.length > 0 && (
-                        <div className="announcement-viewer">
-                            <button onClick={goPrevious} className='previous-button'>Previous</button>
-                            <div className="announcement-item">
+                        <div className="announcement-viewer-company">
+                            <button onClick={goPrevious} className='previous-button-company'>Previous</button>
+                            <div className="announcement-item-company">
                                 <h3>{announcements[currentIndex].title}</h3>
                                 <p>{announcements[currentIndex].description}</p>
                             </div>
-                            <button onClick={goNext} className='next-button'>Next</button>
+                            <button onClick={goNext} className='next-button-company'>Next</button>
                         </div>
                     )}
                 </div>

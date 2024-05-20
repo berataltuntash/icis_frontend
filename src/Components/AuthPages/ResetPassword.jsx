@@ -34,18 +34,18 @@ const ResetPassword = () => {
                 emailCode : code
             });
             if (response.status === 202) {
-                setMessage(response.data || "Password reset successful.");
+                setMessage(response.data);
                 setShowPopup(true);
                 setTimeout(() => {
                     setShowPopup(false);
                     navigate('/login');
                 }, 2000);
             } else if (response.status === 400) {
-                setMessage(response.data || "Password reset error: The server may be down.");
+                setMessage(response.data);
                 setShowPopup(true);
                 setTimeout(() => setShowPopup(false), 2000);
             } else {
-                setMessage(response.data || "Unexpected status received. Please try again.");
+                setMessage(response.data);
                 setShowPopup(true);
                 setTimeout(() => setShowPopup(false), 2000);
             }

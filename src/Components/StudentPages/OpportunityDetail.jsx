@@ -130,38 +130,38 @@ const OpportunityDetail = () => {
 
     return (
         <div>
-            <div className="red-bar">
-                <div className="logo-container" onClick={() => handleClick("/studenthomepage")}>
-                    <img src={iytelogo} alt="Logo" className="logo" />
+            <div className="red-bar-student">
+                <div className="logo-container-student" onClick={() => handleClick("/studenthomepage")}>
+                    <img src={iytelogo} alt="Logo" className="logo-student" />
                 </div>
-                <div className="buttons-container">
-                    <button className="redbarbutton" onClick={() => handleClick("/internshipopportunities")}>Internship Opportunities</button>
-                    <button className="redbarbutton" onClick={() => handleClick("/myinternship")}>My Internship</button>
+                <div className="buttons-container-student">
+                    <button className="redbarbutton-student" onClick={() => handleClick("/internshipopportunities")}>Internship Opportunities</button>
+                    <button className="redbarbutton-student" onClick={() => handleClick("/myinternship")}>My Internship</button>
                 </div>
-                <div className="profile" onClick={() => setShowDropdown(!showDropdown)}>
+                <div className="profile-student" onClick={() => setShowDropdown(!showDropdown)}>
                     <h1>{name}</h1>
                     {showDropdown && (
-                        <div className="dropdown-menu">
-                            <button onClick={handleLogout} className="dropdown-item">Logout</button>
+                        <div className="dropdown-menu-student">
+                            <button onClick={handleLogout} className="dropdown-item-student">Logout</button>
                         </div>
                     )}
                 </div>
             </div>
-            <div className="opportunities">
-                <div className="opportunities-details">
+            <div className="opportunities-student">
+                <div className="opportunities-details-student">
                     {details && (
-                        <div className="opportunity">
-                            <div className="opportunity-header">
+                        <div className="opportunity-student">
+                            <div className="opportunity-header-student">
                                 <h2>{details.companyname}</h2>
                             </div>
-                            <div className="opportunity-name">
+                            <div className="opportunity-name-student">
                                 <h3>{details.offername}</h3>
                             </div>
-                            <div className="opportunity-description">
+                            <div className="opportunity-description-student">
                                 <p>{details.description}</p>
                             </div>
-                            <div className="opportunity-buttons">
-                                <button className="apply-button" onClick={handleApply} disabled={isSubmitting}>Apply</button>
+                            <div className="opportunity-buttons-student">
+                                <button className="apply-button-student" onClick={handleApply} disabled={isSubmitting}>Apply</button>
                             </div>
                         </div>
                     )}

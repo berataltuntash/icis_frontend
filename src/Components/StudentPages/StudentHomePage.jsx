@@ -89,37 +89,37 @@ const StudentHomePage = () => {
 
     return (
         <div>
-            <div className="red-bar">
-                <div className="logo-container" onClick={() => handleClick("/studenthomepage")}>
-                    <img src={iytelogo} alt="Logo" className="logo" />
+            <div className="red-bar-student">
+                <div className="logo-container-student" onClick={() => handleClick("/studenthomepage")}>
+                    <img src={iytelogo} alt="Logo" className="logo-student" />
                 </div>
-                <div className="buttons-container">
-                    <button className="redbarbutton" onClick={() => handleClick("/internshipopportunities")}>Internship Opportunities</button>
-                    <button className="redbarbutton" onClick={() => handleClick("/myinternship")}>My Internship</button>
+                <div className="buttons-container-student">
+                    <button className="redbarbutton-student" onClick={() => handleClick("/internshipopportunities")}>Internship Opportunities</button>
+                    <button className="redbarbutton-student" onClick={() => handleClick("/myinternship")}>My Internship</button>
                 </div>
-                <div className="profile" onClick={() => setShowDropdown(!showDropdown)}>
+                <div className="profile-student" onClick={() => setShowDropdown(!showDropdown)}>
                     <h1>{name}</h1>
                     {showDropdown && (
-                        <div className="dropdown-menu">
-                            <button onClick={handleLogout} className="dropdown-item">Logout</button>
+                        <div className="dropdown-menu-student">
+                            <button onClick={handleLogout} className="dropdown-item-student">Logout</button>
                         </div>
                     )}
                 </div>
             </div>
-            <div className="main-content">
-                <div className="announcements-container">
-                    <h2 className="announcements-title">ANNOUNCEMENTS</h2>
+            <div className="main-content-student">
+            <button onClick={goPrevious} className='previous-button-student'>Previous</button>
+                <div className="announcements-container-student">
+                    <h2 className="announcements-title-student">ANNOUNCEMENTS</h2>
                     {announcements.length > 0 && (
-                        <div className="announcement-viewer">
-                            <button onClick={goPrevious} className='previous-button'>Previous</button>
-                            <div className="announcement-item">
+                        <div className="announcement-viewer-student">
+                            <div className="announcement-item-student">
                                 <h3>{announcements[currentIndex].title}</h3>
                                 <p>{announcements[currentIndex].description}</p>
                             </div>
-                            <button onClick={goNext} className='next-button'>Next</button>
                         </div>
                     )}
                 </div>
+            <button onClick={goNext} className='next-button-student'>Next</button>
             </div>
         </div>
     );

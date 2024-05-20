@@ -118,28 +118,29 @@ const CreateInternshipAnnouncement = () => {
 
     return (
         <div>
-            <div className="red-bar">
-                <div className="logo-container" onClick={() => handleClick("/companyhomepage")}>
-                    <img src={iytelogo} alt="Logo" className="logo" />
+            <div className="red-bar-company">
+                <div className="logo-container-company" onClick={() => handleClick("/companyhomepage")}>
+                    <img src={iytelogo} alt="Logo" className="logo-company" />
                 </div>
-                <div className="buttons-container">
-                    <button className="redbarbutton" onClick={() => handleClick("/createinternshipannouncement")}>Create Internship Announcement</button>
-                    <button className="redbarbutton" onClick={() => handleClick("/fiiloutcompanyform")}>Fill Out Company Form</button>
-                    <button className="redbarbutton" onClick={() => handleClick("/reviewsummerpracticereport")}>Review Summer Practice Report</button>
+                <div className="buttons-container-company">
+                    <button className="redbarbutton-company" onClick={() => handleClick("/createinternshipannouncement")}>Create Internship Announcement</button>
+                    <button className="redbarbutton-company" onClick={() => handleClick("/fiiloutcompanyform")}>Fill Out Company Form</button>
+                    <button className="redbarbutton-company" onClick={() => handleClick("/reviewsummerpracticereport")}>Review Summer Practice Report</button>
+                    <button className='redbarbutton-company' onClick={() => handleClick('/approvedinternship')}>Approved Internship</button>
                 </div>
-                <div className="profile" onClick={() => setShowDropdown(!showDropdown)}>
+                <div className="profile-company" onClick={() => setShowDropdown(!showDropdown)}>
                     <h1>{name}</h1>
                     {showDropdown && (
-                        <div className="dropdown-menu">
-                            <button onClick={handleLogout} className="dropdown-item">Logout</button>
+                        <div className="dropdown-menu-company">
+                            <button onClick={handleLogout} className="dropdown-item-company">Logout</button>
                         </div>
                     )}
                 </div>
             </div>
-            <div className="form-container">
+            <div className="form-container-company">
                 <h2>Create Internship Announcement</h2>
                 <form onSubmit={handleSubmit}>
-                    <div className="form-group">
+                    <div className="form-group-company">
                         <label htmlFor="companyname">Company Name:</label>
                         <input
                             type="text"
@@ -150,7 +151,7 @@ const CreateInternshipAnnouncement = () => {
                             required
                         />
                     </div>
-                    <div className="form-group">
+                    <div className="form-group-company">
                         <label htmlFor="offername">Offer Name:</label>
                         <input
                             type="text"
@@ -161,7 +162,7 @@ const CreateInternshipAnnouncement = () => {
                             required
                         />
                     </div>
-                    <div className="form-group">
+                    <div className="form-group-company">
                         <label htmlFor="description">Description:</label>
                         <textarea
                             id="description"
@@ -171,7 +172,7 @@ const CreateInternshipAnnouncement = () => {
                             required
                         ></textarea>
                     </div>
-                    <button type="submit" className="submit-button" disabled={isSubmitting}>Create Announcement</button>
+                    <button type="submit" className="submit-button-company" disabled={isSubmitting}>Create Announcement</button>
                 </form>
             </div>
             {showPopup && (

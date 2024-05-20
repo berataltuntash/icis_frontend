@@ -1,3 +1,27 @@
+.red-bar{
+    background-color: hsl(2, 81%, 34%); 
+    width: 100%; 
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    padding: 10px;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 80px;
+    height: 80px;
+    margin: 20px 30px;
+}
+
 .wrapper{
     width: 65vh;
     background: hsl(2, 81%, 34%);

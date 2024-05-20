@@ -88,29 +88,29 @@ const ManageInternshipOpportunities = () => {
 
     return (
         <div>
-            <div className="red-bar">
-                <div className="logo-container" onClick={() => handleClick("/staffhomepage")}>
-                    <img src={iytelogo} alt="Logo" className="logo" />
+            <div className="red-bar-staff">
+                <div className="logo-container-staff" onClick={() => handleClick("/staffhomepage")}>
+                    <img src={iytelogo} alt="Logo" className="logo-staff" />
                 </div>
-                <div className="buttons-container">
-                    <button className="redbarbutton" onClick={() => handleClick("/summerpracticereport")}>Summer Practice Report</button>
-                    <button className="redbarbutton" onClick={() => handleClick("/manageinternshipopportunities")}>Manage Internship Opportunities</button>
-                    <button className="redbarbutton" onClick={() => handleClick("/managecompanies")}>Manage Companies</button>
+                <div className="buttons-container-staff">
+                    <button className="redbarbutton-staff" onClick={() => handleClick("/summerpracticereport")}>Summer Practice Report</button>
+                    <button className="redbarbutton-staff" onClick={() => handleClick("/manageinternshipopportunities")}>Manage Internship Opportunities</button>
+                    <button className="redbarbutton-staff" onClick={() => handleClick("/managecompanies")}>Manage Companies</button>
                 </div>
-                <div className="profile" onClick={() => setShowDropdown(!showDropdown)}>
+                <div className="profile-staff" onClick={() => setShowDropdown(!showDropdown)}>
                     <h1>{name}</h1>
                     {showDropdown && (
-                        <div className="dropdown-menu">
-                            <button onClick={handleLogout} className="dropdown-item">Logout</button>
+                        <div className="dropdown-menu-staff">
+                            <button onClick={handleLogout} className="dropdown-item-staff">Logout</button>
                         </div>
                     )}
                 </div>
             </div>
-            <div className="opportunities-container">
+            <div className="opportunities-container-staff">
                 {opportunities.map((opportunity) => (
-                    <div key={opportunity.offerid} className="offername-item">
-                        <span className='companyname'>{opportunity.offername}</span>
-                        <button className="view-button" onClick={() => handleClick(`/manageopportunitydetails/${opportunity.offerid}`)}>View</button>
+                    <div key={opportunity.offerid} className="offername-item-staff">
+                        <span className='companyname-staff'>{opportunity.offername}</span>
+                        <button className="view-button-staff" onClick={() => handleClick(`/manageopportunitydetails/${opportunity.offerid}`)}>View</button>
                     </div>
                 ))}
             </div>

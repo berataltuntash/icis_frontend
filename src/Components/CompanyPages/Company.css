@@ -1,4 +1,4 @@
-.red-bar {
+.red-bar-company{
     background-color: hsl(2, 81%, 34%); 
     width: 100%; 
     display: flex;
@@ -11,23 +11,23 @@
     padding: 10px;
 }
 
-.logo-container {
+.logo-container-company {
     display: flex;
     align-items: center;
 }
 
-.logo {
+.logo-company {
     width: 80px;
     height: 80px;
     margin: 20px 30px;
 }
 
-.buttons-container {
+.buttons-container-company {
     display: flex;
     align-items: center;
 }
 
-.redbarbutton {
+.redbarbutton-company {
     background-color: hsl(0, 0%, 100%); 
     color: hsl(0, 0%, 0%);
     border: none;
@@ -40,13 +40,13 @@
     margin: 35px 50px;
 }
 
-.redbarbutton:hover {
+.redbarbutton-company:hover {
     background-color: #000000;
     color: #ffffff;
     transform: scale(1.1); 
 }
 
-.profile {
+.profile-company {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -58,14 +58,14 @@
     box-shadow: 0 4px 8px rgba(0,0,0,0.15); 
 }
 
-.profile h1 {
+.profile-company h1 {
     font-size: 15px;
     margin: 10px 25px;
     color: #333333; 
     font-weight: bold; 
 }
 
-.dropdown-menu {
+.dropdown-menu-company {
     position: absolute;
     right: 0;
     top: 66%; 
@@ -76,51 +76,45 @@
 
 }
 
-.dropdown-item { 
+.dropdown-item-company { 
     padding: 8px 12px;
     font-size: 15px; 
     border-radius: 15px;
     border: 2px solid #000000;   
 }
 
-.dropdown-item:hover {
+.dropdown-item-company:hover {
     background-color: hsl(0, 0%, 73%);
 }
 
-.main-content {
+.main-content-company {
     display: flex;
     margin-top: 100px;
     background-color: hsl(0, 0%, 64%);
 }
 
-.image-container .main-image {
-    width: 70%;
-    height: auto;
-    margin: 30px 0 30px 30px;
-}
-
-.announcements-container {
+.announcements-container-company {
     width: 30%;
     padding: 20px;
     background-color: #f1f1f1;
     margin: 30px 30px 30px 0;
 }
 
-.announcements-title {
+.announcements-title-company {
     font-size: 24px;
     margin-bottom: 15px;
 }
 
-.announcement-viewer {
+.announcement-viewer-company {
     list-style-type: none;
 }
 
-.announcement-item {
+.announcement-item-company {
     margin-bottom: 10px;
     font-size: 16px;
 }
 
-.form-container {
+.form-container-company {
     background-color: hsl(2, 81%, 34%); 
     padding: 20px;
     width: 800px;
@@ -129,25 +123,25 @@
     border-radius: 10px;
 }
 
-.form-container h2 {
+.form-container-company h2 {
     margin-top: 0;
     text-align: center;
     color: #ffffff;
 }
 
-.form-group {
+.form-group-company {
     margin-bottom: 20px;
 }
 
-.form-group label {
+.form-group-company label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
     color: #ffffff;
 }
 
-.form-group input,
-.form-group textarea {
+.form-group-company input,
+.form-group-company textarea {
     width: 100%;
     padding: 10px;
     border: 1px solid #ddd;
@@ -156,19 +150,19 @@
     height: 40px;
 }
 
-.form-group input:focus,
-.form-group textarea:focus {
+.form-group-company input:focus,
+.form-group-company textarea:focus {
     border-color: #d32f2f;
     outline: none;
 }
 
-.form-group textarea {
+.form-group-company textarea {
     height: 150px;
     resize: vertical;
     border-radius: 10px;
 }
 
-.submit-button {
+.submit-button-company {
     background-color: #d32f2f;
     color: white;
     border: none;
@@ -183,6 +177,67 @@
     height: 40px;
 }
 
-.submit-button:hover {
+.submit-button-company:hover {
     background-color: #b71c1c;
+}
+
+.applications-container-company {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 180px;
+    box-sizing: border-box;
+    padding: 20px;
+    background-color: hsl(2, 81%, 34%);
+}
+
+.studentname-company {
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 20px;
+}
+
+.approve-reject-buttons-company {
+    display: flex;
+    justify-content: center;
+}
+
+.approve-button-company {
+    background-color: #4CAF50; 
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 40px;
+    transition: background-color 0.3s;
+    margin-right: 20px;
+}
+
+.approve-button-company:hover {
+    background-color: #45a049;
+}
+
+.reject-button-company {
+    background-color: #d32f2f; 
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 40px;
+    transition: background-color 0.3s;
+    margin-right: 20px;
+}
+
+.reject-button-company:hover {
+    background-color: #b71c1c;
+}
+
+.applications-item-company {
+    background-color: hsl(0, 0%, 67%);
+    color: rgb(0, 0, 0);
+    margin: 20px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 10px;
+    width: 1200px;
+    height: 110px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 }

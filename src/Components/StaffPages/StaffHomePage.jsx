@@ -9,6 +9,8 @@ import '../PopUp.css';
 const StaffHomePage = () => {
     const navigate = useNavigate();
     const [showDropdown, setShowDropdown] = useState(false);
+    const [announcements, setAnnouncements] = useState([]);
+    const [currentIndex, setCurrentIndex] = useState(0);
     const [name, setName] = useState('');
     
     const handleLogout = () => {
@@ -92,35 +94,35 @@ const StaffHomePage = () => {
 
     return (
         <div>
-            <div className="red-bar">
-                <div className="logo-container">
-                    <img src={iytelogo} alt="Logo" className="logo" />
+            <div className="red-bar-staff">
+                <div className="logo-container-staff">
+                    <img src={iytelogo} alt="Logo" className="logo-staff" />
                 </div>
-                <div className="buttons-container">
-                    <button className="redbarbutton" onClick={() => handleClick("/summerpracticereport")}>Summer Practice Report</button>
-                    <button className="redbarbutton" onClick={() => handleClick("/manageinternshipopportunities")}>Manage Internship Opportunities</button>
-                    <button className="redbarbutton" onClick={() => handleClick("/managecompanies")}>Manage Companies</button>
+                <div className="buttons-container-staff">
+                    <button className="redbarbutton-staff" onClick={() => handleClick("/summerpracticereport")}>Summer Practice Report</button>
+                    <button className="redbarbutton-staff" onClick={() => handleClick("/manageinternshipopportunities")}>Manage Internship Opportunities</button>
+                    <button className="redbarbutton-staff" onClick={() => handleClick("/managecompanies")}>Manage Companies</button>
                 </div>
-                <div className="profile" onClick={() => setShowDropdown(!showDropdown)}>
+                <div className="profile-staff" onClick={() => setShowDropdown(!showDropdown)}>
                     <h1>{name}</h1>
                     {showDropdown && (
-                        <div className="dropdown-menu">
+                        <div className="dropdown-menu-staff">
                             <button onClick={handleLogout} className="dropdown-item">Logout</button>
                         </div>
                     )}
                 </div>
             </div>
-            <div className="main-content">
-                <div className="announcements-container">
-                    <h2 className="announcements-title">ANNOUNCEMENTS</h2>
+            <div className="main-content-staff">
+                <div className="announcements-container-staff">
+                    <h2 className="announcements-title-staff">ANNOUNCEMENTS</h2>
                     {announcements.length > 0 && (
-                        <div className="announcement-viewer">
-                            <button onClick={goPrevious} className='previous-button'>Previous</button>
-                            <div className="announcement-item">
+                        <div className="announcement-viewer-staff">
+                            <button onClick={goPrevious} className='previous-button-staff'>Previous</button>
+                            <div className="announcement-item-staff">
                                 <h3>{announcements[currentIndex].title}</h3>
                                 <p>{announcements[currentIndex].description}</p>
                             </div>
-                            <button onClick={goNext} className='next-button'>Next</button>
+                            <button onClick={goNext} className='next-button-staff-staff'>Next</button>
                         </div>
                     )}
                 </div>
