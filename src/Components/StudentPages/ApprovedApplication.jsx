@@ -4,10 +4,10 @@ import iytelogo from "../Assets/iytelogo.png";
 import Cookies from "js-cookie";
 import axios from "axios";
 import Popup from "../PopUp";
-import './Company.css';
+import './Student.css';
 import '../PopUp.css';
 
-const ApprovedInternship = () => {
+const ApprovedApplication = () => {
     const [name, setName] = useState("");
     const [companies, setCompanies] = useState([]);
     const [showDropdown, setShowDropdown] = useState(false);
@@ -164,4 +164,4 @@ const ApprovedInternship = () => {
     );
 };
 
-export default ApprovedInternship;
+export default ApprovedApplication;

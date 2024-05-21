@@ -248,4 +248,76 @@
     color: hsl(0, 0%, 100%);
 }
 
+.opportunities-staff {
+    background-color: hsl(2, 81%, 34%); 
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+    margin-top: 150px;
+}
+
+.opportunity-staff {
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 20px;
+    height: 450px;
+    width: 1200px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.opportunity-header-staff h2 {
+    color: #1a1a1a; 
+    margin-bottom: 15px;
+    margin-top: 20px;
+}
+
+.opportunity-name-staff h3 {
+    color: #666; 
+    margin-bottom: 30px;
+}
+
+.opportunity-description-staff p {
+    font-size: 14px; 
+    color: #333;
+}
+
+.approve-button-application-staff {
+    background-color: #4CAF50; 
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 40px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    position: absolute; 
+    bottom: 40px; 
+    right: 210px;
+}
+
+.approve-button-application-staff:hover {
+    background-color: #45a049;
+}
+
+.reject-button-application-staff {
+    background-color: #d32f2f; 
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 40px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    position: absolute; 
+    bottom: 40px; 
+    right: 70px;
+
+}
+
+.reject-button-application-staff:hover {
+    background-color: #b71c1c;
+}
+
 

@@ -107,7 +107,7 @@ const StaffHomePage = () => {
                     <h1>{name}</h1>
                     {showDropdown && (
                         <div className="dropdown-menu-staff">
-                            <button onClick={handleLogout} className="dropdown-item">Logout</button>
+                            <button onClick={handleLogout} className="dropdown-item-staff">Logout</button>
                         </div>
                     )}
                 </div>

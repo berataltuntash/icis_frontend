@@ -65,7 +65,7 @@ const ApprovedInternship = () => {
     const fetchapplications = async () => {
         const token = Cookies.get('jwtToken');
         try {
-            const response = await axios.get('http://localhost:8080/api/showoffers', {
+            const response = await axios.get('http://localhost:8080/api/applicationtocompany', {
                 headers: { 'Authorization': `${token}` }
             });
             setApplications(response.data);
@@ -89,13 +89,14 @@ const ApprovedInternship = () => {
     return (
         <div>
             <div className="red-bar-company">
-                <div className="logo-container-company" onClick={() => handleClick("/studenthomepage")}>
+                <div className="logo-container-company" onClick={() => handleClick("/companyhomepage")}>
                     <img src={iytelogo} alt="Logo" className="logo-company" />
                 </div>
                 <div className="buttons-container-company">
-                    <button className="redbarbutton-company" onClick={() => handleClick("/internshipopportunities")}>Internship Opportunities</button>
-                    <button className="redbarbutton-company" onClick={() => handleClick("/myinternship")}>My Internship</button>
-                    <button className="redbarbutton-company" onClick={() => handleClick("/approvedapplication")}>Approved Application</button>
+                    <button className="redbarbutton-company" onClick={() => handleClick("/createinternshipannouncement")}>Create Internship Announcement</button>
+                    <button className="redbarbutton-company" onClick={() => handleClick("/fiiloutcompanyform")}>Fill Out Company Form</button>
+                    <button className="redbarbutton-company" onClick={() => handleClick("/reviewsummerpracticereport")}>Review Summer Practice Report</button>
+                    <button className='redbarbutton-company' onClick={() => handleClick('/approvedinternship')}>Approved Internship</button>
                 </div>
                 <div className="profile-company" onClick={() => setShowDropdown(!showDropdown)}>
                     <h1>{name}</h1>
