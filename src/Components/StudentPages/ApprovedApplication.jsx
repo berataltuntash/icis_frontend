@@ -38,7 +38,7 @@ const ApprovedApplication = () => {
     
         try {
             const response = await axios.post(`http://localhost:8080/api/applicationstostudent/${companyId}`, {
-                approve: isApprove
+                isApproved: isApprove
             }, {
                 headers: {
                     "Authorization": `${token}`,

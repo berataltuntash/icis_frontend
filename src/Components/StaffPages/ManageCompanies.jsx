@@ -38,7 +38,7 @@ const ManageCompanies = () => {
     
         try {
             const response = await axios.post(`http://localhost:8080/api/managecompanyapplication/${companyId}`, {
-                approve: isApprove
+                isApproved: isApprove
             }, {
                 headers: {
                     "Authorization": `${token}`,
@@ -51,7 +51,7 @@ const ManageCompanies = () => {
                 setShowPopup(true);
                 setTimeout(() => {
                     setShowPopup(false);
-                    fetchCompanies(); // Refetch the companies after an action is successfully completed
+                    fetchCompanies();
                 }, 2000);
             } else {
                 setMessage(`Failed to ${isApprove ? 'approve' : 'reject'} company.`);

@@ -8,7 +8,7 @@ import './Staff.css';
 import '../PopUp.css';
 
 const ManageOpportunityDetails = () => {
-    const { offerid } = useParams();
+    const {offerid } = useParams();
     const [name, setName] = useState("");
     const [details, setDetails] = useState({});
     const [message, setMessage] = useState("");
@@ -29,10 +29,9 @@ const ManageOpportunityDetails = () => {
     const handleApproveReject = async (isApprove) => {
         const token = Cookies.get("jwtToken");
         setIsSubmitting(true);
-
         try {
             const response = await axios.post(`http://localhost:8080/api/approverejectoffer/${offerid}`,{ 
-                offerApprove: isApprove
+                isApproved : isApprove
                 },{
                 headers: {
                     "Authorization": `${token}`,

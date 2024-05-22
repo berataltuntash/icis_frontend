@@ -53,6 +53,9 @@ const CreateInternshipAnnouncement = () => {
                     'Content-Type': 'application/json'
                 }
             });
+
+            console.log(companyname, offername, description);
+
             if (response.status === 202) {
                 setMessage(response.data);
             } else {
@@ -94,6 +97,7 @@ const CreateInternshipAnnouncement = () => {
                     'Content-Type': 'application/json'
                 }
             });
+
             const { usertype, name } = response.data;
 
             if (response.status === 202) {

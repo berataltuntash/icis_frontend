@@ -32,7 +32,7 @@ const ManageOpportunityDetails = () => {
 
         try {
             const response = await axios.post(`http://localhost:8080/api/approverejectapplication/${applicationId}`,{ 
-                offerApprove: isApprove
+                isApproved: isApprove
                 },{
                 headers: {
                     "Authorization": `${token}`,
