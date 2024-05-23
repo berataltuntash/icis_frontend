@@ -111,19 +111,19 @@ const CompanyHomePage = () => {
                 </div>
             </div>
             <div className="main-content-company">
+                <button onClick={goPrevious} className='previous-button-company'>&lt;</button>
                 <div className="announcements-container-company">
                     <h2 className="announcements-title-company">ANNOUNCEMENTS</h2>
                     {announcements.length > 0 && (
                         <div className="announcement-viewer-company">
-                            <button onClick={goPrevious} className='previous-button-company'>Previous</button>
                             <div className="announcement-item-company">
                                 <h3>{announcements[currentIndex].title}</h3>
                                 <p>{announcements[currentIndex].description}</p>
                             </div>
-                            <button onClick={goNext} className='next-button-company'>Next</button>
                         </div>
                     )}
                 </div>
+                <button onClick={goNext} className='next-button-company'>&gt;</button>
             </div>
         </div>
     );

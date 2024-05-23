@@ -113,7 +113,7 @@
     margin-bottom: 15px;
 }
 
-.next-button-student, .previous-button-student {
+.next-button-staff, .previous-button-staff {
     top: 50%; /* Center vertically */
     transform: translateY(-50%); /* Offset transform for precise centering */
     padding: 10px 20px;
@@ -127,7 +127,7 @@
     transition: background-color 0.3s, color 0.3s;
 }
 
-.next-button-student:hover, .previous-button-student:hover {
+.next-button-staff:hover, .previous-button-staff:hover {
     background-color: #891a1a;
     color: #ffffff;
     transform: scale(1.1) translateY(-50%);

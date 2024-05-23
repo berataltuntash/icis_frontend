@@ -112,19 +112,19 @@ const StaffHomePage = () => {
                 </div>
             </div>
             <div className="main-content-staff">
+                <button onClick={goPrevious} className='previous-button-staff'>&lt;</button>
                 <div className="announcements-container-staff">
                     <h2 className="announcements-title-staff">ANNOUNCEMENTS</h2>
                     {announcements.length > 0 && (
                         <div className="announcement-viewer-staff">
-                            <button onClick={goPrevious} className='previous-button-staff'>Previous</button>
                             <div className="announcement-item-staff">
                                 <h3>{announcements[currentIndex].title}</h3>
                                 <p>{announcements[currentIndex].description}</p>
                             </div>
-                            <button onClick={goNext} className='next-button-staff-staff'>Next</button>
                         </div>
                     )}
                 </div>
+                <button onClick={goNext} className='next-button-staff-staff'>&gt;</button>
             </div>
         </div>
     );
