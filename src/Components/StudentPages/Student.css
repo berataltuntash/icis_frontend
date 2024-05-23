@@ -89,20 +89,23 @@
 
 .main-content-student {
     display: flex;
-    align-items: center; /* Align items vertically */
-    justify-content: space-between; /* Space out the child elements */
-    width: 800px;
-    height: 350px;
-    margin-top: 100px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 100px; 
     padding: 20px;
-    background-color: hsl(0, 0%, 64%);
+    background-color: hsla(0, 0%, 100%, 0.544); 
+    height: 350px; 
+    width: 700px;
 }
 
 .announcements-container-student {
+    width: 60%;
+    height: 80%;
     padding: 20px;
-    background-color: #f1f1f1;
-    width: 60%; /* Adjust width to take the remaining space */
-    overflow: auto; /* Add scrolling to the container if content overflows */
+    background-color: hsl(2, 81%, 34%); ;
+    color: #ffffff;
+    overflow: auto; 
+    margin: 0  60px;
 }
 
 .announcements-title-student {
@@ -110,13 +113,24 @@
     margin-bottom: 15px;
 }
 
-.announcement-viewer-student {
-    list-style-type: none;
+.next-button-student, .previous-button-student {
+    top: 50%; /* Center vertically */
+    transform: translateY(-50%); /* Offset transform for precise centering */
+    padding: 10px 20px;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: hsl(0, 0%, 0%);
+    color: hsl(0, 0%, 100%);
+    border: none;
+    border-radius: 40px;
+    transition: background-color 0.3s, color 0.3s;
 }
 
-.announcement-item-student {
-    margin-bottom: 10px;
-    font-size: 16px;
+.next-button-student:hover, .previous-button-student:hover {
+    background-color: #891a1a;
+    color: #ffffff;
+    transform: scale(1.1) translateY(-50%);
 }
 
 .opportunities-container-student {
@@ -126,27 +140,6 @@
     box-sizing: border-box;
     padding: 20px;
     background-color: hsl(2, 81%, 34%);
-}
-
-.next-button-student, .previous-button-student {
-    background-color: hsl(0, 0%, 100%);
-    color: hsl(0, 0%, 0%);
-    border: none;
-    padding: 10px 20px;
-    font-size: 14px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
-    border-radius: 40px;  
-    margin: 35px 0; /* Adjusted margin for better placement */
-    height: 10%;
-    width: 10%;
-}
-
-.next-button-student:hover, .previous-button-student:hover {
-    background-color: #000000;
-    color: #ffffff;
-    transform: scale(1.1);
 }
 
 .offername-item-student {

@@ -89,15 +89,23 @@
 
 .main-content-company {
     display: flex;
-    margin-top: 100px;
-    background-color: hsl(0, 0%, 64%);
+    align-items: center;
+    justify-content: center;
+    margin-top: 100px; 
+    padding: 20px;
+    background-color: hsla(0, 0%, 100%, 0.544); 
+    height: 350px; 
+    width: 700px;
 }
 
 .announcements-container-company {
-    width: 30%;
+    width: 60%;
+    height: 80%;
     padding: 20px;
-    background-color: #f1f1f1;
-    margin: 30px 30px 30px 0;
+    background-color: hsl(2, 81%, 34%); 
+    color: #ffffff;
+    overflow: auto; 
+    margin: 0  60px;
 }
 
 .announcements-title-company {
@@ -105,13 +113,24 @@
     margin-bottom: 15px;
 }
 
-.announcement-viewer-company {
-    list-style-type: none;
+.next-button-student, .previous-button-student {
+    top: 50%; /* Center vertically */
+    transform: translateY(-50%); /* Offset transform for precise centering */
+    padding: 10px 20px;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: hsl(0, 0%, 0%);
+    color: hsl(0, 0%, 100%);
+    border: none;
+    border-radius: 40px;
+    transition: background-color 0.3s, color 0.3s;
 }
 
-.announcement-item-company {
-    margin-bottom: 10px;
-    font-size: 16px;
+.next-button-student:hover, .previous-button-student:hover {
+    background-color: #891a1a;
+    color: #ffffff;
+    transform: scale(1.1) translateY(-50%);
 }
 
 .form-container-company {

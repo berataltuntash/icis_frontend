@@ -107,7 +107,7 @@ const StudentHomePage = () => {
                 </div>
             </div>
             <div className="main-content-student">
-            <button onClick={goPrevious} className='previous-button-student'>Previous</button>
+            <button onClick={goPrevious} className='previous-button-student'>&lt;</button>
                 <div className="announcements-container-student">
                     <h2 className="announcements-title-student">ANNOUNCEMENTS</h2>
                     {announcements.length > 0 && (
@@ -119,7 +119,7 @@ const StudentHomePage = () => {
                         </div>
                     )}
                 </div>
-            <button onClick={goNext} className='next-button-student'>Next</button>
+            <button onClick={goNext} className='next-button-student'>&gt;</button>
             </div>
         </div>
     );
