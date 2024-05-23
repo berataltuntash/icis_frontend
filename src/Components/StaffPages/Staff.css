@@ -289,12 +289,16 @@
     background-color: #b71c1c;
 }
 
+.internship-detail-staff{
+    margin-bottom: 5px;
+}
+
 .company-name{
     font-weight: normal;
 }
 
 .offer-name{
-    font-weight: bold;
+    font-weight: normal;
 }
 
 .name{
@@ -311,4 +315,9 @@
 
 .student-name-surname{
     font-weight: normal;
+}
+
+.internship-staff{
+    font-size: 24px;
+    margin-bottom: 20px; 
 }

@@ -54,7 +54,6 @@ const ManageOpportunityDetails = () => {
             setTimeout(() => setShowPopup(false), 2000);
         }
         setIsSubmitting(false);
-        navigate("/manageinternshipopportunities");
     };
 
     const formatName = (name) => {
