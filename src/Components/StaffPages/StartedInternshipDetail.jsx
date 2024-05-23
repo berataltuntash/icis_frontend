@@ -146,7 +146,8 @@ const StartedInternshipDetail = () => {
             <div className="opportunities-staff">
                 <div className="opportunities-details-staff">
                     {details && (
-                        <div className="opportunity-staff">
+                        <div className="internship-container-staff">
+                            <div className="internships-staff">
                             <div className="internship-staff">
                                 <h3><strong>Internship Details</strong></h3>
                             </div>
@@ -165,9 +166,10 @@ const StartedInternshipDetail = () => {
                             <div className="internship-detail-staff">
                                 <h3><strong>Student Id: </strong> <span className="student-number">{details.studentId}</span></h3>
                             </div>
-                            <div>
-                                <input type="file" onChange={handleFileChange} accept=".docx" />
-                                <button onClick={uploadFile}>Upload Document</button>
+                            </div>
+                            <div className="upload-button-staff">
+                                <input type="file" onChange={handleFileChange} accept=".docx" className="input-staff"/>
+                                <button onClick={uploadFile} className="button-staff">Upload Document</button>
                             </div>
                         </div>
                     )}

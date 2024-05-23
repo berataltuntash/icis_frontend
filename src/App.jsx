@@ -44,7 +44,7 @@ function App() {
           <Route path="/approvedapplication" element={<ApprovedApplication/>} />
           <Route path='/approvedinternshipdetail/:applicationId' element={<ApprovedInternshipDetail/>} />
           <Route path="/startedinternships" element={<StartedInternships/>} />
-          <Route path="/startedinternshipdetail/:applicationId" element={<StartedInternshipDetail/>} />
+          <Route path="/startedinternshipdetail" element={<StartedInternshipDetail/>} />
         </Routes>
       </div>
     </Router>

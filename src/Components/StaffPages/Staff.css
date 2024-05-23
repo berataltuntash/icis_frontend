@@ -321,3 +321,48 @@
     font-size: 24px;
     margin-bottom: 20px; 
 }
+
+.internships-staff{
+    margin-left: 50px;
+    margin-top: 50px;
+}
+
+.upload-button-staff{
+    margin: 150px 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.internship-container-staff{
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 20px;
+    height: 400px;
+    width: 1000px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex; 
+}
+
+.upload-button-staff .button-staff{
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 3px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    margin-right: 20px;
+    margin-left: 70px;
+}
+
+.upload-button-staff .button-staff:hover{
+    background-color: #840808;
+    color: hsl(0, 0%, 100%);
+}
+
+.input-staff {
+    display: none; /* Hide the default input */
+}
