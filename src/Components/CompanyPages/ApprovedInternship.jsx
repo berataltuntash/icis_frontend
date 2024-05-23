@@ -46,12 +46,12 @@ const ApprovedInternship = () => {
 
             if (response.status === 202) {
                 setName(formatName(name));
-                if ( usertype === 'Student')  {
+                if ( usertype === 'Company')  {
                     console.log(`Welcome, ${name}`);
                 } else if( usertype === 'Staff') {
                     navigate('/staffhomepage');
-                } else if( usertype === 'Company') {
-                    navigate('/companyhomepage');
+                } else if( usertype === 'Student') {
+                    navigate('/studenthomepage');
                 }    
                 return true;
             }
@@ -94,7 +94,6 @@ const ApprovedInternship = () => {
                 </div>
                 <div className="buttons-container-company">
                     <button className="redbarbutton-company" onClick={() => handleClick("/createinternshipannouncement")}>Create Internship Announcement</button>
-                    <button className="redbarbutton-company" onClick={() => handleClick("/reviewsummerpracticereport")}>Review Summer Practice Report</button>
                     <button className='redbarbutton-company' onClick={() => handleClick('/approvedinternship')}>Approved Internship</button>
                 </div>
                 <div className="profile-company" onClick={() => setShowDropdown(!showDropdown)}>
@@ -110,7 +109,7 @@ const ApprovedInternship = () => {
                 {applications.map((application) => (
                     <div key={application.applicationId} className="offername-item-company">
                         <span className='studentname-company'>{application.studentName} {application.studentSurname}</span>
-                        <button className="view-button-company" onClick={() => handleClick(`/applicationdetail/${application.applicationId}`)}>View</button>
+                        <button className="view-button-company" onClick={() => handleClick(`/approvedapplication/${application.applicationId}`)}>View</button>
                     </div>
                 ))}
             </div>

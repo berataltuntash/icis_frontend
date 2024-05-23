@@ -16,6 +16,7 @@ import ManageOpportunityDetails from './Components/StaffPages/ManageOpportunityD
 import ManageCompanies from './Components/StaffPages/ManageCompanies';
 import ApprovedInternship from './Components/CompanyPages/ApprovedInternship';
 import ApprovedApplication from './Components/StudentPages/ApprovedApplication';
+import ApprovedInternshipDetail from './Components/CompanyPages/ApprovedInternshipDetail';
 
 function App() {
 
@@ -28,17 +29,18 @@ function App() {
           <Route path="/companyregister" element={<CompanyRegister/>} />
           <Route path="/forgotpassword" element={<ForgotPassword/>} />
           <Route path="/resetpassword" element={<ResetPassword/>} />
-          <Route  path="/studenthomepage" element={<StudentHomePage/>} />
-          <Route  path="/companyhomepage" element={<CompanyHomePage/>} />
-          <Route  path="/staffhomepage" element={<StaffHomePage/>} />
-          <Route  path="/internshipopportunities" element={<InternshipOpportunities/>} />
-          <Route  path="/opportunitydetail/:offerid" element={<OpportunityDetail/>} />
-          <Route  path="/createinternshipannouncement" element={<CreateInternshipAnnouncement/>} />
-          <Route  path="/manageinternshipopportunities" element={<ManageInternshipOpportunities/>} />
-          <Route  path="/manageopportunitydetails/:offerid" element={<ManageOpportunityDetails/>} />
-          <Route  path="/managecompanies" element={<ManageCompanies/>} />
-          <Route  path="/approvedinternship" element={<ApprovedInternship/>} />
-          <Route  path="/approvedapplication" element={<ApprovedApplication/>} />
+          <Route path="/studenthomepage" element={<StudentHomePage/>} />
+          <Route path="/companyhomepage" element={<CompanyHomePage/>} />
+          <Route path="/staffhomepage" element={<StaffHomePage/>} />
+          <Route path="/internshipopportunities" element={<InternshipOpportunities/>} />
+          <Route path="/opportunitydetail/:offerid" element={<OpportunityDetail/>} />
+          <Route path="/createinternshipannouncement" element={<CreateInternshipAnnouncement/>} />
+          <Route path="/manageinternshipopportunities" element={<ManageInternshipOpportunities/>} />
+          <Route path="/manageopportunitydetails/:offerid" element={<ManageOpportunityDetails/>} />
+          <Route path="/managecompanies" element={<ManageCompanies/>} />
+          <Route path="/approvedinternship" element={<ApprovedInternship/>} />
+          <Route path="/approvedapplication" element={<ApprovedApplication/>} />
+          <Route path='/approvedinternshipdetail/:applicationId' element={<ApprovedInternshipDetail/>} />
         </Routes>
       </div>
     </Router>

@@ -98,7 +98,6 @@ const CompanyHomePage = () => {
                 </div>
                 <div className="buttons-container-company">
                     <button className="redbarbutton-company" onClick={() => handleClick("/createinternshipannouncement")}>Create Internship Announcement</button>
-                    <button className="redbarbutton-company" onClick={() => handleClick("/reviewsummerpracticereport")}>Review Summer Practice Report</button>
                     <button className='redbarbutton-company' onClick={() => handleClick('/approvedinternship')}>Approved Internship</button>
                 </div>
                 <div className="profile-company" onClick={() => setShowDropdown(!showDropdown)}>
