@@ -330,8 +330,8 @@
 .upload-button-staff{
     margin: 150px 150px;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
 }
 
 .internship-container-staff{
@@ -349,13 +349,12 @@
     background-color: black;
     color: white;
     border: none;
-    padding: 3px 20px;
-    font-size: 16px;
+    padding: 10px 20px;
+    font-size: 14px;
     cursor: pointer;
     border-radius: 20px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-    margin-right: 20px;
-    margin-left: 70px;
+    height: 50px;
 }
 
 .upload-button-staff .button-staff:hover{
@@ -363,6 +362,6 @@
     color: hsl(0, 0%, 100%);
 }
 
-.input-staff {
-    display: none; /* Hide the default input */
+.upload-button-staff .input-staff{
+    height: 100px;
 }
