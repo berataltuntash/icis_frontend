@@ -38,7 +38,7 @@ const ApprovedApplication = () => {
     
         try {
             const response = await axios.post(`http://localhost:8080/api/applicationstostudent/${companyId}`, {
-                isApproved: isApprove
+                isApprove
             }, {
                 headers: {
                     "Authorization": `${token}`,
@@ -51,10 +51,10 @@ const ApprovedApplication = () => {
                 setShowPopup(true);
                 setTimeout(() => {
                     setShowPopup(false);
-                    fetchstudents(); // Refetch the students after an action is successfully completed
+                    fetchstudents();
                 }, 2000);
             } else {
-                setMessage(`Failed to ${isApprove ? 'approve' : 'reject'} company.`);
+                setMessage(response.data);
                 setShowPopup(true);
                 setTimeout(() => setShowPopup(false), 2000);
             }

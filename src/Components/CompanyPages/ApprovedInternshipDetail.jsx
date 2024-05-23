@@ -32,7 +32,7 @@ const ManageOpportunityDetails = () => {
 
         try {
             const response = await axios.post(`http://localhost:8080/api/approverejectapplication/${applicationId}`,{ 
-                isApproved: isApprove
+                isApprove
                 },{
                 headers: {
                     "Authorization": `${token}`,
@@ -45,7 +45,7 @@ const ManageOpportunityDetails = () => {
                 setShowPopup(true);
                 setTimeout(() => setShowPopup(false), 2000);
             } else {
-                setMessage(`Failed to ${isApprove ? 'approve' : 'reject'} opportunity.`);
+                setMessage(response.data);
                 setShowPopup(true);
                 setTimeout(() => setShowPopup(false), 2000);
             }
