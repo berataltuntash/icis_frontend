@@ -15,6 +15,7 @@ const OpportunityDetail = () => {
     const [message, setMessage] = useState('');  
     const [showPopup, setShowPopup] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
 
     const handleClick = (path) => {
@@ -105,6 +106,7 @@ const OpportunityDetail = () => {
     };
 
     const fetchOpportunity = async () => {
+        setIsLoading(true);
         try {
             const token = Cookies.get('jwtToken');
             const response = await axios.get(`http://localhost:8080/api/showoffers/${offerid}`, {
@@ -114,6 +116,7 @@ const OpportunityDetail = () => {
         } catch (error) {
             console.error(response.data);
         }
+        setIsLoading(false);
     };
 
     const authenticateAndFetch = async () => {
@@ -129,43 +132,49 @@ const OpportunityDetail = () => {
 
     return (
         <div>
-            <div className="red-bar-student">
-                <div className="logo-container-student" onClick={() => handleClick("/studenthomepage")}>
-                    <img src={iytelogo} alt="Logo" className="logo-student" />
-                </div>
-                <div className="buttons-container-student">
-                    <button className="redbarbutton-student" onClick={() => handleClick("/internshipopportunities")}>Internship Opportunities</button>
-                    <button className="redbarbutton-student" onClick={() => handleClick("/approvedapplication")}>Approved Application</button> 
-                </div>
-                <div className="profile-student" onClick={() => setShowDropdown(!showDropdown)}>
-                    <h1>{name}</h1>
-                    {showDropdown && (
-                        <div className="dropdown-menu-student">
-                            <button onClick={handleLogout} className="dropdown-item-student">Logout</button>
+            {isLoading ? (
+                <div className="loader"></div> 
+            ) : (
+                <div>
+                    <div className="red-bar-student">
+                        <div className="logo-container-student" onClick={() => handleClick("/studenthomepage")}>
+                            <img src={iytelogo} alt="Logo" className="logo-student" />
                         </div>
-                    )}
-                </div>
-            </div>
-            <div className="opportunities-student">
-                <div className="opportunities-details-student">
-                    {details && (
-                        <div className="opportunity-student">
-                            <div className="opportunity-header-student">
-                                <h2>{details.companyname}</h2>
-                            </div>
-                            <div className="opportunity-name-student">
-                                <h3>{details.offername}</h3>
-                            </div>
-                            <div className="opportunity-description-student">
-                                <p>{details.description}</p>
-                            </div>
-                            <div className="opportunity-buttons-student">
-                                <button className="apply-button-student" onClick={handleApply} disabled={isSubmitting}>Apply</button>
-                            </div>
+                        <div className="buttons-container-student">
+                            <button className="redbarbutton-student" onClick={() => handleClick("/internshipopportunities")}>Internship Opportunities</button>
+                            <button className="redbarbutton-student" onClick={() => handleClick("/approvedapplication")}>Approved Application</button> 
                         </div>
-                    )}
+                        <div className="profile-student" onClick={() => setShowDropdown(!showDropdown)}>
+                            <h1>{name}</h1>
+                            {showDropdown && (
+                            <div className="dropdown-menu-student">
+                                <button onClick={handleLogout} className="dropdown-item-student">Logout</button>
+                            </div>
+                             )}
+                        </div>
+                    </div>
+                    <div className="opportunities-student">
+                        <div className="opportunities-details-student">
+                            {details && (
+                                <div className="opportunity-student">
+                                    <div className="opportunity-header-student">
+                                        <h2>{details.companyname}</h2>
+                                    </div>
+                                    <div className="opportunity-name-student">
+                                        <h3>{details.offername}</h3>
+                                    </div>
+                                    <div className="opportunity-description-student">
+                                        <p>{details.description}</p>
+                                    </div>
+                                    <div className="opportunity-buttons-student">
+                                        <button className="apply-button-student" onClick={handleApply} disabled={isSubmitting}>Apply</button>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    </div>
                 </div>
-            </div>
+            )}
             {showPopup && (
             <Popup message={message} onClose={() => setShowPopup(false)} />
             )}
