@@ -109,7 +109,7 @@ const ApprovedInternship = () => {
                 {applications.map((application) => (
                     <div key={application.applicationId} className="offername-item-company">
                         <span className='studentname-company'>{application.studentName} {application.studentSurname}</span>
-                        <button className="view-button-company" onClick={() => handleClick(`/approvedapplication/${application.applicationId}`)}>View</button>
+                        <button className="view-button-company" onClick={() => handleClick(`/approvedinternshipdetail/${application.applicationId}`)}>View</button>
                     </div>
                 ))}
             </div>

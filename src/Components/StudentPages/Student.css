@@ -215,6 +215,11 @@
     color: #333;
 }
 
+.opportunity-description-student h3{
+    font-size: 14px; 
+    color: #333;
+}
+
 .apply-button-student {
     background-color: #4CAF50; 
     color: white;
@@ -294,3 +299,10 @@
     box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 }
 
+.company-name{
+    font-weight: normal;
+}
+
+.offer-name{
+    font-weight: normal;
+}

@@ -154,12 +154,13 @@ const OpportunityDetail = () => {
                     {details && (
                         <div className="opportunity-student">
                             <div className="opportunity-header-student">
-                                <h2>{details.companyname}</h2>
+                                <h2><strong>Company Name: </strong> <span className="company-name">{details.companyname}</span></h2>
                             </div>
                             <div className="opportunity-name-student">
-                                <h3>{details.offername}</h3>
+                                <h3><strong>Offer Name: </strong> <span className="offer-name">{details.offername}</span></h3>
                             </div>
                             <div className="opportunity-description-student">
+                                <h3><strong>Description: </strong></h3>
                                 <p>{details.description}</p>
                             </div>
                             <div className="opportunity-buttons-student">

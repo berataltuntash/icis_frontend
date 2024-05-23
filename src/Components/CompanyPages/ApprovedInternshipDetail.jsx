@@ -8,7 +8,7 @@ import './Company.css';
 import '../PopUp.css';
 
 const ApprovedInternshipDetail = () => {
-    const { offerid } = useParams();
+    const { applicationId } = useParams();
     const [name, setName] = useState("");
     const [details, setDetails] = useState({});
     const [message, setMessage] = useState("");
@@ -31,7 +31,7 @@ const ApprovedInternshipDetail = () => {
         setIsSubmitting(true);
 
         try {
-            const response = await axios.post(`http://localhost:8080/api/approverejectapplication/${applicationId}`,{},{
+            const response = await axios.post(`http://localhost:8080/api/approveapplicationstocompany/${applicationId}`,{},{
                 headers: {
                     "Authorization": `${token}`,
                     'Content-Type': 'application/json',
@@ -119,7 +119,7 @@ const ApprovedInternshipDetail = () => {
 
     useEffect(() => {
         authenticateAndFetch();
-    }, [navigate, offerid]);
+    }, [navigate, applicationId]);
 
     return (
         <div>
@@ -145,16 +145,16 @@ const ApprovedInternshipDetail = () => {
                     {details && (
                         <div className="application-company">
                             <div className="application-offername-company">
-                                <h2>{details.offerName}</h2>
+                                <h2><strong>Offer Name: </strong> <span className="offer-name">{details.offerName}</span></h2>
                             </div>
                             <div className="application-namesurname-company">
-                                <h3>{details.studentName} {details.studentSurname}</h3>
+                                <h3><strong>Name: </strong> <span className="name">{details.studentName} {details.studentSurname}</span></h3>
                             </div>
                             <div className="application-studentid-company">
-                                <p>{details.studentId}</p>
+                                <p><strong>Student Number: </strong> <span className="student-number">{details.studentId}</span></p>
                             </div>
                             <div className="application-grade-company">
-                                <p>{details.grade}</p>
+                                <p><strong>Student Grade: </strong> <span className="student-grade">{details.grade}</span></p>
                             </div>
                             <div className="application-buttons-company">
                                 <button className="approve-button-application-company" onClick={() => handleApproveReject(true)} disabled={isSubmitting}>Approve</button>

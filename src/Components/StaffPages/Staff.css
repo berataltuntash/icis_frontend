@@ -248,6 +248,12 @@
     color: #333;
 }
 
+.opportunity-description-staff h3{
+    font-size: 14px; 
+    color: #333;
+
+}
+
 .approve-button-internship-staff {
     background-color: #4CAF50; 
     color: white;
@@ -281,4 +287,12 @@
 
 .reject-button-internship-staff:hover {
     background-color: #b71c1c;
+}
+
+.company-name{
+    font-weight: normal;
+}
+
+.offer-name{
+    font-weight: bold;
 }
