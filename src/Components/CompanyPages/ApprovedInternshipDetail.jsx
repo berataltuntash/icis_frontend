@@ -40,7 +40,7 @@ const ManageOpportunityDetails = () => {
             });
 
             if (response.status === 202) {
-                setMessage(isApprove ? "Approved successfully!" : "Rejected successfully!");
+                setMessage(response.data);
                 setShowPopup(true);
                 setTimeout(() => setShowPopup(false), 2000);
             } else {
@@ -49,8 +49,8 @@ const ManageOpportunityDetails = () => {
                 setTimeout(() => setShowPopup(false), 2000);
             }
         } catch (error) {
-            console.error(`Error ${isApprove ? 'approving' : 'rejecting'} opportunity:`, error);
-            setMessage(`Error ${isApprove ? 'approving' : 'rejecting'} opportunity: ` + error.message);
+            console.error(error.response.data);
+            setMessage(error.response.data);
             setShowPopup(true);
             setTimeout(() => setShowPopup(false), 2000);
         }
@@ -92,7 +92,7 @@ const ManageOpportunityDetails = () => {
                 return true;
             }
         } catch (error) {
-            console.error("Authentication check failed:", error);
+            console.error(error.response.data);
             navigate("/login");
         }
         return false;
@@ -106,7 +106,7 @@ const ManageOpportunityDetails = () => {
             });
             setDetails(response.data);
         } catch (error) {
-            console.error("Error fetching opportunity details:", error);
+            console.error(error.response.data);
         }
     };
 
@@ -129,7 +129,6 @@ const ManageOpportunityDetails = () => {
                 </div>
                 <div className="buttons-container-company">
                     <button className="redbarbutton-company" onClick={() => handleClick("/createinternshipannouncement")}>Create Internship Announcement</button>
-                    <button className="redbarbutton-company" onClick={() => handleClick("/fiiloutcompanyform")}>Fill Out Company Form</button>
                     <button className="redbarbutton-company" onClick={() => handleClick("/reviewsummerpracticereport")}>Review Summer Practice Report</button>
                     <button className='redbarbutton-company' onClick={() => handleClick('/approvedinternship')}>Approved Internship</button>
                 </div>

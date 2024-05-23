@@ -39,22 +39,21 @@ const OpportunityDetail = () => {
             });
             
             if (response.status === 202) {
-                setMessage("Applied successfully!"); 
+                setMessage(response.data); 
                 setShowPopup(true);
                 setTimeout(() => {
                     setShowPopup(false);
                 }, 2000);
                 
             } else {
-                setMessage("Failed to apply to opportunity.");
+                setMessage(response.data);
                 setShowPopup(true);
                 setTimeout(() => {
                     setShowPopup(false);
                 }, 2000);
             }
         } catch (error) {
-            console.error('Error applying to opportunity:', error);
-            setMessage("Error applying to opportunity: " + error.message);
+            setMessage(error.response.data);
             setShowPopup(true);
             setTimeout(() => {
                 setShowPopup(false);
@@ -98,7 +97,7 @@ const OpportunityDetail = () => {
                 return true;
             }
         } catch (error) {
-            console.error('Authentication check failed:', error);
+            console.error(error.response.data);
             navigate('/login'); 
         }
 
@@ -113,7 +112,7 @@ const OpportunityDetail = () => {
             });
             setDetails(response.data);
         } catch (error) {
-            console.error('Error fetching opportunity details:', error);
+            console.error(response.data);
         }
     };
 
@@ -136,7 +135,6 @@ const OpportunityDetail = () => {
                 </div>
                 <div className="buttons-container-student">
                     <button className="redbarbutton-student" onClick={() => handleClick("/internshipopportunities")}>Internship Opportunities</button>
-                    <button className="redbarbutton-student" onClick={() => handleClick("/myinternship")}>My Internship</button>
                     <button className="redbarbutton-student" onClick={() => handleClick("/approvedapplication")}>Approved Application</button> 
                 </div>
                 <div className="profile-student" onClick={() => setShowDropdown(!showDropdown)}>

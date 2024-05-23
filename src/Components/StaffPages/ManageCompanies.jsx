@@ -46,7 +46,7 @@ const ManageCompanies = () => {
             });
     
             if (response.status === 202) {
-                setMessage(isApprove ? "Company approved successfully!" : "Company rejected successfully!");
+                setMessage(response.data);
                 setShowPopup(true);
                 setTimeout(() => {
                     setShowPopup(false);
@@ -58,8 +58,8 @@ const ManageCompanies = () => {
                 setTimeout(() => setShowPopup(false), 2000);
             }
         } catch (error) {
-            console.error(`Error ${isApprove ? 'approving' : 'rejecting'} company:`, error);
-            setMessage(`Error ${isApprove ? 'approving' : 'rejecting'} company: ` + error.message);
+            console.error(error.response.data);
+            setMessage(error.response.data);
             setShowPopup(true);
             setTimeout(() => setShowPopup(false), 2000);
         }
@@ -75,7 +75,7 @@ const ManageCompanies = () => {
             });
             setCompanies(response.data);
         } catch (error) {
-            console.error("Error fetching companies:", error);
+            console.error(error.response.data);
         }
     };
 
@@ -107,7 +107,7 @@ const ManageCompanies = () => {
                 return true;
             }
         } catch (error) {
-            console.error("Authentication check failed:", error);
+            console.error(error.response.data);
             navigate("/login");
         }
         return false;
@@ -131,7 +131,6 @@ const ManageCompanies = () => {
                     <img src={iytelogo} alt="Logo" className="logo-staff" />
                 </div>
                 <div className="buttons-container-staff">
-                    <button className="redbarbutton-staff" onClick={() => handleClick("/summerpracticereport")}>Summer Practice Report</button>
                     <button className="redbarbutton-staff" onClick={() => handleClick("/manageinternshipopportunities")}>Manage Internship Opportunities</button>
                     <button className="redbarbutton-staff" onClick={() => handleClick("/managecompanies")}>Manage Companies</button>
                 </div>

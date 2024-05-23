@@ -45,7 +45,7 @@ const ApprovedApplication = () => {
             });
     
             if (response.status === 202) {
-                setMessage(isApprove ? "Company approved successfully!" : "Company rejected successfully!");
+                setMessage(response.data);
                 setShowPopup(true);
                 setTimeout(() => {
                     setShowPopup(false);
@@ -57,8 +57,8 @@ const ApprovedApplication = () => {
                 setTimeout(() => setShowPopup(false), 2000);
             }
         } catch (error) {
-            console.error(`Error ${isApprove ? 'approving' : 'rejecting'} company:`, error);
-            setMessage(`Error ${isApprove ? 'approving' : 'rejecting'} company: ` + error.message);
+            console.error(error.response.data);
+            setMessage(error.response.data);
             setShowPopup(true);
             setTimeout(() => setShowPopup(false), 2000);
         }
@@ -106,7 +106,7 @@ const ApprovedApplication = () => {
                 return true;
             }
         } catch (error) {
-            console.error("Authentication check failed:", error);
+            console.error(error.response.data);
             navigate("/login");
         }
         return false;

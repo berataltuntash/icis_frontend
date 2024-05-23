@@ -59,7 +59,7 @@ const CompanyHomePage = () => {
                 navigate('/login');
             }
         } catch (error) {
-            console.error('Authentication check failed:', error);
+            console.error(error.response.data);
             navigate('/login');
         }
     };
@@ -81,7 +81,7 @@ const CompanyHomePage = () => {
             const response = await axios.get('http://localhost:8080/api/announcements');
             setAnnouncements(response.data);
         } catch (error) {
-            console.error('Failed to fetch announcements:', error);
+            console.error(error.response.data);
         }
     };
 
@@ -98,7 +98,6 @@ const CompanyHomePage = () => {
                 </div>
                 <div className="buttons-container-company">
                     <button className="redbarbutton-company" onClick={() => handleClick("/createinternshipannouncement")}>Create Internship Announcement</button>
-                    <button className="redbarbutton-company" onClick={() => handleClick("/fiiloutcompanyform")}>Fill Out Company Form</button>
                     <button className="redbarbutton-company" onClick={() => handleClick("/reviewsummerpracticereport")}>Review Summer Practice Report</button>
                     <button className='redbarbutton-company' onClick={() => handleClick('/approvedinternship')}>Approved Internship</button>
                 </div>

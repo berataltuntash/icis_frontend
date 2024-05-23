@@ -66,8 +66,8 @@ const CreateInternshipAnnouncement = () => {
                 setShowPopup(false);
             }, 2000);
         } catch (error) {
-            console.error('Error creating internship announcement:', error);
-            setMessage('Error creating internship announcement.');
+            console.error(error.response.data);
+            setMessage(error.response.data);
             setShowPopup(true);
             setTimeout(() => {
                 setShowPopup(false);
@@ -111,7 +111,7 @@ const CreateInternshipAnnouncement = () => {
                 }
             }
         } catch (error) {
-            console.error('Authentication check failed:', error);
+            console.error(error.response.data);
             navigate('/login');
         }
     };
@@ -128,7 +128,6 @@ const CreateInternshipAnnouncement = () => {
                 </div>
                 <div className="buttons-container-company">
                     <button className="redbarbutton-company" onClick={() => handleClick("/createinternshipannouncement")}>Create Internship Announcement</button>
-                    <button className="redbarbutton-company" onClick={() => handleClick("/fiiloutcompanyform")}>Fill Out Company Form</button>
                     <button className="redbarbutton-company" onClick={() => handleClick("/reviewsummerpracticereport")}>Review Summer Practice Report</button>
                     <button className='redbarbutton-company' onClick={() => handleClick('/approvedinternship')}>Approved Internship</button>
                 </div>

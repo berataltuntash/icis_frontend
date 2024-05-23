@@ -56,7 +56,7 @@ const ManageInternshipOpportunities = () => {
                 return true;
             }
         } catch (error) {
-            console.error('Authentication check failed:', error);
+            console.error(error.response.data);
             navigate('/login'); 
         }
         return false;
@@ -70,7 +70,7 @@ const ManageInternshipOpportunities = () => {
             });
             setOpportunities(response.data);
         } catch (error) {
-            console.error('Error fetching opportunities:', error);
+            console.error(error.response.data);
         }
     };
 
@@ -93,7 +93,6 @@ const ManageInternshipOpportunities = () => {
                     <img src={iytelogo} alt="Logo" className="logo-staff" />
                 </div>
                 <div className="buttons-container-staff">
-                    <button className="redbarbutton-staff" onClick={() => handleClick("/summerpracticereport")}>Summer Practice Report</button>
                     <button className="redbarbutton-staff" onClick={() => handleClick("/manageinternshipopportunities")}>Manage Internship Opportunities</button>
                     <button className="redbarbutton-staff" onClick={() => handleClick("/managecompanies")}>Manage Companies</button>
                 </div>

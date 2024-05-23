@@ -59,7 +59,7 @@ const StaffHomePage = () => {
                 navigate('/login');
             }
         } catch (error) {
-            console.error('Authentication check failed:', error);
+            console.error(error.response.data);
             navigate('/login'); 
         }
     };
@@ -81,7 +81,7 @@ const StaffHomePage = () => {
             const response = await axios.get('http://localhost:8080/api/announcements');
             setAnnouncements(response.data);
         } catch (error) {
-            console.error('Failed to fetch announcements:', error);
+            console.error(error.response.data);
         }
     };
 
@@ -99,7 +99,6 @@ const StaffHomePage = () => {
                     <img src={iytelogo} alt="Logo" className="logo-staff" />
                 </div>
                 <div className="buttons-container-staff">
-                    <button className="redbarbutton-staff" onClick={() => handleClick("/summerpracticereport")}>Summer Practice Report</button>
                     <button className="redbarbutton-staff" onClick={() => handleClick("/manageinternshipopportunities")}>Manage Internship Opportunities</button>
                     <button className="redbarbutton-staff" onClick={() => handleClick("/managecompanies")}>Manage Companies</button>
                 </div>

@@ -56,7 +56,7 @@ const StudentHomePage = () => {
                 }    
             }
         } catch (error) {
-            console.error('Authentication check failed:', error);
+            console.error(error.response.data);
             navigate('/login'); 
         }
     };
@@ -78,7 +78,7 @@ const StudentHomePage = () => {
             const response = await axios.get('http://localhost:8080/api/announcements');
             setAnnouncements(response.data);
         } catch (error) {
-            console.error('Failed to fetch announcements:', error);
+            console.error(error.response.data);
         }
     };
 
@@ -95,7 +95,6 @@ const StudentHomePage = () => {
                 </div>
                 <div className="buttons-container-student">
                     <button className="redbarbutton-student" onClick={() => handleClick("/internshipopportunities")}>Internship Opportunities</button>
-                    <button className="redbarbutton-student" onClick={() => handleClick("/myinternship")}>My Internship</button>
                     <button className="redbarbutton-student" onClick={() => handleClick("/approvedapplication")}>Approved Application</button>
                 </div>
                 <div className="profile-student" onClick={() => setShowDropdown(!showDropdown)}>
