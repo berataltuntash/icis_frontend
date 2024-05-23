@@ -65,7 +65,7 @@ const ApprovedInternship = () => {
     const fetchapplications = async () => {
         const token = Cookies.get('jwtToken');
         try {
-            const response = await axios.get('http://localhost:8080/api/applicationtocompany', {
+            const response = await axios.get('http://localhost:8080/api/applicationstocompany', {
                 headers: { 'Authorization': `${token}` }
             });
             setApplications(response.data);
@@ -107,7 +107,7 @@ const ApprovedInternship = () => {
                     )}
                 </div>
                 </div>
-                <div className="opportunities-container-company">
+                <div className="application-container-company">
                 {applications.map((application) => (
                     <div key={application.applicationId} className="offername-item-company">
                         <span className='studentname-company'>{application.studentName} {application.studentSurname}</span>

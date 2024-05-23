@@ -37,12 +37,11 @@ const ManageCompanies = () => {
         setIsSubmitting(true);
     
         try {
-            const response = await axios.post(`http://localhost:8080/api/managecompanyapplication/${companyId}`, {
-                isApprove
-            }, {
+            const response = await axios.post(`http://localhost:8080/api/managecompanyapplication/${companyId}`, {}, {
                 headers: {
                     "Authorization": `${token}`,
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    "isApprove": isApprove
                 }
             });
     

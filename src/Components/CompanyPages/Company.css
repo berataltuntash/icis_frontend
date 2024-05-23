@@ -194,16 +194,7 @@
     box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 }
 
-.opportunities-container-company {
-    flex-direction: column;
-    align-items: center;
-    margin-top: 180px;
-    box-sizing: border-box;
-    padding: 20px;
-    background-color: hsl(2, 81%, 34%);
-}
-
-.opportunities-container-company {
+.application-container-company {
     flex-direction: column;
     align-items: center;
     margin-top: 180px;
@@ -248,7 +239,7 @@
     color: hsl(0, 0%, 100%);
 }
 
-.opportunities-staff {
+.applications-company {
     background-color: hsl(2, 81%, 34%); 
     padding: 20px;
     border-radius: 8px;
@@ -256,7 +247,7 @@
     margin-top: 150px;
 }
 
-.opportunity-staff {
+.application-company {
     background-color: #ffffff;
     padding: 15px;
     border-radius: 10px;
@@ -269,23 +260,29 @@
     position: relative;
 }
 
-.opportunity-header-staff h2 {
+.application-offername-company h2 {
     color: #1a1a1a; 
     margin-bottom: 15px;
     margin-top: 20px;
 }
 
-.opportunity-name-staff h3 {
+.application-namesurname-company h3 {
     color: #666; 
     margin-bottom: 30px;
 }
 
-.opportunity-description-staff p {
+.application-studentid-company p {
     font-size: 14px; 
     color: #333;
 }
 
-.approve-button-application-staff {
+.application-grade-company{
+    font-size: 14px; 
+    color: #333;
+
+}
+
+.approve-button-application-company {
     background-color: #4CAF50; 
     color: white;
     border: none;
@@ -298,11 +295,11 @@
     right: 210px;
 }
 
-.approve-button-application-staff:hover {
+.approve-button-application-company:hover {
     background-color: #45a049;
 }
 
-.reject-button-application-staff {
+.reject-button-application-company {
     background-color: #d32f2f; 
     color: white;
     border: none;
@@ -316,7 +313,7 @@
 
 }
 
-.reject-button-application-staff:hover {
+.reject-button-application-company:hover {
     background-color: #b71c1c;
 }
 

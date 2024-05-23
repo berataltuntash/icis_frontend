@@ -31,12 +31,11 @@ const ManageOpportunityDetails = () => {
         setIsSubmitting(true);
 
         try {
-            const response = await axios.post(`http://localhost:8080/api/approverejectapplication/${applicationId}`,{ 
-                isApprove
-                },{
+            const response = await axios.post(`http://localhost:8080/api/approverejectapplication/${applicationId}`,{},{
                 headers: {
                     "Authorization": `${token}`,
                     'Content-Type': 'application/json',
+                    "isApprove": isApprove
                 }
             });
 
@@ -102,7 +101,7 @@ const ManageOpportunityDetails = () => {
     const fetchOpportunityDetails = async () => {
         try {
             const token = Cookies.get("jwtToken");
-            const response = await axios.get(`http://localhost:8080/api/applicationtocompany/${applicationId}`, {
+            const response = await axios.get(`http://localhost:8080/api/applicationstocompany/${applicationId}`, {
                 headers: { "Authorization": `${token}` }
             });
             setDetails(response.data);
@@ -143,20 +142,23 @@ const ManageOpportunityDetails = () => {
                     )}
                 </div>
             </div>
-            <div className="opportunities-company">
-                <div className="opportunities-details-company">
+            <div className="applications-company">
+                <div className="application-details-company">
                     {details && (
-                        <div className="opportunity-company">
-                            <div className="opportunity-header-company">
-                                <h2>{details.studentname}</h2>
+                        <div className="application-company">
+                            <div className="application-offername-company">
+                                <h2>{details.offerName}</h2>
                             </div>
-                            <div className="opportunity-name-company">
-                                <h3>{details.studentid}</h3>
+                            <div className="application-namesurname-company">
+                                <h3>{details.studentName} {details.studentSurname}</h3>
                             </div>
-                            <div className="opportunity-description-company">
-                                <p>{details.student}</p>
+                            <div className="application-studentid-company">
+                                <p>{details.studentId}</p>
                             </div>
-                            <div className="opportunity-buttons-company">
+                            <div className="application-grade-company">
+                                <p>{details.grade}</p>
+                            </div>
+                            <div className="application-buttons-company">
                                 <button className="approve-button-application-company" onClick={() => handleApproveReject(true)} disabled={isSubmitting}>Approve</button>
                                 <button className="reject-button-application-company" onClick={() => handleApproveReject(false)} disabled={isSubmitting}>Reject</button>
                             </div>

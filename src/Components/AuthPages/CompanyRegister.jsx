@@ -58,7 +58,7 @@ const CompanyRegister = () => {
                 setTimeout(() => setShowPopup(false), 2000);
             }
         } catch (error) {
-            setMessage((error.response && error.response.data && error.response.data.message) || 'Registration error: The server may be down.');
+            setMessage(error.response.data);
             setShowPopup(true);
             setTimeout(() => setShowPopup(false), 2000);
 

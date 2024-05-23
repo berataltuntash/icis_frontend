@@ -32,17 +32,15 @@ const ApprovedApplication = () => {
             .join(' '); 
     };
 
-    const handleApproveReject = async (companyId, isApprove) => {
+    const handleApproveReject = async (applicationId, isApprove) => {
         const token = Cookies.get("jwtToken");
         setIsSubmitting(true);
     
         try {
-            const response = await axios.post(`http://localhost:8080/api/applicationstostudent/${companyId}`, {
-                isApprove
-            }, {
+            const response = await axios.post(`http://localhost:8080/api/studentapprovedapplication/${applicationId}`, {}, {
                 headers: {
                     "Authorization": `${token}`,
-                    "Content-Type": "application/json"
+                    "isApprove": isApprove
                 }
             });
     
@@ -71,7 +69,7 @@ const ApprovedApplication = () => {
     const fetchstudents = async () => {
         const token = Cookies.get("jwtToken");
         try {
-            const response = await axios.get("http://localhost:8080/api/applicationstostudent", {
+            const response = await axios.get("http://localhost:8080/api/studentapprovedapplication", {
                 headers: { "Authorization": `${token}` }
             });
             setCompanies(response.data);
@@ -133,7 +131,6 @@ const ApprovedApplication = () => {
                 </div>
                 <div className="buttons-container-student">
                     <button className="redbarbutton-student" onClick={() => handleClick("/internshipopportunities")}>Internship Opportunities</button>
-                    <button className="redbarbutton-student" onClick={() => handleClick("/myinternship")}>My Internship</button>
                     <button className="redbarbutton-student" onClick={() => handleClick("/approvedapplication")}>Approved Application</button>
                 </div>
                 <div className="profile-student" onClick={() => setShowDropdown(!showDropdown)}>
