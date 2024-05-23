@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import Cookies from 'js-cookie';
 import iytelogo from "../Assets/iytelogo.png";
+import Cookies from 'js-cookie';
+import axios from 'axios';
 import './Staff.css';
 import '../PopUp.css';
 
-const StaffHomePage = () => {
-    const navigate = useNavigate();
-    const [showDropdown, setShowDropdown] = useState(false);
-    const [announcements, setAnnouncements] = useState([]);
-    const [currentIndex, setCurrentIndex] = useState(0);
+const StartedInternships = () => {
     const [name, setName] = useState('');
-    
+    const [showDropdown, setShowDropdown] = useState(false);
+    const [internships, setInternships] = useState([]);
+    const navigate = useNavigate();
+
     const handleLogout = () => {
         Cookies.remove('jwtToken');
         navigate('/login');
@@ -33,7 +32,7 @@ const StaffHomePage = () => {
         const token = Cookies.get('jwtToken');
         if (!token) {
             navigate('/login');
-            return;
+            return false;
         }
 
         try {
@@ -43,59 +42,54 @@ const StaffHomePage = () => {
                     'Content-Type': 'application/json'
                 }
             });
-
             const { usertype, name } = response.data;
 
             if (response.status === 202) {
                 setName(formatName(name));
                 if ( usertype === 'Staff')  {
                     console.log(`Welcome, ${name}`);
-                } else if( usertype === 'Student') {
+                } else if ( usertype === 'Student') {
                     navigate('/studenthomepage');
-                } else if( usertype === 'Company') {
+                } else if ( usertype === 'Company') {
                     navigate('/companyhomepage');
-                }  
-            } else {
-                navigate('/login');
+                }
+                return true;
             }
         } catch (error) {
             console.error(error.response.data);
             navigate('/login'); 
         }
+        return false;
     };
 
-    const goNext = () => {
-        if (currentIndex < announcements.length - 1) {
-            setCurrentIndex(currentIndex + 1);
-        }
-    };
-
-    const goPrevious = () => {
-        if (currentIndex > 0) {
-            setCurrentIndex(currentIndex - 1);
-        }
-    };
-
-    const fetchAnnouncements = async () => {
+    const fetchOpportunities = async () => {
+        const token = Cookies.get('jwtToken');
         try {
-            const response = await axios.get('http://localhost:8080/api/announcements');
-            setAnnouncements(response.data);
+            const response = await axios.get('http://localhost:8080/api/staffshowinternshipsstarted', {
+                headers: { 'Authorization': `${token}` }
+            });
+            setInternships(response.data);
         } catch (error) {
             console.error(error.response.data);
         }
     };
 
+    const authenticateAndFetch = async () => {
+        const isAuthenticated = await checkAuthentication();
+        if (isAuthenticated) {
+            const token = Cookies.get('jwtToken');
+            fetchOpportunities(token);
+        }
+    };
+
     useEffect(() => {
-        checkAuthentication();
-        fetchAnnouncements();
+        authenticateAndFetch();
     }, [navigate]);
-
-
 
     return (
         <div>
             <div className="red-bar-staff">
-                <div className="logo-container-staff">
+                <div className="logo-container-staff" onClick={() => handleClick("/staffhomepage")}>
                     <img src={iytelogo} alt="Logo" className="logo-staff" />
                 </div>
                 <div className="buttons-container-staff">
@@ -112,23 +106,17 @@ const StaffHomePage = () => {
                     )}
                 </div>
             </div>
-            <div className="main-content-staff">
-                <button onClick={goPrevious} className='previous-button-staff'>&lt;</button>
-                <div className="announcements-container-staff">
-                    <h2 className="announcements-title-staff">ANNOUNCEMENTS</h2>
-                    {announcements.length > 0 && (
-                        <div className="announcement-viewer-staff">
-                            <div className="announcement-item-staff">
-                                <h3>{announcements[currentIndex].title}</h3>
-                                <p>{announcements[currentIndex].description}</p>
-                            </div>
-                        </div>
-                    )}
-                </div>
-                <button onClick={goNext} className='next-button-staff-staff'>&gt;</button>
+            <div className="opportunities-container-staff">
+                {internships.map((internship) => (
+                    <div key={internship.applicationId} className="offername-item-staff">
+                        <span className='companyname-staff'>{internship.studentName} {internship.studentSurname}</span>
+                        <span className='companyname-staff'>{internship.offerName}</span>
+                        <button className="view-button-staff" onClick={() => handleClick(`/startedinternshipdetail/${internship.applicationId}`)}>View</button>
+                    </div>
+                ))}
             </div>
         </div>
     );
 }
 
-export default StaffHomePage;
+export default StartedInternships;

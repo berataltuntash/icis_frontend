@@ -7,14 +7,14 @@ import Popup from "../PopUp";
 import './Staff.css';
 import '../PopUp.css';
 
-const ManageOpportunityDetails = () => {
-    const {offerid } = useParams();
+const StartedInternshipDetail = () => {
+    const { applicationId } = useParams();
     const [name, setName] = useState("");
     const [details, setDetails] = useState({});
     const [message, setMessage] = useState("");
     const [showPopup, setShowPopup] = useState(false);
     const [showDropdown, setShowDropdown] = useState(false);
-    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [file, setFile] = useState(null);
     const navigate = useNavigate();
 
     const handleClick = (path) => {
@@ -24,37 +24,6 @@ const ManageOpportunityDetails = () => {
     const handleLogout = () => {
         Cookies.remove("jwtToken");
         navigate("/login");
-    };
-
-    const handleApproveReject = async (isApprove) => {
-        const token = Cookies.get("jwtToken");
-        setIsSubmitting(true);
-        try {
-            const response = await axios.post(`http://localhost:8080/api/approverejectoffer/${offerid}`,{},{
-                headers: {
-                    "Authorization": `${token}`,
-                    'Content-Type': 'application/json',
-                    "isApprove": isApprove
-                }
-            });
-
-            if (response.status === 202) {
-                setMessage(response.data);
-                setShowPopup(true);
-                setTimeout(() => setShowPopup(false), 2000);
-            } else {
-                setMessage(response.data);
-                setShowPopup(true);
-                setTimeout(() => setShowPopup(false), 2000);
-            }
-        } catch (error) {
-            console.error(error.response.data);
-            setMessage(error.response.data);
-            setShowPopup(true);
-            setTimeout(() => setShowPopup(false), 2000);
-        }
-        setIsSubmitting(false);
-        navigate("/manageinternshipopportunities");
     };
 
     const formatName = (name) => {
@@ -101,7 +70,7 @@ const ManageOpportunityDetails = () => {
     const fetchOpportunityDetails = async () => {
         try {
             const token = Cookies.get("jwtToken");
-            const response = await axios.get(`http://localhost:8080/api/manageoffers/${offerid}`, {
+            const response = await axios.get(`http://localhost:8080/api/staffshowinternshipsstarted/${applicationId}`, {
                 headers: { "Authorization": `${token}` }
             });
             setDetails(response.data);
@@ -120,6 +89,40 @@ const ManageOpportunityDetails = () => {
     useEffect(() => {
         authenticateAndFetch();
     }, [navigate, offerid]);
+
+    const handleFileChange = (event) => {
+        setFile(event.target.files[0]);
+    };
+
+    const uploadFile = async () => {
+        if (!file) {
+            setMessage("No file selected.");
+            setShowPopup(true);
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append("file", file);
+
+        try {
+            const token = Cookies.get("jwtToken");
+            const response = await axios.post("http://localhost:8080/api/upload", formData, {
+                headers: {
+                    "Authorization": `${token}`,
+                    "Content-Type": "multipart/form-data"
+                }
+            });
+            setMessage("File uploaded successfully!");
+            setShowPopup(true);
+            setTimeout(() => setShowPopup(false), 2000);
+        } catch (error) {
+            console.error("Error uploading file:", error.response.data);
+            setMessage("Failed to upload file.");
+            setShowPopup(true);
+            setTimeout(() => setShowPopup(false), 2000);
+        }
+        navigate("/startedinternships");
+    };
 
     return (
         <div>
@@ -145,19 +148,27 @@ const ManageOpportunityDetails = () => {
                 <div className="opportunities-details-staff">
                     {details && (
                         <div className="opportunity-staff">
-                            <div className="opportunity-header-staff">
-                                <h2><strong>Company Name: </strong> <span className="company-name">{details.companyname}</span></h2>
+                            <div className="internship-staff">
+                                <h3><strong>Internship Details</strong></h3>
                             </div>
-                            <div className="opportunity-name-staff">
-                                <h3><strong>Company Name: </strong> <span className="offer-name">{details.offername}</span></h3>
+                            <div className="internship-detail-staff">
+                                <h3><strong>Name: </strong> <span className="student-name-surname">{details.studentName} {details.studentSurname}</span></h3>
                             </div>
-                            <div className="opportunity-description-staff">
-                                <h3><strong>Description:</strong></h3>
-                                <p>{details.description}</p>
+                            <div className="internship-detail-staff">
+                                <h3><strong>Company Name: </strong> <span className="company-name">{details.companyName}</span></h3>
                             </div>
-                            <div className="opportunity-buttons-staff">
-                                <button className="approve-button-internship-staff" onClick={() => handleApproveReject(true)} disabled={isSubmitting}>Approve</button>
-                                <button className="reject-button-internship-staff" onClick={() => handleApproveReject(false)} disabled={isSubmitting}>Reject</button>
+                            <div className="internship-detail-staff">
+                                <h3><strong>Offer Name: </strong> <span className="offer-name">{details.offerName}</span></h3>
+                            </div>
+                            <div className="internship-detail-staff">
+                                <h3><strong>Grade: </strong> <span className="student-grade">{details.grade}</span></h3>
+                            </div>
+                            <div className="internship-detail-staff">
+                                <h3><strong>Student Id: </strong> <span className="student-number">{details.studentId}</span></h3>
+                            </div>
+                            <div>
+                                <input type="file" onChange={handleFileChange} accept=".docx" />
+                                <button onClick={uploadFile}>Upload Document</button>
                             </div>
                         </div>
                     )}
@@ -170,4 +181,4 @@ const ManageOpportunityDetails = () => {
     );
 };
 
-export default ManageOpportunityDetails;
+export default StartedInternshipDetail;

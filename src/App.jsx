@@ -17,6 +17,8 @@ import ManageCompanies from './Components/StaffPages/ManageCompanies';
 import ApprovedInternship from './Components/CompanyPages/ApprovedInternship';
 import ApprovedApplication from './Components/StudentPages/ApprovedApplication';
 import ApprovedInternshipDetail from './Components/CompanyPages/ApprovedInternshipDetail';
+import StartedInternships from './Components/StaffPages/StartedInternships';
+import StartedInternshipDetail from './Components/StaffPages/StartedInternshipDetail';
 
 function App() {
 
@@ -41,6 +43,8 @@ function App() {
           <Route path="/approvedinternship" element={<ApprovedInternship/>} />
           <Route path="/approvedapplication" element={<ApprovedApplication/>} />
           <Route path='/approvedinternshipdetail/:applicationId' element={<ApprovedInternshipDetail/>} />
+          <Route path="/startedinternships" element={<StartedInternships/>} />
+          <Route path="/startedinternshipdetail/:applicationId" element={<StartedInternshipDetail/>} />
         </Routes>
       </div>
     </Router>

@@ -63,6 +63,7 @@ const OpportunityDetail = () => {
         }
         setIsSubmitting(false);
         setIsLoading(false);  
+        navigate('/internshipopportunities');
     };
 
     const formatName = (name) => {

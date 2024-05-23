@@ -296,3 +296,19 @@
 .offer-name{
     font-weight: bold;
 }
+
+.name{
+    font-weight: normal;
+}
+
+.student-number{
+    font-weight: normal;
+}
+
+.student-grade{
+    font-weight: normal;
+}
+
+.student-name-surname{
+    font-weight: normal;
+}

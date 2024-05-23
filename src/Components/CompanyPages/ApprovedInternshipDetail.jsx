@@ -55,6 +55,7 @@ const ApprovedInternshipDetail = () => {
             setTimeout(() => setShowPopup(false), 2000);
         }
         setIsSubmitting(false);
+        navigate("/approvedinternship");
     };
 
     const formatName = (name) => {
@@ -151,7 +152,7 @@ const ApprovedInternshipDetail = () => {
                                 <h3><strong>Name: </strong> <span className="name">{details.studentName} {details.studentSurname}</span></h3>
                             </div>
                             <div className="application-studentid-company">
-                                <p><strong>Student Number: </strong> <span className="student-number">{details.studentId}</span></p>
+                                <p><strong>Student Number: </strong> <span className="student-number">{details.student}</span></p>
                             </div>
                             <div className="application-grade-company">
                                 <p><strong>Student Grade: </strong> <span className="student-grade">{details.grade}</span></p>
