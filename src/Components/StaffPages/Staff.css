@@ -262,9 +262,7 @@
     border-radius: 40px;
     cursor: pointer;
     transition: background-color 0.3s;
-    position: absolute; 
-    bottom: 40px; 
-    right: 210px;
+    margin-right: 40px;
 }
 
 .approve-button-internship-staff:hover {
@@ -279,10 +277,7 @@
     border-radius: 40px;
     cursor: pointer;
     transition: background-color 0.3s;
-    position: absolute; 
-    bottom: 40px; 
-    right: 70px;
-
+    margin-right: 20px;
 }
 
 .reject-button-internship-staff:hover {
@@ -383,9 +378,7 @@
     border-radius: 40px;
     cursor: pointer;
     transition: background-color 0.3s;
-    position: absolute; 
-    bottom: 100px; 
-    right: 450px;
+    margin-right: 40px;
 }
 
 .approve-button-application-staff:hover {
@@ -400,11 +393,17 @@
     border-radius: 40px;
     cursor: pointer;
     transition: background-color 0.3s;
-    position: absolute; 
-    bottom: 100px; 
-    right: 320px;
+    margin-right: 20px;
 }
 
 .reject-button-application-staff:hover {
     background-color: #b71c1c;
+}
+
+.opportunity-buttons-staff {
+    display: flex;
+    flex-direction: row;
+    justify-content: center; 
+    align-items: flex-end;
+    height: 100%;
 }
