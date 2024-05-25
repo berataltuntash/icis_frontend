@@ -8,7 +8,7 @@ import './Staff.css';
 import '../PopUp.css';
 
 const ApproveFormDetail = () => {
-    const {offerid } = useParams();
+    const {applicationId } = useParams();
     const [name, setName] = useState("");
     const [details, setDetails] = useState({});
     const [message, setMessage] = useState("");
@@ -31,7 +31,7 @@ const ApproveFormDetail = () => {
         const token = Cookies.get("jwtToken");
         setIsSubmitting(true);
         try {
-            const response = await axios.post(`http://localhost:8080/api/approverejectoffer/${offerid}`,{},{
+            const response = await axios.post(`http://localhost:8080/api/approveapplicationform/${applicationId}`,{},{
                 headers: {
                     "Authorization": `${token}`,
                     'Content-Type': 'application/json',
@@ -101,7 +101,7 @@ const ApproveFormDetail = () => {
     const fetchOpportunityDetails = async () => {
         try {
             const token = Cookies.get("jwtToken");
-            const response = await axios.get(`http://localhost:8080/api/manageoffers/${offerid}`, {
+            const response = await axios.get(`http://localhost:8080/api/approveforms/${applicationId}`, {
                 headers: { "Authorization": `${token}` }
             });
             setDetails(response.data);
@@ -119,7 +119,7 @@ const ApproveFormDetail = () => {
 
     useEffect(() => {
         authenticateAndFetch();
-    }, [navigate, offerid]);
+    }, [navigate, applicationId]);
 
     const handleFileChange = (event) => {
         setFile(event.target.files[0]);
