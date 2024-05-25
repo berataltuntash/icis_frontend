@@ -344,7 +344,7 @@
     height: 400px;
     width: 1000px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    display: flex; 
+    display: flex;
 }
 
 .upload-button-staff .button-staff{
@@ -373,4 +373,38 @@
     font-size: 20px;
     font-weight: bold;
     margin-left: 20px;
+}
+
+.approve-button-application-staff {
+    background-color: #4CAF50; 
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 40px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    position: absolute; 
+    bottom: 100px; 
+    right: 450px;
+}
+
+.approve-button-application-staff:hover {
+    background-color: #45a049;
+}
+
+.reject-button-application-staff {
+    background-color: #d32f2f; 
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 40px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    position: absolute; 
+    bottom: 100px; 
+    right: 320px;
+}
+
+.reject-button-application-staff:hover {
+    background-color: #b71c1c;
 }

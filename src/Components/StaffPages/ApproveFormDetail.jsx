@@ -15,6 +15,7 @@ const ApproveFormDetail = () => {
     const [showPopup, setShowPopup] = useState(false);
     const [showDropdown, setShowDropdown] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [file, setFile] = useState(null);
     const navigate = useNavigate();
 
     const handleClick = (path) => {
@@ -120,6 +121,10 @@ const ApproveFormDetail = () => {
         authenticateAndFetch();
     }, [navigate, offerid]);
 
+    const handleFileChange = (event) => {
+        setFile(event.target.files[0]);
+    };
+
     const uploadFile = async () => {
         if (!file) {
             setMessage("No file selected.");
@@ -223,12 +228,13 @@ const ApproveFormDetail = () => {
                             </div>
                             </div>
                             <div className="upload-button-staff">
+                            <button onClick={handleDownload} className="button-staff">Download Document</button>
                                 <input type="file" onChange={handleFileChange} accept=".docx" className="input-staff"/>
                                 <button onClick={uploadFile} className="button-staff">Upload Document</button>
                             </div>
                             <div className="opportunity-buttons-staff">
-                                <button className="approve-button-internship-staff" onClick={() => handleApproveReject(true)} disabled={isSubmitting}>Approve</button>
-                                <button className="reject-button-internship-staff" onClick={() => handleApproveReject(false)} disabled={isSubmitting}>Reject</button>
+                                <button className="approve-button-application-staff" onClick={() => handleApproveReject(true)} disabled={isSubmitting}>Approve</button>
+                                <button className="reject-button-application-staff" onClick={() => handleApproveReject(false)} disabled={isSubmitting}>Reject</button>
                             </div>
                         </div>
                     )}
