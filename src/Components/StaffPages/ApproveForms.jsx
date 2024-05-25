@@ -6,10 +6,10 @@ import axios from 'axios';
 import './Staff.css';
 import '../PopUp.css';
 
-const SGK = () => {
+const ApproveForms = () => {
     const [name, setName] = useState('');
     const [showDropdown, setShowDropdown] = useState(false);
-    const [internships, setInternships] = useState([]);
+    const [applications, setApplications] = useState([]);
     const navigate = useNavigate();
 
     const handleLogout = () => {
@@ -65,10 +65,10 @@ const SGK = () => {
     const fetchOpportunities = async () => {
         const token = Cookies.get('jwtToken');
         try {
-            const response = await axios.get('http://localhost:8080/api/staffshowinternshipsstarted', {
+            const response = await axios.get('http://localhost:8080/api/approveforms', {
                 headers: { 'Authorization': `${token}` }
             });
-            setInternships(response.data);
+            setApplications(response.data);
         } catch (error) {
             console.error(error.response.data);
         }
@@ -108,11 +108,10 @@ const SGK = () => {
                 </div>
             </div>
             <div className="opportunities-container-staff">
-                {internships.map((internship) => (
-                    <div key={internship.applicationId} className="offername-item-staff">
-                        <span className='companyname-staff'>{internship.studentName} {internship.studentSurname}</span>
-                        <span className='companyname-staff'>{internship.offerName}</span>
-                        <button className="view-button-staff" onClick={() => handleClick(`/sgkdetail/${internship.applicationId}`)}>View</button>
+                    {applications.map((application) => (
+                    <div key={application.applicationId} className="offername-item-staff">
+                        <span className='studentname-staff'>{application.studentName} {application.studentSurname}</span>
+                        <button className="view-button-staff" onClick={() => handleClick(`/approveformdetail/${application.applicationId}`)}>View</button>
                     </div>
                 ))}
             </div>
@@ -120,4 +119,4 @@ const SGK = () => {
     );
 }
 
-export default SGK;
+export default ApproveForms;

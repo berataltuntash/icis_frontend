@@ -7,7 +7,7 @@ import Popup from "../PopUp";
 import './Staff.css';
 import '../PopUp.css';
 
-const ManageOpportunityDetails = () => {
+const ApproveFormDetail = () => {
     const {offerid } = useParams();
     const [name, setName] = useState("");
     const [details, setDetails] = useState({});
@@ -120,6 +120,63 @@ const ManageOpportunityDetails = () => {
         authenticateAndFetch();
     }, [navigate, offerid]);
 
+    const uploadFile = async () => {
+        if (!file) {
+            setMessage("No file selected.");
+            setShowPopup(true);
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append("file", file);
+
+        try {
+            const token = Cookies.get("jwtToken");
+            const response = await axios.post(`http://localhost:8080/api/uploadapplicationform/${applicationId}`, formData, {
+                headers: {
+                    "Authorization": `${token}`,
+                    "Content-Type": "multipart/form-data"
+                }
+            });
+            setMessage(response.data);
+            setShowPopup(true);
+            setTimeout(() => setShowPopup(false), 2000);
+        } catch (error) {
+            console.error(error.response.data);
+            setMessage(error.response.data);
+            setShowPopup(true);
+            setTimeout(() => setShowPopup(false), 2000);
+        }
+    };
+
+    const handleDownload = async () => {
+        try {
+            const token = Cookies.get("jwtToken");
+            const response = await axios.get(`http://localhost:8080/api/downloadapplicationform/${applicationId}`, {
+                headers: {
+                    "Authorization": `${token}`,
+                },
+                responseType: 'blob'
+            });
+            
+    
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', 'applicationForm.docx');
+            document.body.appendChild(link);
+            link.click();
+            
+            link.parentNode.removeChild(link);
+            window.URL.revokeObjectURL(url);
+        } catch (error) {
+            console.error("Download error:", error.response.data);
+            setMessage("Failed to download the file.");
+            setShowPopup(true);
+            setTimeout(() => setShowPopup(false), 2000);
+        }
+    };
+
     return (
         <div>
             <div className="red-bar-staff">
@@ -144,16 +201,30 @@ const ManageOpportunityDetails = () => {
             <div className="opportunities-staff">
                 <div className="opportunities-details-staff">
                     {details && (
-                        <div className="opportunity-staff">
-                            <div className="opportunity-header-staff">
-                                <h2><strong>Company Name: </strong> <span className="company-name">{details.companyname}</span></h2>
+                        <div className="internship-container-staff">
+                            <div className="internships-staff">
+                            <div className="internship-staff">
+                                <h3><strong>Internship Details</strong></h3>
                             </div>
-                            <div className="opportunity-name-staff">
-                                <h3><strong>Offer Name: </strong> <span className="offer-name">{details.offername}</span></h3>
+                            <div className="internship-detail-staff">
+                                <h3><strong>Name: </strong> <span className="student-name-surname">{details.studentName} {details.studentSurname}</span></h3>
                             </div>
-                            <div className="opportunity-description-staff">
-                                <h3><strong>Description:</strong></h3>
-                                <p>{details.description}</p>
+                            <div className="internship-detail-staff">
+                                <h3><strong>Company Name: </strong> <span className="company-name">{details.companyName}</span></h3>
+                            </div>
+                            <div className="internship-detail-staff">
+                                <h3><strong>Offer Name: </strong> <span className="offer-name">{details.offerName}</span></h3>
+                            </div>
+                            <div className="internship-detail-staff">
+                                <h3><strong>Grade: </strong> <span className="student-grade">{details.grade}</span></h3>
+                            </div>
+                            <div className="internship-detail-staff">
+                                <h3><strong>Student Id: </strong> <span className="student-number">{details.studentId}</span></h3>
+                            </div>
+                            </div>
+                            <div className="upload-button-staff">
+                                <input type="file" onChange={handleFileChange} accept=".docx" className="input-staff"/>
+                                <button onClick={uploadFile} className="button-staff">Upload Document</button>
                             </div>
                             <div className="opportunity-buttons-staff">
                                 <button className="approve-button-internship-staff" onClick={() => handleApproveReject(true)} disabled={isSubmitting}>Approve</button>
@@ -170,4 +241,4 @@ const ManageOpportunityDetails = () => {
     );
 };
 
-export default ManageOpportunityDetails;
+export default ApproveFormDetail;

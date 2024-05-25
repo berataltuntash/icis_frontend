@@ -21,6 +21,8 @@ import SGKDetail from './Components/StaffPages/SGKDetail';
 import SGK from './Components/StaffPages/SGK';
 import ApplicationForm from './Components/CompanyPages/ApplicationForm';  
 import ApplicationFormDetail from './Components/CompanyPages/ApplicationFormDetail';
+import ApproveForms from './Components/StaffPages/ApproveForms';
+import ApproveFormDetail from './Components/StaffPages/ApproveFormDetail';
 
 function App() {
 
@@ -51,6 +53,8 @@ function App() {
           <Route path="*" element={<LoginPage/>} />
           <Route path="/" element={<LoginPage/>} />
           <Route path="/applicationformdetail/:applicationId" element={<ApplicationFormDetail/>} />
+          <Route path="/approveforms" element={<ApproveForms/>} />
+          <Route path="/approveformdetail/:applicationId" element={<ApproveFormDetail/>} />
         </Routes>
       </div>
     </Router>
