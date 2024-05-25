@@ -148,7 +148,7 @@ const ManageOpportunityDetails = () => {
                                 <h2><strong>Company Name: </strong> <span className="company-name">{details.companyname}</span></h2>
                             </div>
                             <div className="opportunity-name-staff">
-                                <h3><strong>Company Name: </strong> <span className="offer-name">{details.offername}</span></h3>
+                                <h3><strong>Offer Name: </strong> <span className="offer-name">{details.offername}</span></h3>
                             </div>
                             <div className="opportunity-description-staff">
                                 <h3><strong>Description:</strong></h3>

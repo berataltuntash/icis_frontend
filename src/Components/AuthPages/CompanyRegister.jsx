@@ -11,6 +11,7 @@ const CompanyRegister = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [isForeign, setIsForeign] = useState(false);
     const [showPopup, setShowPopup] = useState(false);
     const [message, setMessage] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -26,6 +27,7 @@ const CompanyRegister = () => {
             setMessage("Passwords do not match.");
             setShowPopup(true);
             setTimeout(() => setShowPopup(false), 2000);
+            setIsSubmitting(false);
             return;
         }
 
@@ -33,7 +35,8 @@ const CompanyRegister = () => {
             const response = await axios.post('http://localhost:8080/api/companyregister', {
                 name: companyname,
                 email,
-                password
+                password,
+                isForeign: isForeign ? "true" : "false"
             },
             {
                 headers: {
@@ -91,6 +94,17 @@ const CompanyRegister = () => {
                 <div className="input-box">
                     <input type="password" placeholder="Confirm Password" required
                         value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} />
+                </div>
+                <div className="foreign-company" id='foreign-company'>
+                    <label>
+                        <input
+                            id='isForeign'
+                            type="checkbox"
+                            checked={isForeign}
+                            onChange={e => setIsForeign(e.target.checked)}
+                        />
+                    </label>
+                    Not Turkish?
                 </div>
                 <button className="button" type="submit" disabled={isSubmitting}>Register</button>
                 <div className="register-link">

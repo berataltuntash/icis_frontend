@@ -125,7 +125,7 @@ const StaffHomePage = () => {
                         </div>
                     )}
                 </div>
-                <button onClick={goNext} className='next-button-staff-staff'>&gt;</button>
+                <button onClick={goNext} className='next-button-staff'>&gt;</button>
             </div>
         </div>
     );

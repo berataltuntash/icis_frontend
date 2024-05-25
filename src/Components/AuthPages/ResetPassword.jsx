@@ -24,6 +24,7 @@ const ResetPassword = () => {
             setMessage("Passwords do not match.");
             setShowPopup(true);
             setTimeout(() => setShowPopup(false), 2000);
+            setIsSubmitting(false);
             return;
         }
 
