@@ -328,6 +328,8 @@
 }
 
 .upload-button-staff{
+    height: 150px;
+    width: 200px;
     margin: 150px 150px;
     display: flex;
     flex-direction: column;
@@ -346,22 +348,23 @@
 }
 
 .upload-button-staff .button-staff{
-    background-color: black;
+    background-color: #840808; 
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 10px 10px;
     font-size: 14px;
     cursor: pointer;
     border-radius: 20px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-    height: 50px;
 }
 
 .upload-button-staff .button-staff:hover{
-    background-color: #840808;
+    background-color: black;
     color: hsl(0, 0%, 100%);
 }
 
 .upload-button-staff .input-staff{
-    height: 100px;
+    margin: 10px 0;
+    align-self: start;
+    margin: 20px 0;
 }

@@ -14,6 +14,7 @@ const ApplicationFormDetail = () => {
     const [message, setMessage] = useState("");
     const [showPopup, setShowPopup] = useState(false);
     const [showDropdown, setShowDropdown] = useState(false);
+    const [file, setFile] = useState(null);
     const navigate = useNavigate();
 
     const handleClick = (path) => {
@@ -122,15 +123,16 @@ const ApplicationFormDetail = () => {
         }
     };
 
-    const handleDownload = async (applicationId) => {
+    const handleDownload = async () => {
         try {
             const token = Cookies.get("jwtToken");
             const response = await axios.get(`http://localhost:8080/api/downloadapplicationform/${applicationId}`, {
                 headers: {
-                    "Authorization": token
+                    "Authorization": `${token}`,
                 },
                 responseType: 'blob'
             });
+            
     
             const url = window.URL.createObjectURL(new Blob([response.data]));
             const link = document.createElement('a');
@@ -194,12 +196,11 @@ const ApplicationFormDetail = () => {
                             </div>
                             </div>
                             <div className="upload-button-company">
+                                <button onClick={handleDownload} className="button-company">Download Document</button>
                                 <input type="file" onChange={handleFileChange} accept=".docx" className="input-company"/>
                                 <button onClick={uploadFile} className="button-company">Upload Document</button>
                             </div>
-                            <div className="download-button-company">
-                                <button onClick={handleDownload} className="button-company">Download Document</button>
-                            </div>
+
                         </div>
                     )}
                 </div>

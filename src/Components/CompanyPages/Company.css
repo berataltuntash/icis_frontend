@@ -353,6 +353,8 @@
 }
 
 .upload-button-company{
+    height: 150px;
+    width: 200px;
     margin: 150px 150px;
     display: flex;
     flex-direction: column;
@@ -360,24 +362,25 @@
 }
 
 .upload-button-company .button-company{
-    background-color: black;
+    background-color: #840808; 
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 10px 10px;
     font-size: 14px;
     cursor: pointer;
     border-radius: 20px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-    height: 50px;
 }
 
 .upload-button-company .button-company:hover{
-    background-color: #840808;
+    background-color: black;
     color: hsl(0, 0%, 100%);
 }
 
 .upload-button-company .input-company{
-    height: 100px;
+    margin: 10px 0;
+    align-self: start;
+    margin: 20px 0;
 }
 
 .internship-container-company{
@@ -404,4 +407,7 @@
     font-size: 24px;
     margin-bottom: 20px; 
 }
+
+
+
 

@@ -19,8 +19,7 @@ import ApprovedApplication from './Components/StudentPages/ApprovedApplication';
 import ApprovedInternshipDetail from './Components/CompanyPages/ApprovedInternshipDetail';
 import SGKDetail from './Components/StaffPages/SGKDetail';
 import SGK from './Components/StaffPages/SGK';
-import SGKDetail from './Components/StaffPages/SGKDetail';
-import ApplicationForm from './Components/CompanyPages/ApplicationForm';
+import ApplicationForm from './Components/CompanyPages/ApplicationForm';  
 import ApplicationFormDetail from './Components/CompanyPages/ApplicationFormDetail';
 
 function App() {
