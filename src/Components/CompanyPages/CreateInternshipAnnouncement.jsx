@@ -12,7 +12,6 @@ const CreateInternshipAnnouncement = () => {
     const [showDropdown, setShowDropdown] = useState(false);
     const [showPopup, setShowPopup] = useState(false);
     const [announcement, setAnnouncement] = useState({
-        companyname: '',
         offername: '',
         description: ''
     });
@@ -44,7 +43,7 @@ const CreateInternshipAnnouncement = () => {
         const token = Cookies.get('jwtToken');
         try {
             const response = await axios.post('http://localhost:8080/api/createoffer', {
-                companyname: announcement.companyname,
+                companyname: announcement.offername,
                 offername: announcement.offername,
                 description: announcement.description
             }, {
@@ -53,8 +52,6 @@ const CreateInternshipAnnouncement = () => {
                     'Content-Type': 'application/json'
                 }
             });
-
-            console.log(companyname, offername, description);
 
             if (response.status === 202) {
                 setMessage(response.data);
@@ -143,17 +140,6 @@ const CreateInternshipAnnouncement = () => {
             <div className="form-container-company">
                 <h2>Create Internship Announcement</h2>
                 <form onSubmit={handleSubmit}>
-                    <div className="form-group-company">
-                        <label htmlFor="companyname">Company Name:</label>
-                        <input
-                            type="text"
-                            id="companyname"
-                            name="companyname"
-                            value={announcement.companyname}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
                     <div className="form-group-company">
                         <label htmlFor="offername">Offer Name:</label>
                         <input

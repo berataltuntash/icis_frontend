@@ -15,7 +15,6 @@ const ApproveFormDetail = () => {
     const [showPopup, setShowPopup] = useState(false);
     const [showDropdown, setShowDropdown] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const [isFileUploaded, setIsFileUploaded] = useState(false);
     const [file, setFile] = useState(null);
     const navigate = useNavigate();
 
@@ -39,6 +38,13 @@ const ApproveFormDetail = () => {
     };
 
     const handleApproveReject = async (isApprove) => {
+        
+        if (file === null) {
+            setMessage("No file selected.");
+            setShowPopup(true);
+            setTimeout(() => setShowPopup(false), 2000);
+            return;
+        }
         const token = Cookies.get("jwtToken");
         setIsSubmitting(true);
         try {
@@ -137,7 +143,7 @@ const ApproveFormDetail = () => {
     };
 
     const uploadFile = async () => {
-        if (!file) {
+        if (file === null) {
             setMessage("No file selected.");
             setShowPopup(true);
             setTimeout(() => setShowPopup(false), 2000);
@@ -157,7 +163,6 @@ const ApproveFormDetail = () => {
             });
             setMessage(response.data);
             setShowPopup(true);
-            setIsFileUploaded(true);
             setTimeout(() => setShowPopup(false), 2000);
         } catch (error) {
             console.error(error.response.data);
@@ -246,7 +251,7 @@ const ApproveFormDetail = () => {
                                 <button onClick={uploadFile} className="button-staff">Upload Document</button>
                             </div>
                             <div className="application-buttons-staff">
-                                <button className="approve-button-application-staff" onClick={() => handleApproveReject(true)} disabled={!isFileUploaded || isSubmitting}>Approve</button>
+                                <button className="approve-button-application-staff" onClick={() => handleApproveReject(true)} disabled={isSubmitting}>Approve</button>
                                 <button className="reject-button-application-staff" onClick={() => handleApproveReject(false)} disabled={isSubmitting}>Reject</button>
                             </div>
                         </div>
