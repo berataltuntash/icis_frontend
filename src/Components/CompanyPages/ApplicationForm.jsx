@@ -3,13 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import iytelogo from "../Assets/iytelogo.png";
 import Cookies from 'js-cookie';
 import axios from 'axios';
-import './Staff.css';
+import './Company.css';
 import '../PopUp.css';
 
-const StartedInternships = () => {
+const ApplicationForm = () => {
     const [name, setName] = useState('');
     const [showDropdown, setShowDropdown] = useState(false);
-    const [internships, setInternships] = useState([]);
+    const [applications, setApplications] = useState([]);
     const navigate = useNavigate();
 
     const handleLogout = () => {
@@ -46,13 +46,13 @@ const StartedInternships = () => {
 
             if (response.status === 202) {
                 setName(formatName(name));
-                if ( usertype === 'Staff')  {
+                if ( usertype === 'Company')  {
                     console.log(`Welcome, ${name}`);
-                } else if ( usertype === 'Student') {
+                } else if( usertype === 'Staff') {
+                    navigate('/staffhomepage');
+                } else if( usertype === 'Student') {
                     navigate('/studenthomepage');
-                } else if ( usertype === 'Company') {
-                    navigate('/companyhomepage');
-                }
+                }    
                 return true;
             }
         } catch (error) {
@@ -62,13 +62,13 @@ const StartedInternships = () => {
         return false;
     };
 
-    const fetchOpportunities = async () => {
+    const fetchapplications = async () => {
         const token = Cookies.get('jwtToken');
         try {
-            const response = await axios.get('http://localhost:8080/api/staffshowinternshipsstarted', {
+            const response = await axios.get('http://localhost:8080/api/applicationforms', {
                 headers: { 'Authorization': `${token}` }
             });
-            setInternships(response.data);
+            setApplications(response.data);
         } catch (error) {
             console.error(error.response.data);
         }
@@ -78,7 +78,7 @@ const StartedInternships = () => {
         const isAuthenticated = await checkAuthentication();
         if (isAuthenticated) {
             const token = Cookies.get('jwtToken');
-            fetchOpportunities(token);
+            fetchapplications(token);
         }
     };
 
@@ -88,30 +88,29 @@ const StartedInternships = () => {
 
     return (
         <div>
-            <div className="red-bar-staff">
-                <div className="logo-container-staff" onClick={() => handleClick("/staffhomepage")}>
-                    <img src={iytelogo} alt="Logo" className="logo-staff" />
+            <div className="red-bar-company">
+                <div className="logo-container-company" onClick={() => handleClick("/companyhomepage")}>
+                    <img src={iytelogo} alt="Logo" className="logo-company" />
                 </div>
-                <div className="buttons-container-staff">
-                    <button className="redbarbutton-staff" onClick={() => handleClick("/manageinternshipopportunities")}>Manage Internship Opportunities</button>
-                    <button className="redbarbutton-staff" onClick={() => handleClick("/managecompanies")}>Manage Companies</button>
-                    <button className="redbarbutton-staff" onClick={() => handleClick("/startedinternships")}>Started Internships</button>
+                <div className="buttons-container-company">
+                    <button className="redbarbutton-company" onClick={() => handleClick("/createinternshipannouncement")}>Create Internship Announcement</button>
+                    <button className='redbarbutton-company' onClick={() => handleClick('/approvedinternship')}>Approved Internship</button>
+                    <button className='redbarbutton-company' onClick={() => handleClick('/applicationform')}>Application Form</button>
                 </div>
-                <div className="profile-staff" onClick={() => setShowDropdown(!showDropdown)}>
+                <div className="profile-company" onClick={() => setShowDropdown(!showDropdown)}>
                     <h1>{name}</h1>
                     {showDropdown && (
-                        <div className="dropdown-menu-staff">
-                            <button onClick={handleLogout} className="dropdown-item-staff">Logout</button>
+                        <div className="dropdown-menu-company">
+                            <button onClick={handleLogout} className="dropdown-item-company">Logout</button>
                         </div>
                     )}
                 </div>
-            </div>
-            <div className="opportunities-container-staff">
-                {internships.map((internship) => (
-                    <div key={internship.applicationId} className="offername-item-staff">
-                        <span className='companyname-staff'>{internship.studentName} {internship.studentSurname}</span>
-                        <span className='companyname-staff'>{internship.offerName}</span>
-                        <button className="view-button-staff" onClick={() => handleClick(`/startedinternshipdetail/${internship.applicationId}`)}>View</button>
+                </div>
+                <div className="application-container-company">
+                {applications.map((application) => (
+                    <div key={application.applicationId} className="offername-item-company">
+                        <span className='studentname-company'>{application.studentName} {application.studentSurname}</span>
+                        <button className="view-button-company" onClick={() => handleClick(`/approvedinternshipdetail/${application.applicationId}`)}>View</button>
                     </div>
                 ))}
             </div>
@@ -119,4 +118,4 @@ const StartedInternships = () => {
     );
 }
 
-export default StartedInternships;
+export default ApplicationForm;

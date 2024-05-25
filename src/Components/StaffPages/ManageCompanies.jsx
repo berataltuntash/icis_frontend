@@ -133,7 +133,7 @@ const ManageCompanies = () => {
                 <div className="buttons-container-staff">
                     <button className="redbarbutton-staff" onClick={() => handleClick("/manageinternshipopportunities")}>Manage Internship Opportunities</button>
                     <button className="redbarbutton-staff" onClick={() => handleClick("/managecompanies")}>Manage Companies</button>
-                    <button className="redbarbutton-staff" onClick={() => handleClick("/startedinternships")}>Started Internships</button>
+                    <button className="redbarbutton-staff" onClick={() => handleClick("/sgk")}>SGK</button>
                 </div>
                 <div className="profile-staff" onClick={() => setShowDropdown(!showDropdown)}>
                     <h1>{name}</h1>

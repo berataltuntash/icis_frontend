@@ -95,6 +95,7 @@ const ApprovedInternship = () => {
                 <div className="buttons-container-company">
                     <button className="redbarbutton-company" onClick={() => handleClick("/createinternshipannouncement")}>Create Internship Announcement</button>
                     <button className='redbarbutton-company' onClick={() => handleClick('/approvedinternship')}>Approved Internship</button>
+                    <button className='redbarbutton-company' onClick={() => handleClick('/applicationform')}>Application Form</button>
                 </div>
                 <div className="profile-company" onClick={() => setShowDropdown(!showDropdown)}>
                     <h1>{name}</h1>

@@ -17,8 +17,11 @@ import ManageCompanies from './Components/StaffPages/ManageCompanies';
 import ApprovedInternship from './Components/CompanyPages/ApprovedInternship';
 import ApprovedApplication from './Components/StudentPages/ApprovedApplication';
 import ApprovedInternshipDetail from './Components/CompanyPages/ApprovedInternshipDetail';
-import StartedInternships from './Components/StaffPages/StartedInternships';
-import StartedInternshipDetail from './Components/StaffPages/StartedInternshipDetail';
+import SGKDetail from './Components/StaffPages/SGKDetail';
+import SGK from './Components/StaffPages/SGK';
+import SGKDetail from './Components/StaffPages/SGKDetail';
+import ApplicationForm from './Components/CompanyPages/ApplicationForm';
+import ApplicationFormDetail from './Components/CompanyPages/ApplicationFormDetail';
 
 function App() {
 
@@ -42,9 +45,13 @@ function App() {
           <Route path="/managecompanies" element={<ManageCompanies/>} />
           <Route path="/approvedinternship" element={<ApprovedInternship/>} />
           <Route path="/approvedapplication" element={<ApprovedApplication/>} />
-          <Route path='/approvedinternshipdetail/:applicationId' element={<ApprovedInternshipDetail/>} />
-          <Route path="/startedinternships" element={<StartedInternships/>} />
-          <Route path="/startedinternshipdetail/:applicationId" element={<StartedInternshipDetail/>} />
+          <Route path="/approvedinternshipdetail/:applicationId" element={<ApprovedInternshipDetail/>} />
+          <Route path="/sgk" element={<SGK/>} />
+          <Route path="/sgkdetail/:applicationId" element={<SGKDetail/>} />
+          <Route path="/applicationform" element={<ApplicationForm/>} />
+          <Route path="*" element={<LoginPage/>} />
+          <Route path="/" element={<LoginPage/>} />
+          <Route path="/applicationformdetail/:applicationId" element={<ApplicationFormDetail/>} />
         </Routes>
       </div>
     </Router>

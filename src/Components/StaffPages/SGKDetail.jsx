@@ -7,7 +7,7 @@ import Popup from "../PopUp";
 import './Staff.css';
 import '../PopUp.css';
 
-const StartedInternshipDetail = () => {
+const SGKDetail = () => {
     const { applicationId } = useParams();
     const [name, setName] = useState("");
     const [details, setDetails] = useState({});
@@ -132,7 +132,7 @@ const StartedInternshipDetail = () => {
                 <div className="buttons-container-staff">
                     <button className="redbarbutton-staff" onClick={() => handleClick("/manageinternshipopportunities")}>Manage Internship Opportunities</button>
                     <button className="redbarbutton-staff" onClick={() => handleClick("/managecompanies")}>Manage Companies</button>
-                    <button className="redbarbutton-staff" onClick={() => handleClick("/startedinternships")}>Started Internships</button>
+                    <button className="redbarbutton-staff" onClick={() => handleClick("/sgk")}>SGK</button>
                 </div>
                 <div className="profile-staff" onClick={() => setShowDropdown(!showDropdown)}>
                     <h1>{name}</h1>
@@ -182,4 +182,4 @@ const StartedInternshipDetail = () => {
     );
 };
 
-export default StartedInternshipDetail;
+export default SGKDetail;

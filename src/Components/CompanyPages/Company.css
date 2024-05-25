@@ -84,7 +84,7 @@
 }
 
 .dropdown-item-company:hover {
-    background-color: hsl(0, 0%, 73%);
+    background-color: hsl(0, 0%, 91%);
 }
 
 .main-content-company {
@@ -114,8 +114,8 @@
 }
 
 .next-button-company, .previous-button-company {
-    top: 50%; /* Center vertically */
-    transform: translateY(-50%); /* Offset transform for precise centering */
+    top: 50%;
+    transform: translateY(-50%);
     padding: 10px 20px;
     font-size: 24px;
     font-weight: bold;
@@ -223,7 +223,7 @@
 }
 
 .offername-item-company {
-    background-color: hsl(0, 0%, 67%);
+    background-color: hsl(0, 0%, 90%);
     color: rgb(0, 0, 0);
     margin: 20px 30px;
     display: flex;
@@ -242,8 +242,8 @@
 }
 
 .view-button-company {
-    background-color: rgb(255, 255, 255);
-    color: black;
+    background-color: hsl(2, 81%, 34%); 
+    color: rgb(255, 255, 255);
     border: none;
     padding: 10px 20px;
     cursor: pointer;
@@ -352,4 +352,56 @@
     font-weight: normal;
 }
 
+.upload-button-company{
+    margin: 150px 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.upload-button-company .button-company{
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    height: 50px;
+}
+
+.upload-button-company .button-company:hover{
+    background-color: #840808;
+    color: hsl(0, 0%, 100%);
+}
+
+.upload-button-company .input-company{
+    height: 100px;
+}
+
+.internship-container-company{
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 20px;
+    height: 400px;
+    width: 1000px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex; 
+}
+
+.internship-detail-company{
+    margin-bottom: 5px;
+}
+
+.internships-company{
+    margin-left: 50px;
+    margin-top: 50px;
+}
+
+.internship-company{
+    font-size: 24px;
+    margin-bottom: 20px; 
+}
 

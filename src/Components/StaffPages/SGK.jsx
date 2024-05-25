@@ -6,10 +6,10 @@ import axios from 'axios';
 import './Staff.css';
 import '../PopUp.css';
 
-const ManageInternshipOpportunities = () => {
+const SGK = () => {
     const [name, setName] = useState('');
     const [showDropdown, setShowDropdown] = useState(false);
-    const [opportunities, setOpportunities] = useState([]);
+    const [internships, setInternships] = useState([]);
     const navigate = useNavigate();
 
     const handleLogout = () => {
@@ -65,10 +65,10 @@ const ManageInternshipOpportunities = () => {
     const fetchOpportunities = async () => {
         const token = Cookies.get('jwtToken');
         try {
-            const response = await axios.get('http://localhost:8080/api/manageoffers', {
+            const response = await axios.get('http://localhost:8080/api/staffshowinternshipsstarted', {
                 headers: { 'Authorization': `${token}` }
             });
-            setOpportunities(response.data);
+            setInternships(response.data);
         } catch (error) {
             console.error(error.response.data);
         }
@@ -107,10 +107,11 @@ const ManageInternshipOpportunities = () => {
                 </div>
             </div>
             <div className="opportunities-container-staff">
-                {opportunities.map((opportunity) => (
-                    <div key={opportunity.offerid} className="offername-item-staff">
-                        <span className='companyname-staff'>{opportunity.offername}</span>
-                        <button className="view-button-staff" onClick={() => handleClick(`/manageopportunitydetails/${opportunity.offerid}`)}>View</button>
+                {internships.map((internship) => (
+                    <div key={internship.applicationId} className="offername-item-staff">
+                        <span className='companyname-staff'>{internship.studentName} {internship.studentSurname}</span>
+                        <span className='companyname-staff'>{internship.offerName}</span>
+                        <button className="view-button-staff" onClick={() => handleClick(`/sgkdetail/${internship.applicationId}`)}>View</button>
                     </div>
                 ))}
             </div>
@@ -118,4 +119,4 @@ const ManageInternshipOpportunities = () => {
     );
 }
 
-export default ManageInternshipOpportunities;
+export default SGK;
