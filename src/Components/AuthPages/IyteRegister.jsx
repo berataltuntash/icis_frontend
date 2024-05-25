@@ -15,9 +15,36 @@ const IyteRegister = () => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const navigate = useNavigate();
 
+    const isPasswordStrong = (password) => {
+        const regex = {
+            length: /.{8,}/,
+            uppercase: /[A-Z]/,
+            lowercase: /[a-z]/,
+            number: /[0-9]/,
+            specialChar: /[!@#$%^&*(),.?":{}|<>]/
+        };
+
+        if (!regex.length.test(password)) return "Password must be at least 8 characters long.";
+        if (!regex.uppercase.test(password)) return "Password must contain at least one uppercase letter.";
+        if (!regex.lowercase.test(password)) return "Password must contain at least one lowercase letter.";
+        if (!regex.number.test(password)) return "Password must contain at least one number.";
+        if (!regex.specialChar.test(password)) return "Password must contain at least one special character.";
+
+        return null; 
+    };
+
     const handleRegister = async (event) => {
         event.preventDefault();
         setIsSubmitting(true);
+
+        const passwordError = isPasswordStrong(password);
+        if (passwordError) {
+            setMessage(passwordError);
+            setShowPopup(true);
+            setTimeout(() => setShowPopup(false), 2000);
+            setIsSubmitting(false);
+            return;
+        }
 
         if (password !== confirmPassword) {
             setMessage("Passwords do not match.");
