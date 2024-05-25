@@ -33,6 +33,11 @@ const ApplicationFormDetail = () => {
             .join(' ');
     };
 
+    const closePopupAndRefresh = () => {
+        setShowPopup(false);
+        navigate(0);
+    };
+
     const checkAuthentication = async () => {
         const token = Cookies.get("jwtToken");
         if (!token) {
@@ -98,6 +103,7 @@ const ApplicationFormDetail = () => {
         if (!file) {
             setMessage("No file selected.");
             setShowPopup(true);
+            setTimeout(() => setShowPopup(false), 2000);
             return;
         }
 
@@ -119,7 +125,7 @@ const ApplicationFormDetail = () => {
             console.error(error.response.data);
             setMessage(error.response.data);
             setShowPopup(true);
-            setTimeout(() => setShowPopup(false), 2000);
+            setTimeout(() => closePopupAndRefresh(), 2000);
         }
     };
 
@@ -147,7 +153,7 @@ const ApplicationFormDetail = () => {
             console.error("Download error:", error.response.data);
             setMessage("Failed to download the file.");
             setShowPopup(true);
-            setTimeout(() => setShowPopup(false), 2000);
+            setTimeout(() => closePopupAndRefresh(), 2000);
         }
     };
 

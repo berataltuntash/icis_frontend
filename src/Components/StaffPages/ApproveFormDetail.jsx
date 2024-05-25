@@ -15,6 +15,7 @@ const ApproveFormDetail = () => {
     const [showPopup, setShowPopup] = useState(false);
     const [showDropdown, setShowDropdown] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isFileUploaded, setIsFileUploaded] = useState(false);
     const [file, setFile] = useState(null);
     const navigate = useNavigate();
 
@@ -25,6 +26,16 @@ const ApproveFormDetail = () => {
     const handleLogout = () => {
         Cookies.remove("jwtToken");
         navigate("/login");
+    };
+
+    const closePopupAndNavigateBack = () => {
+        setShowPopup(false);
+        navigate(-1);
+    };
+
+    const closePopupAndRefresh = () => {
+        setShowPopup(false);
+        navigate(0);
     };
 
     const handleApproveReject = async (isApprove) => {
@@ -42,17 +53,17 @@ const ApproveFormDetail = () => {
             if (response.status === 202) {
                 setMessage(response.data);
                 setShowPopup(true);
-                setTimeout(() => setShowPopup(false), 2000);
+                setTimeout(() => closePopupAndNavigateBack(), 2000);
             } else {
                 setMessage(response.data);
                 setShowPopup(true);
-                setTimeout(() => setShowPopup(false), 2000);
+                setTimeout(() => closePopupAndNavigateBack(), 2000);
             }
         } catch (error) {
             console.error(error.response.data);
             setMessage(error.response.data);
             setShowPopup(true);
-            setTimeout(() => setShowPopup(false), 2000);
+            setTimeout(() => closePopupAndRefresh(), 2000);
         }
         setIsSubmitting(false);
     };
@@ -129,6 +140,7 @@ const ApproveFormDetail = () => {
         if (!file) {
             setMessage("No file selected.");
             setShowPopup(true);
+            setTimeout(() => setShowPopup(false), 2000);
             return;
         }
 
@@ -145,12 +157,13 @@ const ApproveFormDetail = () => {
             });
             setMessage(response.data);
             setShowPopup(true);
+            setIsFileUploaded(true);
             setTimeout(() => setShowPopup(false), 2000);
         } catch (error) {
             console.error(error.response.data);
             setMessage(error.response.data);
             setShowPopup(true);
-            setTimeout(() => setShowPopup(false), 2000);
+            setTimeout(() => closePopupAndRefresh(), 2000);
         }
     };
 
@@ -178,7 +191,7 @@ const ApproveFormDetail = () => {
             console.error("Download error:", error.response.data);
             setMessage("Failed to download the file.");
             setShowPopup(true);
-            setTimeout(() => setShowPopup(false), 2000);
+            setTimeout(() => closePopupAndRefresh(), 2000);
         }
     };
 
@@ -232,8 +245,8 @@ const ApproveFormDetail = () => {
                                 <input type="file" onChange={handleFileChange} accept=".docx" className="input-staff"/>
                                 <button onClick={uploadFile} className="button-staff">Upload Document</button>
                             </div>
-                            <div className="opportunity-buttons-staff">
-                                <button className="approve-button-application-staff" onClick={() => handleApproveReject(true)} disabled={isSubmitting}>Approve</button>
+                            <div className="application-buttons-staff">
+                                <button className="approve-button-application-staff" onClick={() => handleApproveReject(true)} disabled={!isFileUploaded || isSubmitting}>Approve</button>
                                 <button className="reject-button-application-staff" onClick={() => handleApproveReject(false)} disabled={isSubmitting}>Reject</button>
                             </div>
                         </div>

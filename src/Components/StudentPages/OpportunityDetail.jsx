@@ -27,6 +27,15 @@ const OpportunityDetail = () => {
         navigate('/login');
     };
 
+    const closePopupAndNavigateBack = () => {
+        setShowPopup(false);
+        navigate(-1);
+    };
+
+    const closePopupAndRefresh = () => {
+        setShowPopup(false);
+        navigate(0);
+    };
 
     const handleApply = async () => {
         const token = Cookies.get('jwtToken');
@@ -44,21 +53,21 @@ const OpportunityDetail = () => {
                 setMessage(response.data); 
                 setShowPopup(true);
                 setTimeout(() => {
-                    setShowPopup(false);
+                    closePopupAndNavigateBack();
                 }, 2000);
                 
             } else {
                 setMessage(response.data);
                 setShowPopup(true);
                 setTimeout(() => {
-                    setShowPopup(false);
+                    closePopupAndNavigateBack();
                 }, 2000);
             }
         } catch (error) {
             setMessage(error.response.data);
             setShowPopup(true);
             setTimeout(() => {
-                setShowPopup(false);
+                closePopupAndRefresh();
             }, 2000);
         }
         setIsSubmitting(false);
